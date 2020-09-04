@@ -1,7 +1,7 @@
 import { JsonController, Param, Body, Get, Post, Put, Delete, Authorized } from "routing-controllers";
 import { getRepository, InsertResult, UpdateResult, DeleteResult } from "typeorm";
 
-import { User } from "../entities/user.entity";
+import { User } from "@entities/user.entity";
 
 @JsonController("/users")
 export class UserController {
