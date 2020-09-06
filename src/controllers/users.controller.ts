@@ -9,27 +9,27 @@ export class UserController {
 
   @Authorized()
   @Get()
-  index(): Promise<User[]> {
-    return this.userRepository.find();
+  async index(): Promise<User[]> {
+    return await this.userRepository.find();
   }
 
   @Get("/:id")
-  show(@Param("id") id: number): Promise<User | undefined> {
-    return this.userRepository.findOne(id);
+  async show(@Param("id") id: number): Promise<User | undefined> {
+    return await this.userRepository.findOne(id);
   }
 
   @Post()
-  post(@Body() user: any): Promise<InsertResult> {
-    return this.userRepository.insert(user);
+  async post(@Body() user: any): Promise<InsertResult> {
+    return await this.userRepository.insert(user);
   }
 
   @Put("/:id")
-  put(@Param("id") id: number, @Body() user: any): Promise<UpdateResult> {
-    return this.userRepository.update(id, user);
+  async put(@Param("id") id: number, @Body() user: any): Promise<UpdateResult> {
+    return await this.userRepository.update(id, user);
   }
 
   @Delete("/:id")
-  delete(@Param("id") id: number): Promise<DeleteResult> {
-    return this.userRepository.delete(id);
+  async delete(@Param("id") id: number): Promise<DeleteResult> {
+    return await this.userRepository.delete(id);
   }
 }

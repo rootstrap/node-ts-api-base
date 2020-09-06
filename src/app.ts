@@ -6,7 +6,7 @@ import AdminBro from 'admin-bro';
 //TODO: Check how to change this to TS import
 const AdminBroExpress = require('@admin-bro/express')
 import { Database, Resource } from '@admin-bro/typeorm';
-import authCheck from "./services/auth.service";
+import authorizationChecker from "./middleware/auth.middleware";
 import { User } from './entities/user.entity';
 import { PORT } from "./config";
 
@@ -20,7 +20,7 @@ createConnection().then(async connection => {
   const app = createExpressServer({
     routePrefix: "/api/v1",
     cors: true,
-    authorizationChecker: authCheck,
+    authorizationChecker,
     controllers: [__dirname + "/controllers/*.ts"],
     middlewares: [__dirname + "/middlewares/*.ts"],
     interceptors: [__dirname + "/interceptors/*.ts"],
