@@ -13,7 +13,8 @@
     "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config",
     "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed",
     "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
-    "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync"
+    "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync",
+    "register": "ts-node -r tsconfig-paths/register src/app.ts"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",
@@ -27,6 +28,7 @@
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.4",
     "ts-node": "^9.0.0",
+    "tsconfig-paths": "^3.9.0",
     "typeorm-seeding": "^1.6.1",
     "typescript": "^4.0.2"
   },
