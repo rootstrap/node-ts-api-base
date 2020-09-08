@@ -2,19 +2,18 @@
   "name": "express-api-base",
   "version": "1.0.0",
   "description": "Rest api base with nodejs + express",
-  "main": "index.js",
+  "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/app.ts",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node -r tsconfig-paths/register' src/app.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node -r tsconfig-paths/register -r ts-node/register ./dist/app.js",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
     "test": "ENVIRONMENT=test jest",
     "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config",
     "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed",
     "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
-    "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync",
-    "register": "ts-node -r tsconfig-paths/register src/app.ts"
+    "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",
