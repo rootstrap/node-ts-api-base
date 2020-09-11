@@ -20,9 +20,9 @@ beforeEach(async () => {
 });
 
 describe('when requesting all users', () => {
-  it('should return 500 without authentication', async () => {
+  it('should return 401 without authentication', async () => {
     const response = await request(app).get(`${api}/users`);
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(401);
   });
 });
 
@@ -40,7 +40,8 @@ describe('when creating a user', () => {
       firstName: Faker.name.firstName(),
       lastName: Faker.name.lastName(),
       email: Faker.internet.email(),
-      password: Faker.internet.password(8)
+      password: Faker.internet.password(8),
+      age: Math.round(Math.random() * 20)
     };
 
     const response = await request(app).post(`${api}/users`).send(userFields);
