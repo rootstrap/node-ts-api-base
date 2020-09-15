@@ -22,7 +22,7 @@ const connection = {
 
     entities.forEach(async entity => {
       const repository = connection.getRepository(entity.name);
-      await repository.query(`DELETE FROM public.${entity.tableName}`);
+      await repository.clear();
     });
   }
 };
