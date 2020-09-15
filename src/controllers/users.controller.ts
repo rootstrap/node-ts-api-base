@@ -1,9 +1,23 @@
-import { JsonController, Param, Body, Get, Post, Put, Delete, Authorized } from "routing-controllers";
-import { getRepository, InsertResult, UpdateResult, DeleteResult } from "typeorm";
+import {
+  JsonController,
+  Param,
+  Body,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Authorized
+} from 'routing-controllers';
+import {
+  getRepository,
+  InsertResult,
+  UpdateResult,
+  DeleteResult
+} from 'typeorm';
 
-import { User } from "../entities/user.entity";
+import { User } from '@entities/user.entity';
 
-@JsonController("/users")
+@JsonController('/users')
 export class UserController {
   private userRepository = getRepository<User>(User);
 
@@ -13,8 +27,8 @@ export class UserController {
     return await this.userRepository.find();
   }
 
-  @Get("/:id")
-  async show(@Param("id") id: number): Promise<User | undefined> {
+  @Get('/:id')
+  async show(@Param('id') id: number): Promise<User | undefined> {
     return await this.userRepository.findOne(id);
   }
 
@@ -23,13 +37,13 @@ export class UserController {
     return await this.userRepository.insert(user);
   }
 
-  @Put("/:id")
-  async put(@Param("id") id: number, @Body() user: any): Promise<UpdateResult> {
+  @Put('/:id')
+  async put(@Param('id') id: number, @Body() user: any): Promise<UpdateResult> {
     return await this.userRepository.update(id, user);
   }
 
-  @Delete("/:id")
-  async delete(@Param("id") id: number): Promise<DeleteResult> {
+  @Delete('/:id')
+  async delete(@Param('id') id: number): Promise<DeleteResult> {
     return await this.userRepository.delete(id);
   }
 }

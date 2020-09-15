@@ -66,6 +66,7 @@ This is the suggested scaffolding for this project. You can take a look at:
 - [typeorm](https://typeorm.io/#/) - NodeJS ORM.
 - [nodemon](https://nodemon.io/) - Utility that will monitor for any changes in your source and automatically restart your server.
 - [multer](https://github.com/expressjs/multer) -  NodeJS middleware for handling multipart/form-data.
+- [tsconfig-paths](https://github.com/dividab/tsconfig-paths#readme) - Utility to register relative paths set at tsconfig file
 
 ## Deployment with docker
 
