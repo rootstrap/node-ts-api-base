@@ -5,12 +5,13 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node -r tsconfig-paths/register' src/server.ts",
+    "prebuild": "rm -rf /dist",
     "build": "tsc",
     "start": "node -r tsconfig-paths/register -r ts-node/register ./dist/server.js",
-    "typeorm": "ts-node ./node_modules/typeorm/cli.js",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "ENVIRONMENT=test jest",
     "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config",
-    "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed",
+    "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed",
     "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
     "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync"
   },

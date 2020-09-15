@@ -6,6 +6,6 @@ module.exports = {
   testEnvironment: 'node',
   // necessary for resolving the paths in tsconfig:
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-    prefix: '<rootDir>/src/'
+    prefix: '<rootDir>/'
   })
 };

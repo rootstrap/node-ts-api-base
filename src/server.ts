@@ -1,13 +1,13 @@
 import 'reflect-metadata'; // this shim is required
-import { createConnection, Connection } from 'typeorm';
+import { Connection } from 'typeorm';
 import AdminBro from 'admin-bro';
 //TODO: Check how to change this to TS import
 const AdminBroExpress = require('@admin-bro/express');
 import { Database, Resource } from '@admin-bro/typeorm';
-import { User } from './entities/user.entity';
-import { PORT } from './config';
-import connection from 'database/connection';
-import app from 'app';
+import { User } from '@entities/user.entity';
+import { PORT } from '@config';
+import connection from '@database/connection';
+import app from '@app';
 
 const handleConnection = async (connection: Connection) => {
   // creates admin panel, register all resources and their options

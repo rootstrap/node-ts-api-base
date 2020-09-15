@@ -4,14 +4,18 @@
     "module": "commonjs",
     "sourceMap": true,
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": ".",
     "strict": true,
     "noImplicitAny": false,
     "moduleResolution": "node",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "@entities/*": ["entities/*"],
-      "@services/*": ["services/*"]
+      "@config": ["src/config/index"],
+      "@controllers/*": ["src/controllers/*"],
+      "@database/*": ["src/database/*"],
+      "@entities/*": ["src/entities/*"],
+      "@services/*": ["src/services/*"],
+      "@app": ["src/app"]
     },
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -19,6 +23,5 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
-  },
-  "include": ["src/**/*"]
+  }
 }
