@@ -10,6 +10,7 @@
     "start": "node -r tsconfig-paths/register -r ts-node/register ./dist/server.js",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "ENVIRONMENT=test jest",
+    "test:ci": "ENVIRONMENT=ci jest",
     "lint": "eslint \"src/**\" --color",
     "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config",
     "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed",
