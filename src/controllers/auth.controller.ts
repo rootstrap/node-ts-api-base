@@ -36,7 +36,7 @@ export class AuthController {
       throw new UnauthorizedError('Invalid credentials');
     }
 
-    //Check if encrypted password match
+    // Check if encrypted password match
     if (!user.comparePassword(password)) {
       throw new UnauthorizedError('Invalid credentials');
     }
