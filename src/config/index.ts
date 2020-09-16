@@ -26,8 +26,8 @@ export const databaseConfig: ConnectionOptions = {
   migrationsRun: process.env.TYPEORM_MIGRATIONS_RUN === 'true',
   cli: {
     migrationsDir: 'src/database/migrations/**/*.ts',
-    entitiesDir: 'src/entities/**/*.ts',
-  },
+    entitiesDir: 'src/entities/**/*.ts'
+  }
 };
 
 export const {
