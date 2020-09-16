@@ -1,22 +1,21 @@
-import { createConnection, getConnection } from 'typeorm';
+import { createConnection, getConnection, Connection } from 'typeorm';
 import { databaseConfig } from '@config';
 
-
 const connection = {
-  async create(callback: Function | null = null) {
+  async create(callback?: (c: Connection) => void): Promise<void> {
     try {
-      let connection = await createConnection(databaseConfig);
+      const connection = await createConnection(databaseConfig);
       if (callback) callback(connection);
     } catch (e) {
       console.log(e);
     }
   },
 
-  async close() {
+  async close(): Promise<void> {
     await getConnection().close();
   },
 
-  async clear() {
+  async clear(): Promise<void> {
     const connection = getConnection();
     const entities = connection.entityMetadatas;
 
