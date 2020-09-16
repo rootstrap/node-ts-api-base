@@ -24,6 +24,6 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Lint
-        run: yarn eslint src/**/*.ts --color
+        run: yarn lint
       - name: Run tests
         run: yarn test

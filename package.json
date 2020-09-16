@@ -10,6 +10,7 @@
     "start": "node -r tsconfig-paths/register -r ts-node/register ./dist/server.js",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "ENVIRONMENT=test jest",
+    "lint": "eslint \"src/**\" --color",
     "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config",
     "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed",
     "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
@@ -39,6 +40,8 @@
   "dependencies": {
     "@admin-bro/express": "^3.0.0",
     "@admin-bro/typeorm": "^1.2.0",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
     "admin-bro": "^3.2.3",
     "admin-bro-expressjs": "^2.1.1",
     "body-parser": "^1.19.0",

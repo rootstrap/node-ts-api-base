@@ -3,7 +3,7 @@
     "node": true,
     "es6": true
   },
-  "extends": ["prettier", "prettier/@typescript-eslint", "google"],
+  "extends": ["prettier", "prettier/@typescript-eslint", "google", "plugin:@typescript-eslint/recommended"],
   "plugins": ["prettier"],
   "globals": {
     "Atomics": "readonly",
@@ -16,6 +16,13 @@
   "rules": {
     "indent": ["error", 2],
     "comma-dangle": ["error", "never"],
-    "object-curly-spacing": ["error", "always"]
+    "object-curly-spacing": ["error", "always"],
+    "require-jsdoc": 0,
+    "new-cap": 0,
+    "arrow-parens": 0,
+    "operator-linebreak": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-var-requires": 0
   }
 }
