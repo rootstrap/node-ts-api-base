@@ -37,3 +37,19 @@ jobs:
         run: |
           echo TYPEORM_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} >> .env.ci
           yarn test:ci
+      # Another existing action, this one to checkout the repository
+      - name: "Checkout repository on branch: ${{ github.REF }}"
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.REF }}
+          fetch-depth: 0
+      # Before running the scan, typescript must be installed from npm and
+      # NODE_PATH env var must point to tsc bin folder, otherways typescript static analysis will fail
+      - name: "Run Sonarqube analysis of the branch"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          yarn install 
+          yarn run build
+          echo "::set-env name=NODE_PATH::$(which tsc)"
+          sonar-scanner -Dsonar.verbose=false -Dsonar.qualitygate.wait=true -Dsonar.host.url=${{ secrets.SONAR_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.projectKey=${{secrets.SONAR_PROJECT_KEY }} -Dsonar.scm.provider=git -Dsonar.java.binaries=/tmp -Dsonar.nodejs.executable=$(which node) -Dsonar.projectVersion=$(echo $GITHUB_SHA | cut -c1-8) -Dsonar.sources=. -Dsonar.projectBaseDir=.
