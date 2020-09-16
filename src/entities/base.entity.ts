@@ -1,5 +1,9 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, BeforeInsert, BeforeUpdate, UpdateDateColumn } from "typeorm";
-import { IsDate, validateOrReject } from "class-validator";
+import {
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn
+} from 'typeorm';
 
 export abstract class Base extends BaseEntity {
   @PrimaryGeneratedColumn()

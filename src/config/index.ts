@@ -31,5 +31,6 @@ export const databaseConfig: ConnectionOptions = {
 };
 
 export const {
-  PORT
+  PORT,
+  JWT_SECRET
 } = process.env;

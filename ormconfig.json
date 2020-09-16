@@ -1,0 +1,3 @@
+{
+  "factories": ["src/database/factories/*.ts"]
+}

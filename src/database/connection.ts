@@ -1,7 +1,6 @@
 import { createConnection, getConnection } from 'typeorm';
 import { databaseConfig } from '@config';
 
-
 const connection = {
   async create(callback: Function | null = null) {
     try {
