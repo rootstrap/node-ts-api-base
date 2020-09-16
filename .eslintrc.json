@@ -15,6 +15,7 @@
   },
   "rules": {
     "indent": ["error", 2],
-    "comma-dangle": ["error", "never"]
+    "comma-dangle": ["error", "never"],
+    "object-curly-spacing": ["error", "always"]
   }
 }
