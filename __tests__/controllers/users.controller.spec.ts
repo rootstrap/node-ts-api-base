@@ -1,14 +1,14 @@
-import * as Faker from 'faker';
 import request from 'supertest';
 import { getRepository } from 'typeorm';
+import { factory, useSeeding } from 'typeorm-seeding';
 import app from '@app';
 import connection from '@database/connection';
 import { User } from '@entities/user.entity';
 import { createJWT } from '@services/jwt.service';
-
-const API = '/api/v1';
+import { API, mockUserFields } from '../utils/index';
 
 beforeAll(async () => {
+  await useSeeding();
   await connection.create();
 });
 
@@ -25,13 +25,7 @@ describe('when requesting all users', () => {
   let token;
 
   beforeEach(async () => {
-    const userFields = {
-      firstName: Faker.name.firstName(),
-      lastName: Faker.name.lastName(),
-      email: Faker.internet.email(),
-      password: Faker.internet.password(8)
-    };
-    user = await User.create(userFields).save();
+    user = await factory(User)().create();
     token = createJWT(user);
   });
 
@@ -64,13 +58,7 @@ describe('when requesting one user', () => {
   let user;
 
   beforeEach(async () => {
-    const userFields = {
-      firstName: Faker.name.firstName(),
-      lastName: Faker.name.lastName(),
-      email: Faker.internet.email(),
-      password: Faker.internet.password(8)
-    };
-    user = await User.create(userFields).save();
+    user = await factory(User)().create();
   });
 
   it('should return 404 for non-existing user', async () => {
@@ -88,12 +76,7 @@ describe('when requesting one user', () => {
 
 describe('when creating a user', () => {
   it('should return 200 and create db record', async () => {
-    const userFields = {
-      firstName: Faker.name.firstName(),
-      lastName: Faker.name.lastName(),
-      email: Faker.internet.email(),
-      password: Faker.internet.password(8)
-    };
+    const userFields = mockUserFields();
 
     const response = await request(app).post(`${API}/users`).send(userFields);
     expect(response.status).toBe(200);
@@ -107,13 +90,7 @@ describe('when modifying a user', () => {
   let user;
 
   beforeEach(async () => {
-    const userFields = {
-      firstName: Faker.name.firstName(),
-      lastName: Faker.name.lastName(),
-      email: Faker.internet.email(),
-      password: Faker.internet.password(8)
-    };
-    user = await User.create(userFields).save();
+    user = await factory(User)().create();
   });
 
   it('should return 200 and update the record', async () => {
@@ -135,13 +112,7 @@ describe('when deleting a user', () => {
   let user;
 
   beforeEach(async () => {
-    const userFields = {
-      firstName: Faker.name.firstName(),
-      lastName: Faker.name.lastName(),
-      email: Faker.internet.email(),
-      password: Faker.internet.password(8)
-    };
-    user = await User.create(userFields).save();
+    user = await factory(User)().create({ password: 'password123' });
   });
 
   it('should return 200 and delete the record', async () => {

@@ -1,12 +1,12 @@
-import * as Faker from 'faker';
 import request from 'supertest';
 import app from '@app';
 import connection from '@database/connection';
+import { API, mockUserFields } from '../utils/index';
+import { factory, useSeeding } from 'typeorm-seeding';
 import { User } from '@entities/user.entity';
 
-const API = '/api/v1/auth';
-
 beforeAll(async () => {
+  await useSeeding();
   await connection.create();
 });
 
@@ -20,13 +20,8 @@ beforeEach(async () => {
 
 describe('when creating a sigup', () => {
   it('should return 200 whith valid params', async () => {
-    const userFields = {
-      firstName: Faker.name.firstName(),
-      lastName: Faker.name.lastName(),
-      email: Faker.internet.email(),
-      password: Faker.internet.password(8)
-    };
-    const response = await request(app).post(`${API}/signup`).send(userFields);
+    const userFields = mockUserFields();
+    const response = await request(app).post(`${API}/auth/signup`).send(userFields);
     expect(response.status).toBe(200);
   });
 });
@@ -36,15 +31,9 @@ describe('when signing in', () => {
   let password;
 
   beforeEach(async () => {
-    const userFields = {
-      firstName: Faker.name.firstName(),
-      lastName: Faker.name.lastName(),
-      email: Faker.internet.email(),
-      password: Faker.internet.password(8)
-    };
-    email = userFields.email
-    password = userFields.password
-    await User.create(userFields).save();
+    const user = await factory(User)().create({ password: 'password123' });
+    email = user.email
+    password = 'password123'
   });
 
   it('should return 200 whith valid params', async () => {
@@ -52,7 +41,7 @@ describe('when signing in', () => {
       email: email,
       password: password
     };
-    const response = await request(app).post(`${API}/signin`).send(authFields);
+    const response = await request(app).post(`${API}/auth/signin`).send(authFields);
     expect(response.status).toBe(200);
   });
 });
