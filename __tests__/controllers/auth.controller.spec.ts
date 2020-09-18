@@ -1,7 +1,7 @@
 import request from 'supertest';
 import app from '@app';
 import connection from '@database/connection';
-import { API, mockUserFields } from '../utils/index';
+import { API } from '../utils/index';
 import { factory, useSeeding } from 'typeorm-seeding';
 import { User } from '@entities/user.entity';
 
@@ -20,7 +20,7 @@ beforeEach(async () => {
 
 describe('creating an account', () => {
   it('returns http code 200 whith valid params', async () => {
-    const userFields = mockUserFields();
+    const userFields = await factory(User)().make();
     const response = await request(app).post(`${API}/auth/signup`).send(userFields);
     expect(response.status).toBe(200);
   });

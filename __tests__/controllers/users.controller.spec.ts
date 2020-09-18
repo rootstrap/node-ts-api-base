@@ -5,7 +5,7 @@ import app from '@app';
 import connection from '@database/connection';
 import { User } from '@entities/user.entity';
 import { createJWT } from '@services/jwt.service';
-import { API, mockUserFields } from '../utils/index';
+import { API } from '../utils/index';
 
 beforeAll(async () => {
   await useSeeding();
@@ -83,7 +83,7 @@ describe('requesting a user', () => {
 
 describe('creating a user', () => {
   it('returns http code 200 and creates the user', async () => {
-    const userFields = mockUserFields();
+    const userFields = await factory(User)().create();
 
     const response = await request(app).post(`${API}/users`).send(userFields);
     expect(response.status).toBe(200);
