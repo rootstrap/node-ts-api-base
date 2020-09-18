@@ -1,0 +1,12 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence
+
+# Change the next line to add your own reviewers
+*     @rootstrap/reviewers-express-api-base
+
+# Order is important; the last matching pattern takes the most
+# precedence. When someone opens a pull request that only
+# modifies JS files, only @some_user and not the global
+# owner(s) will be requested for a review.
+
+# *.js    @some_user
