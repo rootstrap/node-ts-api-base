@@ -16,7 +16,13 @@ import { createJWT } from '@services/jwt.service';
 export class AuthController {
   @Post('/signup')
   async signUp(@Body({ validate: false }) user: User, @Res() response: any) {
-    const newUser = await getRepository(User).save(user);
+    let newUser;
+
+    try {
+      newUser = await getRepository(User).save(user);
+    } catch (error) {
+      throw new BadRequestError('Missing params on body');
+    }
     return response.send(_.omit(newUser, ['password']));
   }
 
@@ -42,7 +48,7 @@ export class AuthController {
     }
 
     // user matches email + password, create a token
-    const token = createJWT(user);
+    const token = await createJWT(user);
     return {
       token
     };

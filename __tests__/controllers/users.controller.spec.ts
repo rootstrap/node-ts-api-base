@@ -20,28 +20,35 @@ beforeEach(async () => {
   await connection.clear();
 });
 
-describe('when requesting all users', () => {
+describe('requesting all users', () => {
   let user;
   let token;
 
   beforeEach(async () => {
     user = await factory(User)().create();
-    token = createJWT(user);
+    token = await createJWT(user);
   });
 
-  it('should return 401 without authentication', async () => {
+  it('returns http code 401 without authentication token', async () => {
     const response = await request(app).get(`${API}/users`);
     expect(response.status).toBe(401);
   });
 
-  it('should return 200 with authentication token', async () => {
+  it('returns http code 401 with an invalid authentication token', async () => {
+    const response = await request(app)
+      .get(`${API}/users`)
+      .set({ Authorization: 'Inv3nT3d-T0k3N' });
+    expect(response.status).toBe(401);
+  });
+
+  it('returns http code 200 with valid authentication token', async () => {
     const response = await request(app)
       .get(`${API}/users`)
       .set({ Authorization: token });
     expect(response.status).toBe(200);
   });
 
-  it('should return the users', async () => {
+  it('returns the user\'s list', async () => {
     const response = await request(app)
       .get(`${API}/users`)
       .set({ Authorization: token });
@@ -54,28 +61,28 @@ describe('when requesting all users', () => {
   });
 });
 
-describe('when requesting one user', () => {
+describe('requesting a user', () => {
   let user;
 
   beforeEach(async () => {
     user = await factory(User)().create();
   });
 
-  it('should return 404 for non-existing user', async () => {
+  it('returns http code 404 for non-existing user', async () => {
     const random = Math.round(Math.random() * 10);
     const response = await request(app).get(`${API}/users/${random}`);
     expect(response.status).toBe(404);
   });
 
-  it('should return 200 for an existing user', async () => {
+  it('returns http code 200 for an existing user', async () => {
     const id = user.id;
     const response = await request(app).get(`${API}/users/${id}`);
     expect(response.status).toBe(200);
   });
 });
 
-describe('when creating a user', () => {
-  it('should return 200 and create db record', async () => {
+describe('creating a user', () => {
+  it('returns http code 200 and creates the user', async () => {
     const userFields = mockUserFields();
 
     const response = await request(app).post(`${API}/users`).send(userFields);
@@ -86,14 +93,14 @@ describe('when creating a user', () => {
   });
 });
 
-describe('when modifying a user', () => {
+describe('updating a user', () => {
   let user;
 
   beforeEach(async () => {
     user = await factory(User)().create();
   });
 
-  it('should return 200 and update the record', async () => {
+  it('returns http code 200 and updates the user', async () => {
     const id = user.id;
     const newFields = {
       firstName: 'new firstname',
@@ -108,14 +115,14 @@ describe('when modifying a user', () => {
   });
 });
 
-describe('when deleting a user', () => {
+describe('deleting a user', () => {
   let user;
 
   beforeEach(async () => {
     user = await factory(User)().create({ password: 'password123' });
   });
 
-  it('should return 200 and delete the record', async () => {
+  it('returns http code 200 and deletes the user', async () => {
     const id = user.id;
     const userRepo = getRepository<User>(User);
     const beforeCount = await userRepo.count();

@@ -18,15 +18,21 @@ beforeEach(async () => {
   await connection.clear();
 });
 
-describe('when creating a sigup', () => {
-  it('should return 200 whith valid params', async () => {
+describe('creating an account', () => {
+  it('returns http code 200 whith valid params', async () => {
     const userFields = mockUserFields();
     const response = await request(app).post(`${API}/auth/signup`).send(userFields);
     expect(response.status).toBe(200);
   });
+
+  it('returns http code 400 whith invalid params', async () => {
+    const userFields = {};
+    const response = await request(app).post(`${API}/auth/signup`).send(userFields);
+    expect(response.status).toBe(400);
+  });
 });
 
-describe('when signing in', () => {
+describe('creating a session', () => {
   let email;
   let password;
 
@@ -36,12 +42,21 @@ describe('when signing in', () => {
     password = 'password123'
   });
 
-  it('should return 200 whith valid params', async () => {
+  it('returns http code 200 whith valid params', async () => {
     const authFields = {
       email: email,
       password: password
     };
     const response = await request(app).post(`${API}/auth/signin`).send(authFields);
     expect(response.status).toBe(200);
+  });
+
+  it('returns http code 401 whith invalid params', async () => {
+    const authFields = {
+      email: 'r4nD0m@3M4Il.com',
+      password: 'r4Nd0mPa55w0rD'
+    };
+    const response = await request(app).post(`${API}/auth/signin`).send(authFields);
+    expect(response.status).toBe(401);
   });
 });
