@@ -1,8 +1,7 @@
 import 'reflect-metadata'; // this shim is required
 import { Connection } from 'typeorm';
 import AdminBro from 'admin-bro';
-// TODO: Check how to change this to TS import
-const AdminBroExpress = require('@admin-bro/express');
+import AdminBroExpress from '@admin-bro/express';
 import { Database, Resource } from '@admin-bro/typeorm';
 import { User } from '@entities/user.entity';
 import { PORT } from '@config';
@@ -22,7 +21,11 @@ const handleConnection = async (connection: Connection) => {
     ],
     rootPath: '/admin',
     branding: {
-      companyName: 'Rootstrap'
+      companyName: 'Rootstrap',
+      softwareBrothers: false
+    },
+    dashboard: {
+      component: AdminBro.bundle('./admin/dashboard')
     }
   });
 
