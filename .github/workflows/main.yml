@@ -37,3 +37,13 @@ jobs:
         run: |
           echo TYPEORM_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} >> .env.ci
           yarn test:ci
+      # Before running the scan, typescript must be installed from npm and
+      # NODE_PATH env var must point to tsc bin folder, otherways typescript static analysis will fail
+      - name: Setup sonar scanner
+        uses: warchant/setup-sonar-scanner@v1
+      - name: Run Sonarqube analysis
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "::set-env name=NODE_PATH::$(which tsc)"
+          sonar-scanner -Dsonar.verbose=false -Dsonar.qualitygate.wait=true -Dsonar.host.url=${{ secrets.SONAR_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.projectKey=${{secrets.SONAR_PROJECT_KEY }} -Dsonar.scm.provider=git -Dsonar.java.binaries=/tmp -Dsonar.nodejs.executable=$(which node) -Dsonar.projectVersion=$(echo $GITHUB_SHA | cut -c1-8) -Dsonar.sources=. -Dsonar.projectBaseDir=.
