@@ -1,15 +1,20 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { IsEmail } from 'class-validator';
+import { Entity, Column, BeforeInsert } from 'typeorm';
+import { IsEmail, validateOrReject, IsNotEmpty } from 'class-validator';
+import { compareSync, hashSync, genSaltSync } from 'bcrypt';
+import { Base } from './base.entity';
 
 @Entity()
-export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id!: number;
+export class User extends Base {
+  @BeforeInsert()
+  async beforeInsert() {
+    await validateOrReject(this);
+    this.hashPassword();
+  }
 
-  @Column()
+  @Column({ nullable: true })
   firstName!: string;
 
-  @Column()
+  @Column({ nullable: true })
   lastName!: string;
 
   @Column()
@@ -17,5 +22,14 @@ export class User extends BaseEntity {
   email!: string;
 
   @Column()
-  age!: number;
+  @IsNotEmpty()
+  password!: string;
+
+  comparePassword(password: string): boolean {
+    return compareSync(password, this.password);
+  }
+
+  private hashPassword() {
+    this.password = hashSync(this.password, genSaltSync());
+  }
 }
