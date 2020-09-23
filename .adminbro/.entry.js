@@ -1,1 +1,1 @@
-AdminBro.UserComponents = {};
+AdminBro.UserComponents = {}

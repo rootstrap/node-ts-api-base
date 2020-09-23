@@ -7,5 +7,6 @@ module.exports = {
   // necessary for resolving the paths in tsconfig:
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/'
-  })
+  }),
+  testRegex: '/__tests__/.*.spec.(js|ts|tsx)?$'
 };
