@@ -7,8 +7,11 @@ This project includes the boilerplate for a basic rest-api made in Node.JS with 
 1. Install Node.js (lts-version v12.18.3)
 2. Install `yarn` if not present `curl -o- -L https://yarnpkg.com/install.sh | bash` (macOS and generic Unix environments)
 3. Install required dependencies by `yarn`
-4. `mv .example.env .env`
-5. `mv .example.env.test .env.test`
+4. `cp .example.env .env`
+5. `cp .example.env.test .env.test`
+6. Create your DB (i.e. psql for Postgres: `psql -U <user> -h <host> -c "create database <db name>;"`) with same name as your .env file.
+7. Run `yarn db:setup`.
+8. Start your server with `yarn dev`.
 
 ## Some scripts
 
@@ -20,7 +23,14 @@ Run `yarn test` to run tests.
 
 Run `yarn dev` to start and automatically detect any source-code changes, restarting the server as well.
 
-Run `yarn register` to register the paths set at tsconfig.
+Run `yarn schema:drop` to drop your schema of the DB.
+
+Run `yarn schema:sync` to resync the schema of your DB.
+
+Run `yarn seed:run` to run seed files.
+
+Run `yarn db:reset` to drop schema and re run it, then seed the DB.
+
 ## App scaffolding
 
 This is the suggested scaffolding for this project. You can take a look at:

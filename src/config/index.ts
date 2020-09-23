@@ -30,4 +30,4 @@ export const databaseConfig: ConnectionOptions = {
   }
 };
 
-export const { PORT } = process.env;
+export const { PORT, JWT_SECRET, ACCESS_TOKEN_LIFE } = process.env;
