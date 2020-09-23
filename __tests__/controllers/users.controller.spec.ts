@@ -5,7 +5,7 @@ import app from '@app';
 import connection from '@database/connection';
 import { User } from '@entities/user.entity';
 import { createJWT } from '@services/jwt.service';
-import { API } from '../utils/index';
+import { API } from '../utils';
 
 beforeAll(async () => {
   await useSeeding();
@@ -48,7 +48,7 @@ describe('requesting all users', () => {
     expect(response.status).toBe(200);
   });
 
-  it('returns the user\'s list', async () => {
+  it("returns the user's list", async () => {
     const response = await request(app)
       .get(`${API}/users`)
       .set({ Authorization: token });
@@ -104,9 +104,11 @@ describe('updating a user', () => {
     const id = user.id;
     const newFields = {
       firstName: 'new firstname',
-      lastName: 'new lastname',
+      lastName: 'new lastname'
     };
-    const response = await request(app).put(`${API}/users/${id}`).send(newFields);
+    const response = await request(app)
+      .put(`${API}/users/${id}`)
+      .send(newFields);
     expect(response.status).toBe(200);
 
     const updatedUser = await getRepository(User).findOne(id);
