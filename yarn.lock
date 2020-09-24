@@ -1541,10 +1541,10 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
-"@types/faker@^4.1.12":
-  version "4.1.12"
-  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-4.1.12.tgz#065d37343677df1aa757c622650bd14666c42602"
-  integrity sha512-0MEyzJrLLs1WaOCx9ULK6FzdCSj2EuxdSP9kvuxxdBEGujZYUOZ4vkPXdgu3dhyg/pOdn7VCatelYX7k0YShlA==
+"@types/faker@^5.1.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-5.1.1.tgz#db1c14ddb4a325d710ba00e79913b9ff5740bd6b"
+  integrity sha512-CK4YJa4JOO+mul/DTb3HbuUOtS1T4shEbIkuSFVvqfslxAiKxPj2OJb6oUS0n4x+FWia8EOGdIzdClV2F/97SQ==
 
 "@types/graceful-fs@^4.1.2":
   version "4.1.3"
