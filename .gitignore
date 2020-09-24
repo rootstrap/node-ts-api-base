@@ -172,3 +172,6 @@ dist
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/yarn,visualstudiocode,node,macos,dotenv
+
+# admin bro automatically generated file
+.adminbro
