@@ -10,9 +10,9 @@ const app = createExpressServer({
   routePrefix: '/api/v1',
   cors: true,
   authorizationChecker: authorizationChecker,
-  controllers: [__dirname + '/controllers/*.ts'],
-  middlewares: [__dirname + '/middlewares/*.ts'],
-  interceptors: [__dirname + '/interceptors/*.ts']
+  controllers: [`${__dirname}/controllers/*.ts`],
+  middlewares: [`${__dirname}/middlewares/*.ts`],
+  interceptors: [`${__dirname}/interceptors/*.ts`]
 });
 
 export default app;
