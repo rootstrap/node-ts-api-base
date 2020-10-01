@@ -3,7 +3,9 @@ import { verifyJWT } from '@services/jwt.service';
 
 const authorizationChecker = async (action: Action): Promise<boolean> => {
   const token = action.request.headers['authorization'];
-  if (!token) return false;
+  if (!token) {
+    return false;
+  }
 
   try {
     const payload = await verifyJWT(token);

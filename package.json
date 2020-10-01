@@ -9,7 +9,7 @@
     "build": "tsc",
     "start": "node -r tsconfig-paths/register -r ts-node/register ./dist/server.js",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "test": "ENVIRONMENT=test jest",
+    "test": "ENVIRONMENT=test jest --runInBand",
     "db:setup": "yarn schema:sync && yarn seed:run",
     "db:reset": "yarn schema:drop && yarn db:setup",
     "test:ci": "ENVIRONMENT=ci jest",

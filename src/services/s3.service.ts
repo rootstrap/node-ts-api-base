@@ -15,23 +15,23 @@ const bucket = S3_BUCKETNAME || '';
 /**
  * Interacting with an S3 Bucket
  */
-const service = {
+export default class {
   /**
    * @description uploads a file to S3
    * @param {ReadStream} file - file stream
    * @param {string} name - name it will have in the AWS S3 bucket
    * @example
-   * import s3 from '<path...>/s3.service'
+   * import S3 from '<path...>/s3.service'
    * // ...
-   * let stream = fs.createReadStream(pathToFile);
    * try {
-   *   const data = await s3.upload(stream, 'name-of-file');
+   *   let stream = fs.createReadStream(pathToFile);
+   *   const data = await S3.upload(stream, 'name-of-file');
    *   // ...do something with data if success...
    * } catch (e) {
    *   // ...do something with error if failure...
    * }
    */
-  upload: async (file: ReadStream, name: string): Promise<SendData> => {
+  static async upload(file: ReadStream, name: string): Promise<SendData> {
     const managedUpload = new ManagedUpload({
       params: {
         Bucket: bucket,
@@ -41,13 +41,13 @@ const service = {
     });
 
     return managedUpload.promise();
-  },
+  }
 
   /**
    * @description deletes a file from S3
    * @param {string} key - file identifier in the AWS S3 bucket
    * @example
-   * import s3 from '<path...>/s3.service'
+   * import S3 from '<path...>/s3.service'
    * // ...
    * try {
    *   const data = await s3.delete(fileKey);
@@ -56,7 +56,7 @@ const service = {
    *   // ...do something with error if failure...
    * }
    */
-  delete: async (key: string) => {
+  static async delete(key: string) {
     return new Promise((resolve, reject) => {
       const s3 = new aws.S3();
       const params: aws.S3.DeleteObjectRequest = {
@@ -65,12 +65,12 @@ const service = {
       };
 
       s3.deleteObject(params, (error, data) => {
-        if (error) reject(error);
+        if (error) {
+          reject(error);
+        }
 
         resolve(data);
       });
     });
   }
-};
-
-export default service;
+}

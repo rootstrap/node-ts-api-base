@@ -19,7 +19,7 @@ import { User } from '@entities/user.entity';
 
 @JsonController('/users')
 export class UserController {
-  private userRepository = getRepository<User>(User);
+  private readonly userRepository = getRepository<User>(User);
 
   @Authorized()
   @Get()
