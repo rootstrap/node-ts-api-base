@@ -21,7 +21,7 @@ import { User } from '@entities/user.entity';
 export class UserController {
   private userRepository = getRepository<User>(User);
 
-  @Authorized()
+  // @Authorized()
   @Get()
   async index(): Promise<User[]> {
     return await this.userRepository.find();
