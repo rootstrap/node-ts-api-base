@@ -1,7 +1,7 @@
 import 'reflect-metadata'; // this shim is required
 import { createExpressServer, useContainer } from 'routing-controllers';
 import { Container } from 'typedi';
-import authorizationChecker from '@middleware/auth.middleware';
+import authorizationChecker from '@middlewares/auth.middleware';
 
 // required by routing-controllers
 useContainer(Container);
