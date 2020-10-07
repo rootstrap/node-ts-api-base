@@ -11,15 +11,19 @@ import { getRepository } from 'typeorm';
 import * as _ from 'lodash';
 import { User } from '@entities/user.entity';
 import { createJWT } from '@services/jwt.service';
+import { Mailer } from '@services/mailer.service';
 
 @JsonController('/auth')
 export class AuthController {
   @Post('/signup')
   async signUp(@Body({ validate: false }) user: User, @Res() response: any) {
-    let newUser;
+    let newUser: User;
 
     try {
       newUser = await getRepository(User).save(user);
+      new Mailer().sendMail(newUser.email, 'Welcome', Mailer.WELCOME, {
+        name: `${newUser.firstName} ${newUser.lastName}`
+      });
     } catch (error) {
       throw new BadRequestError('Missing params on body');
     }

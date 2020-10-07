@@ -30,4 +30,11 @@ export const databaseConfig: ConnectionOptions = {
   }
 };
 
-export const { PORT, JWT_SECRET, ACCESS_TOKEN_LIFE, ENVIRONMENT } = process.env;
+export const {
+  PORT,
+  JWT_SECRET,
+  ACCESS_TOKEN_LIFE,
+  ENVIRONMENT,
+  SENDGRID_API_KEY,
+  SENDGRID_EMAIL
+} = process.env;

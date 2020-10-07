@@ -40,6 +40,8 @@ This is the suggested scaffolding for this project. You can take a look at:
 ├── __tests__
 │   └── ...
 ├── src
+│   ├── admin
+│   │   └── ...
 │   ├── config
 │   │   └── ...
 │   ├── controllers
@@ -48,9 +50,15 @@ This is the suggested scaffolding for this project. You can take a look at:
 │   │   └── ...
 │   ├── entities
 │   │   └── ...
+│   ├── middlewares
+│   │   └── ...
 │   ├── services
 │   │   └── ...
+│   ├── views
+│   │   └── emails
+│   │       └── ...       (Templates for emails.)
 │   ├── app.ts            (App root and is where the application will be configured.)
+│   ├── server.ts         (Start the server.)
 ├── README.md
 ├── .nvmrc                (Locks down your Node version.)
 ├── jest.config.js        (Jest configuration file.)
@@ -68,6 +76,8 @@ This is the suggested scaffolding for this project. You can take a look at:
 - [multer](https://github.com/expressjs/multer) -  NodeJS middleware for handling multipart/form-data.
 - [tsconfig-paths](https://github.com/dividab/tsconfig-paths#readme) - Utility to register relative paths set at tsconfig file
 - [morgan](https://github.com/expressjs/morgan) - HTTP request logger middleware for node.js
+- [nodemailer](https://github.com/nodemailer/nodemailer) - Send e-mails from Node.js
+- [ejs](https://github.com/tj/ejs) - Embedded JavaScript templates.
 
 ## Deployment with docker
 
