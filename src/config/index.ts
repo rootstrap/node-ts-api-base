@@ -31,6 +31,7 @@ export const databaseConfig: ConnectionOptions = {
 };
 
 export const {
+  ENVIRONMENT,
   PORT,
   JWT_SECRET,
   ACCESS_TOKEN_LIFE,

@@ -14,7 +14,7 @@
       "@controllers/*": ["src/controllers/*"],
       "@database/*": ["src/database/*"],
       "@entities/*": ["src/entities/*"],
-      "@middleware/*": ["src/middleware/*"],
+      "@middlewares/*": ["src/middlewares/*"],
       "@services/*": ["src/services/*"],
       "@app": ["src/app"]
     },
