@@ -1,7 +1,7 @@
 import request from 'supertest';
 import app from '@app';
 import connection from '@database/connection';
-import { API } from '../utils';
+import { API, confirmedUser } from '../utils';
 import { factory, useSeeding } from 'typeorm-seeding';
 import { User } from '@entities/user.entity';
 
@@ -39,32 +39,52 @@ describe('creating an account', () => {
 describe('creating a session', () => {
   let email;
   let password;
+  let user;
 
   beforeEach(async () => {
-    const user = await factory(User)().create({ password: 'password123' });
+    user = await factory(User)().create({ password: 'password123' });
     email = user.email;
     password = 'password123';
   });
 
-  it('returns http code 200 whith valid params', async () => {
-    const authFields = {
-      email: email,
-      password: password
-    };
-    const response = await request(app)
-      .post(`${API}/auth/signin`)
-      .send(authFields);
-    expect(response.status).toBe(200);
+  describe('with an unconfirmed user', () => {
+    it('returns http code 401', async () => {
+      const authFields = {
+        email: email,
+        password: password
+      };
+      const response = await request(app)
+        .post(`${API}/auth/signin`)
+        .send(authFields);
+      expect(response.status).toBe(401);
+    });
   });
 
-  it('returns http code 401 whith invalid params', async () => {
-    const authFields = {
-      email: 'r4nD0m@3M4Il.com',
-      password: 'r4Nd0mPa55w0rD'
-    };
-    const response = await request(app)
-      .post(`${API}/auth/signin`)
-      .send(authFields);
-    expect(response.status).toBe(401);
+  describe('with a confirmed user', () => {
+    beforeEach(async () => {
+      user = await confirmedUser(user);
+    });
+
+    it('returns http code 200 whith valid params', async () => {
+      const authFields = {
+        email: email,
+        password: password
+      };
+      const response = await request(app)
+        .post(`${API}/auth/signin`)
+        .send(authFields);
+      expect(response.status).toBe(200);
+    });
+
+    it('returns http code 401 whith invalid params', async () => {
+      const authFields = {
+        email: 'r4nD0m@3M4Il.com',
+        password: 'r4Nd0mPa55w0rD'
+      };
+      const response = await request(app)
+        .post(`${API}/auth/signin`)
+        .send(authFields);
+      expect(response.status).toBe(401);
+    });
   });
 });

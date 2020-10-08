@@ -1,0 +1,15 @@
+# Ignore artifacts:
+dist
+
+# Ignore all HTML files:
+*.html
+
+# Ignore node_modules
+node_modules
+
+tsconfig.json
+.eslintrc.json
+package.json
+
+.vscode
+.github

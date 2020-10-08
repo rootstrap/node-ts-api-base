@@ -8,7 +8,7 @@ export const createJWT = (user: User): Promise<string> => {
       const token = jwt.sign(
         { data: { userId: user.id, email: user.email } },
         JWT_SECRET || '',
-        { expiresIn: ACCESS_TOKEN_LIFE || '6h' }
+        { expiresIn: `${ACCESS_TOKEN_LIFE || 6}h` }
       );
       resolve(token);
     } catch (error) {

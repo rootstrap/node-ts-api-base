@@ -5,13 +5,15 @@ import {
   BodyParam,
   UnauthorizedError,
   BadRequestError,
-  Res
+  Res,
+  Get,
+  Param,
+  OnUndefined
 } from 'routing-controllers';
 import { getRepository } from 'typeorm';
 import * as _ from 'lodash';
 import { User } from '@entities/user.entity';
 import { createJWT } from '@services/jwt.service';
-import { Mailer } from '@services/mailer.service';
 
 @JsonController('/auth')
 export class AuthController {
@@ -21,9 +23,6 @@ export class AuthController {
 
     try {
       newUser = await getRepository(User).save(user);
-      new Mailer().sendMail(newUser.email, 'Welcome', Mailer.WELCOME, {
-        name: `${newUser.firstName} ${newUser.lastName}`
-      });
     } catch (error) {
       throw new BadRequestError('Missing params on body');
     }
@@ -41,7 +40,7 @@ export class AuthController {
 
     let user: User;
     try {
-      user = await User.findOneOrFail({ where: { email } });
+      user = await getRepository(User).findOneOrFail({ where: { email } });
     } catch (error) {
       throw new UnauthorizedError('Invalid credentials');
     }
@@ -51,10 +50,29 @@ export class AuthController {
       throw new UnauthorizedError('Invalid credentials');
     }
 
+    // Check if user is confirmed
+    if (!user.isConfirmed()) {
+      throw new UnauthorizedError('Confirm your email before continuing');
+    }
+
     // user matches email + password, create a token
     const token = await createJWT(user);
     return {
       token
     };
+  }
+
+  @Get('/confirm/:token')
+  @OnUndefined(201)
+  async confirm(@Param('token') token: string) {
+    console.log('token: ', token);
+    const user = await getRepository(User).findOne({
+      where: { confirmationToken: token }
+    });
+
+    if (user) {
+      user.confirmedAt = new Date();
+      await user.save();
+    }
   }
 }

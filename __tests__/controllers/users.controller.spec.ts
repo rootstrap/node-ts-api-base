@@ -48,6 +48,8 @@ describe('requesting all users', () => {
     expect(response.status).toBe(200);
   });
 
+  // prettier-ignore-start
+  // eslint-disable-next-line quotes
   it("returns the user's list", async () => {
     const response = await request(app)
       .get(`${API}/users`)
@@ -60,6 +62,7 @@ describe('requesting all users', () => {
     expect(response.body).not.toEqual([]);
   });
 });
+// prettier-ignore-end
 
 describe('requesting a user', () => {
   let user;

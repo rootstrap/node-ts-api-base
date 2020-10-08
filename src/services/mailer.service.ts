@@ -1,7 +1,7 @@
 import * as nodemailer from 'nodemailer';
 import nodemailerSendgrid from 'nodemailer-sendgrid';
 import ejs from 'ejs';
-import { SENDGRID_API_KEY, SENDGRID_EMAIL } from '@config';
+import { SENDGRID_API_KEY, SENDGRID_EMAIL, ENVIRONMENT } from '@config';
 import path from 'path';
 
 export class Mailer {
@@ -34,6 +34,11 @@ export class Mailer {
         subject,
         html: data
       };
+
+      // Don't test this
+      if (ENVIRONMENT === 'test' || ENVIRONMENT === 'ci') {
+        return;
+      }
 
       await this.transporter.sendMail(options, error => {
         if (error) {

@@ -13,7 +13,7 @@
     "db:setup": "yarn schema:sync && yarn seed:run",
     "db:reset": "yarn schema:drop && yarn db:setup",
     "test:ci": "ENVIRONMENT=ci jest",
-    "lint": "eslint \"src/**\" --color",
+    "lint": "eslint \"src/**\" --color && prettier -c '{**/*,*}.{ts,tsx,json}'",
     "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config",
     "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed",
     "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
@@ -75,6 +75,7 @@
     "supertest": "^5.0.0",
     "ts-jest": "^26.4.1",
     "typedi": "^0.8.0",
-    "typeorm": "^0.2.28"
+    "typeorm": "^0.2.28",
+    "uuid-token-generator": "^1.0.0"
   }
 }
