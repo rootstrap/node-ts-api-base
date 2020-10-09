@@ -34,9 +34,8 @@ const handleConnection = async (connection: Connection) => {
   app.use(adminBro.options.rootPath, router);
 
   // run express application on given port
-  app.listen(PORT, (err: any) => {
-    if (err) return console.error(err);
-    return console.log(`Server is listening on ${PORT}`);
+  app.listen(PORT, () => {
+    console.log(`Server is listening on ${PORT}`);
   });
 };
 

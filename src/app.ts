@@ -1,5 +1,6 @@
 import 'reflect-metadata'; // this shim is required
-import { createExpressServer, useContainer } from 'routing-controllers';
+import express from 'express';
+import { useContainer, useExpressServer } from 'routing-controllers';
 import { Container } from 'typedi';
 import authorizationChecker from '@middleware/auth.middleware';
 import { limiter } from '@middleware/rateLimiter.middleware';
@@ -7,7 +8,13 @@ import { limiter } from '@middleware/rateLimiter.middleware';
 // required by routing-controllers
 useContainer(Container);
 
-const app = createExpressServer({
+// Creates express app
+let app: express.Express = express();
+
+// Set requests limiter
+app.use(limiter);
+
+useExpressServer(app, {
   routePrefix: '/api/v1',
   cors: true,
   authorizationChecker: authorizationChecker,
@@ -15,7 +22,5 @@ const app = createExpressServer({
   middlewares: [`${__dirname}/middlewares/*.ts`],
   interceptors: [`${__dirname}/interceptors/*.ts`]
 });
-
-app.use(limiter);
 
 export default app;
