@@ -1,7 +1,7 @@
 import 'reflect-metadata'; // this shim is required
 import { createExpressServer, useContainer } from 'routing-controllers';
 import { Container } from 'typedi';
-import authorizationChecker from '@middlewares/auth.middleware';
+import Auth from '@middlewares/auth.middleware';
 
 // required by routing-controllers
 useContainer(Container);
@@ -9,7 +9,7 @@ useContainer(Container);
 const app = createExpressServer({
   routePrefix: '/api/v1',
   cors: true,
-  authorizationChecker: authorizationChecker,
+  authorizationChecker: Auth.checker,
   controllers: [`${__dirname}/controllers/*.ts`],
   middlewares: [`${__dirname}/middlewares/*.ts`],
   interceptors: [`${__dirname}/interceptors/*.ts`]

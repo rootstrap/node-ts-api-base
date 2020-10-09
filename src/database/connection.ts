@@ -23,7 +23,9 @@ const connection = {
 
     entities.forEach(async entity => {
       const repository = connection.getRepository(entity.name);
-      await repository.clear();
+      try {
+        await repository.clear();
+      } catch (e) {}
     });
   }
 };
