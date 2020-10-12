@@ -8,8 +8,8 @@ const connection = {
       if (callback) {
         callback(connection);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      throw new Error(`ERROR: Creating test db connection: ${error}`);
     }
   },
 
@@ -25,7 +25,9 @@ const connection = {
       const repository = connection.getRepository(entity.name);
       try {
         await repository.clear();
-      } catch (e) {}
+      } catch (error) {
+        throw new Error(`ERROR: Cleaning test db: ${error}`);
+      }
     });
   }
 };
