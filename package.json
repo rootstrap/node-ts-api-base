@@ -7,7 +7,7 @@
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node -r tsconfig-paths/register' src/server.ts",
     "prebuild": "rm -rf /dist",
     "build": "tsc",
-    "start": "node -r tsconfig-paths/register -r ts-node/register ./dist/server.js",
+    "start": "node -r tsconfig-paths/register -r ts-node/register ./dist/index.js",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "ENVIRONMENT=test jest --runInBand",
     "db:setup": "yarn schema:sync && yarn seed:run",
