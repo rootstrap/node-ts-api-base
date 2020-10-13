@@ -8,8 +8,8 @@ import { createJWT } from '@services/jwt.service';
 import { API } from '../utils';
 
 beforeAll(async () => {
-  await useSeeding();
   await connection.create();
+  await useSeeding();
 });
 
 afterAll(async () => {
@@ -69,7 +69,7 @@ describe('requesting a user', () => {
   });
 
   it('returns http code 404 for non-existing user', async () => {
-    const randomId = Math.round(user.id + (Math.random() * 10));
+    const randomId = Math.round(user.id + Math.random() * 10);
     const response = await request(app).get(`${API}/users/${randomId}`);
     expect(response.status).toBe(404);
   });

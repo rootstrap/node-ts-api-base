@@ -6,8 +6,8 @@ import { factory, useSeeding } from 'typeorm-seeding';
 import { User } from '@entities/user.entity';
 
 beforeAll(async () => {
-  await useSeeding();
   await connection.create();
+  await useSeeding();
 });
 
 afterAll(async () => {

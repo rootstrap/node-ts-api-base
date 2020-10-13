@@ -9,16 +9,22 @@
     "build": "tsc",
     "start": "node -r tsconfig-paths/register -r ts-node/register ./dist/index.js",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "test": "ENVIRONMENT=test jest --runInBand",
+    "test": "ENVIRONMENT=test jest --runInBand --useStderr",
+    "test:cover": "yarn test --coverage && sonar-scanner",
+    "test:ci": "ENVIRONMENT=ci jest",
     "db:setup": "yarn schema:sync && yarn seed:run",
     "db:reset": "yarn schema:drop && yarn db:setup",
-    "test:ci": "ENVIRONMENT=ci jest",
     "lint": "eslint \"src/**\" --color",
     "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config",
     "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed",
     "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
     "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync",
     "migration:generate": "yarn run typeorm migration:create -n"
+  },
+  "jestSonar": {
+    "reportPath": "__tests__",
+    "reportFile": "test-report.xml",
+    "indent": 2
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
@@ -38,6 +44,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "jest-sonar-reporter": "^2.0.0",
     "nodemon": "^2.0.4",
     "prettier": "^2.1.2",
     "ts-node": "^9.0.0",
