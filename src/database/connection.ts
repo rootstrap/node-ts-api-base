@@ -5,9 +5,11 @@ const connection = {
   async create(callback?: (c: Connection) => void): Promise<void> {
     try {
       const connection = await createConnection(databaseConfig);
-      if (callback) callback(connection);
-    } catch (e) {
-      console.log(e);
+      if (callback) {
+        callback(connection);
+      }
+    } catch (error) {
+      throw new Error(`ERROR: Creating test db connection: ${error}`);
     }
   },
 
@@ -21,7 +23,11 @@ const connection = {
 
     entities.forEach(async entity => {
       const repository = connection.getRepository(entity.name);
-      await repository.clear();
+      try {
+        await repository.clear();
+      } catch (error) {
+        throw new Error(`ERROR: Cleaning test db: ${error}`);
+      }
     });
   }
 };

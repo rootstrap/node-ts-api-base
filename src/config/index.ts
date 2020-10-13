@@ -31,9 +31,13 @@ export const databaseConfig: ConnectionOptions = {
 };
 
 export const {
+  ENVIRONMENT,
   PORT,
   JWT_SECRET,
   ACCESS_TOKEN_LIFE,
   RATE_LIMIT_WINDOW,
-  RATE_LIMIT_MAX_REQUESTS
+  RATE_LIMIT_MAX_REQUESTS,
+  S3_ID,
+  S3_SECRET,
+  S3_BUCKETNAME
 } = process.env;

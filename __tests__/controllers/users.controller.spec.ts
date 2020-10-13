@@ -69,8 +69,8 @@ describe('requesting a user', () => {
   });
 
   it('returns http code 404 for non-existing user', async () => {
-    const random = Math.round(Math.random() * 10);
-    const response = await request(app).get(`${API}/users/${random}`);
+    const randomId = Math.round(user.id + (Math.random() * 10));
+    const response = await request(app).get(`${API}/users/${randomId}`);
     expect(response.status).toBe(404);
   });
 
