@@ -4,7 +4,7 @@
   "description": "Rest api base with nodejs + express",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node -r tsconfig-paths/register' src/server.ts",
+    "dev": "yarn && nodemon --watch 'src/**/*.ts' --exec 'ts-node -r tsconfig-paths/register' src/server.ts",
     "prebuild": "rm -rf /dist",
     "build": "tsc",
     "start": "node -r tsconfig-paths/register -r ts-node/register ./dist/index.js",
