@@ -35,7 +35,10 @@ const handleConnection = async (connection: Connection) => {
 
   // run express application on given port
   app.listen(PORT, (err: any) => {
-    if (err) return console.error(err);
+    if (err) {
+      return console.error(err);
+    }
+
     return console.log(`Server is listening on ${PORT}`);
   });
 };

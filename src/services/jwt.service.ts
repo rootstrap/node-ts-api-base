@@ -31,11 +31,9 @@ export const decodeJWT = (
 };
 
 export const verifyJWT = (
-  token: string
+  token = ''
 ): Promise<string | { [key: string]: any } | null> => {
   return new Promise((resolve, reject) => {
-    if (!token) return null;
-
     try {
       const verify = jwt.verify(token, JWT_SECRET || '');
       resolve(verify);

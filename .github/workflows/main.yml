@@ -25,6 +25,8 @@ jobs:
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Fetch unshallow
+        run: git fetch --unshallow
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:

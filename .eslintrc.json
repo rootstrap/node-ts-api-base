@@ -17,6 +17,7 @@
     "indent": ["error", 2],
     "comma-dangle": ["error", "never"],
     "object-curly-spacing": ["error", "always"],
+    "curly": ["error", "all"],
     "require-jsdoc": 0,
     "new-cap": 0,
     "arrow-parens": 0,
