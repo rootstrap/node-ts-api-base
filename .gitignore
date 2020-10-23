@@ -175,3 +175,8 @@ dist
 
 # admin bro automatically generated file
 .adminbro
+
+#sonar local files
+.scannerwork
+sonar-project.properties
+test-report.xml

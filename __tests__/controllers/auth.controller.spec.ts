@@ -7,8 +7,8 @@ import { User } from '@entities/user.entity';
 import { RATE_LIMIT_MAX_REQUESTS } from '@config';
 
 beforeAll(async () => {
-  await useSeeding();
   await connection.create();
+  await useSeeding();
 });
 
 afterAll(async () => {

@@ -74,6 +74,14 @@ This is the suggested scaffolding for this project. You can take a look at:
 
 Work in progress ...
 
+## Code Quality
+
+This repo is integrated with SonarQube for static code analysis and test coverage reporting. [This guide](https://www.notion.so/rootstrap/SonarQube-c87fcaef3fbe4d7995ad087486768a24#a59df288a98c4410807c02c2d381ec6a) covers all the steps, including how to run the test coverage on a local machine.
+Use the provided `sonar-project.properties` as-is.
+Once that is covered:
+1. Run `yarn test:cover` to run tests with coverage reporting.
+2. Run `sonar-scanner` to import the test results into the sonar dashboard.
+
 ## Docs
 
 [Express documentation](https://expressjs.com/es/)

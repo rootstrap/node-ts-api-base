@@ -21,14 +21,17 @@ const connection = {
     const connection = getConnection();
     const entities = connection.entityMetadatas;
 
-    entities.forEach(async entity => {
+    const reposToClear: Promise<void>[] = [];
+    entities.forEach(entity => {
       const repository = connection.getRepository(entity.name);
       try {
-        await repository.clear();
+        reposToClear.push(repository.clear());
       } catch (error) {
         throw new Error(`ERROR: Cleaning test db: ${error}`);
       }
     });
+
+    return Promise.all(reposToClear).then();
   }
 };
 
