@@ -7,6 +7,18 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "yarn",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": [
+        "dev"
+      ],
+      "port": 3000,
+      "cwd": "${workspaceRoot}",
+      "timeout": 10000
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Launch Program",
       "runtimeArgs": [
           "-r",
