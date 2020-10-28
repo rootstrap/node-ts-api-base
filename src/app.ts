@@ -17,14 +17,16 @@ const app: express.Express = express();
 app.use(helmet());
 
 // Setup express middlewares
-app.use(rateLimit({
-  windowMs: Number.parseInt(RATE_LIMIT_WINDOW || '900000'),
-  max: Number.parseInt(RATE_LIMIT_MAX_REQUESTS || '10'),
-  message: {
-    status: 429,
-    message: 'Too many requests, please try again later.'
-  }
-}));
+app.use(
+  rateLimit({
+    windowMs: Number.parseInt(RATE_LIMIT_WINDOW || '900000'),
+    max: Number.parseInt(RATE_LIMIT_MAX_REQUESTS || '10'),
+    message: {
+      status: 429,
+      message: 'Too many requests, please try again later.'
+    }
+  })
+);
 
 // Wrap server with routing-controllers
 useExpressServer(app, {
