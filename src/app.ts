@@ -1,5 +1,6 @@
 import 'reflect-metadata'; // this shim is required
 import express from 'express';
+import helmet from 'helmet';
 import { useContainer, useExpressServer } from 'routing-controllers';
 import { Container } from 'typedi';
 import Auth from '@middlewares/auth.middleware';
@@ -11,6 +12,9 @@ useContainer(Container);
 
 // Create express server
 const app: express.Express = express();
+
+// Setup security headers
+app.use(helmet());
 
 // Setup express middlewares
 app.use(rateLimit({
