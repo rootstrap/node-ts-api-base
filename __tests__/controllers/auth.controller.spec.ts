@@ -4,10 +4,11 @@ import connection from '@database/connection';
 import { API, confirmedUser } from '../utils';
 import { factory, useSeeding } from 'typeorm-seeding';
 import { User } from '@entities/user.entity';
+import { RATE_LIMIT_MAX_REQUESTS } from '@config';
 
 beforeAll(async () => {
-  await useSeeding();
   await connection.create();
+  await useSeeding();
 });
 
 afterAll(async () => {
@@ -86,5 +87,19 @@ describe('creating a session', () => {
         .send(authFields);
       expect(response.status).toBe(401);
     });
+  });
+});
+
+describe('calling multiple times an endpoint', () => {
+  it('returns http code 429 with message too many requests', async () => {
+    let response;
+    for (
+      let index = 0;
+      index < Number.parseInt(RATE_LIMIT_MAX_REQUESTS || '100') + 1;
+      index++
+    ) {
+      response = await request(app).post(`${API}/auth/signin`);
+    }
+    expect(response.status).toBe(429);
   });
 });

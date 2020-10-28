@@ -9,5 +9,6 @@ module.exports = {
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/'
   }),
-  testRegex: '/__tests__/.*.spec.(js|ts|tsx)?$'
+  testRegex: '/__tests__/.*.spec.(js|ts|tsx)?$',
+  testResultsProcessor: 'jest-sonar-reporter'
 };

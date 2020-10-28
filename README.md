@@ -75,6 +75,7 @@ This is the suggested scaffolding for this project. You can take a look at:
 - [nodemon](https://nodemon.io/) - Utility that will monitor for any changes in your source and automatically restart your server.
 - [multer](https://github.com/expressjs/multer) -  NodeJS middleware for handling multipart/form-data.
 - [tsconfig-paths](https://github.com/dividab/tsconfig-paths#readme) - Utility to register relative paths set at tsconfig file
+- [express-rate-limit](https://github.com/nfriedly/express-rate-limit) - Basic rate-limiting middleware used to limit repeated requests to public APIs
 - [morgan](https://github.com/expressjs/morgan) - HTTP request logger middleware for node.js
 - [nodemailer](https://github.com/nodemailer/nodemailer) - Send e-mails from Node.js
 - [ejs](https://github.com/tj/ejs) - Embedded JavaScript templates.
@@ -82,6 +83,14 @@ This is the suggested scaffolding for this project. You can take a look at:
 ## Deployment with docker
 
 Work in progress ...
+
+## Code Quality
+
+This repo is integrated with SonarQube for static code analysis and test coverage reporting. [This guide](https://www.notion.so/rootstrap/SonarQube-c87fcaef3fbe4d7995ad087486768a24#a59df288a98c4410807c02c2d381ec6a) covers all the steps, including how to run the test coverage on a local machine.
+Use the provided `sonar-project.properties` as-is.
+Once that is covered:
+1. Run `yarn test:cover` to run tests with coverage reporting.
+2. Run `sonar-scanner` to import the test results into the sonar dashboard.
 
 ## Docs
 
