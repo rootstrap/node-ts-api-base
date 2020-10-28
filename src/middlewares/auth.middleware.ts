@@ -3,9 +3,14 @@ import { verifyJWT } from '@services/jwt.service';
 
 export default class {
   static async checker(action: Action): Promise<boolean> {
-    const token = action.request.headers['authorization'];
+    let token = action.request.headers['authorization'];
     if (!token) {
       return false;
+    }
+
+    if (token.startsWith('Bearer ')) {
+      // Remove Bearer from authentication scheme header
+      token = token.replace('Bearer ', '');
     }
 
     try {

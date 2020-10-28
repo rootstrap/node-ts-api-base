@@ -8,6 +8,7 @@
     "strict": true,
     "noImplicitAny": false,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
       "@config": ["src/config/index"],
