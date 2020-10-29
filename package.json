@@ -78,7 +78,7 @@
     "pg": "^8.4.2",
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.9.0-alpha.6",
-    "supertest": "^5.0.0",
+    "supertest": "^6.0.0",
     "ts-jest": "^26.4.3",
     "typedi": "^0.8.0",
     "typeorm": "^0.2.28"
