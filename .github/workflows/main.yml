@@ -27,10 +27,13 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Fetch unshallow
         run: git fetch --unshallow
-      - name: Use Node.js
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+      - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x' # TODO: match nvmrc version
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Lint
