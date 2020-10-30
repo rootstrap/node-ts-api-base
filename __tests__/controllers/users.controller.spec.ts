@@ -102,18 +102,16 @@ describe('updating a user', () => {
 
   it('returns http code 200 and updates the user', async () => {
     const id = user.id;
-    const newFields = {
-      firstName: 'new firstname',
-      lastName: 'new lastname'
-    };
+    user.firstName = 'new firstname';
+    user.lastName = 'new lastname';
     const response = await request(app)
       .put(`${API}/users/${id}`)
-      .send(newFields);
+      .send(user);
     expect(response.status).toBe(200);
 
     const updatedUser = await getRepository(User).findOne(id);
-    expect(updatedUser?.firstName).toEqual(newFields.firstName);
-    expect(updatedUser?.lastName).toEqual(newFields.lastName);
+    expect(updatedUser?.firstName).toEqual(user.firstName);
+    expect(updatedUser?.lastName).toEqual(user.lastName);
   });
 });
 
