@@ -63,12 +63,18 @@ This is the suggested scaffolding for this project. You can take a look at:
 
 - [AdminBro](https://adminbro.com/) - Admin panel middleware.
 - [routing-controllers](https://github.com/typestack/routing-controllers) - Create structured class-based controllers with decorators usage in Express.
+- [routing-controllers-openapi](https://www.npmjs.com/package/routing-controllers-openapi) - Runtime OpenAPI v3 schema generation for routing-controllers.
+- [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express) - Serves auto-generated swagger-ui API docs from express.
 - [typeorm](https://typeorm.io/#/) - NodeJS ORM.
 - [nodemon](https://nodemon.io/) - Utility that will monitor for any changes in your source and automatically restart your server.
 - [multer](https://github.com/expressjs/multer) -  NodeJS middleware for handling multipart/form-data.
 - [tsconfig-paths](https://github.com/dividab/tsconfig-paths#readme) - Utility to register relative paths set at tsconfig file
 - [express-rate-limit](https://github.com/nfriedly/express-rate-limit) - Basic rate-limiting middleware used to limit repeated requests to public APIs
 - [morgan](https://github.com/expressjs/morgan) - HTTP request logger middleware for node.js
+
+## API Documentation
+
+After running the server you will find OpenAPI Specification here: `http://<host>:<port>/docs`
 
 ## Deployment with docker
 

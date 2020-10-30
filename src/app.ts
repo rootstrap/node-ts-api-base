@@ -1,11 +1,20 @@
 import 'reflect-metadata'; // this shim is required
 import express from 'express';
+import {
+  useContainer,
+  useExpressServer,
+  getMetadataArgsStorage
+} from 'routing-controllers';
 import helmet from 'helmet';
-import { useContainer, useExpressServer } from 'routing-controllers';
 import { Container } from 'typedi';
 import Auth from '@middlewares/auth.middleware';
 import rateLimit from 'express-rate-limit';
-import { RATE_LIMIT_MAX_REQUESTS, RATE_LIMIT_WINDOW } from '@config';
+import { swaggerSpec } from './swagger';
+import {
+  RATE_LIMIT_MAX_REQUESTS,
+  RATE_LIMIT_WINDOW,
+  ENVIRONMENT
+} from '@config';
 
 // required by routing-controllers
 useContainer(Container);
@@ -26,14 +35,25 @@ app.use(rateLimit({
   }
 }));
 
-// Wrap server with routing-controllers
-useExpressServer(app, {
+const routingControllersOptions: any = {
   routePrefix: '/api/v1',
   cors: true,
   authorizationChecker: Auth.checker,
   controllers: [`${__dirname}/controllers/*.ts`],
   middlewares: [`${__dirname}/middlewares/*.ts`],
   interceptors: [`${__dirname}/interceptors/*.ts`]
-});
+};
+
+// Wrap server with routing-controllers
+useExpressServer(app, routingControllersOptions);
+
+// Setup Swagger
+if (ENVIRONMENT !== 'prod') {
+  swaggerSpec(
+    getMetadataArgsStorage,
+    routingControllersOptions,
+    app
+  );
+}
 
 export default app;
