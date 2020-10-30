@@ -5,6 +5,7 @@ import {
   useExpressServer,
   getMetadataArgsStorage
 } from 'routing-controllers';
+import helmet from 'helmet';
 import { Container } from 'typedi';
 import Auth from '@middlewares/auth.middleware';
 import rateLimit from 'express-rate-limit';
@@ -20,6 +21,9 @@ useContainer(Container);
 
 // Create express server
 const app: express.Express = express();
+
+// Setup security headers
+app.use(helmet());
 
 // Setup express middlewares
 app.use(rateLimit({
