@@ -20,10 +20,10 @@
   resolved "https://registry.yarnpkg.com/@admin-bro/express/-/express-3.0.1.tgz#21e6693cce257da6f25e75be28b4e2b7ef387531"
   integrity sha512-CNGZxdMBFhhr9WGDKmdEpuxYumryO9VNZN+HK93o+Xjqx7lDfFk7smUDFRxmfoHsmaI4QRpErmvswNwpGGzevA==
 
-"@admin-bro/typeorm@^1.2.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@admin-bro/typeorm/-/typeorm-1.3.0.tgz#df4c38b1490e9de85eca04410c84e0447fc598e8"
-  integrity sha512-1J5Mbna8xUaW1OAb5XDPYP5VCJym2JkisV/AOi1rULgy4j0pdMHKQ5YYPB2fdxuPfIPwFQw8YRVNgYx3RtLAyQ==
+"@admin-bro/typeorm@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@admin-bro/typeorm/-/typeorm-1.4.0.tgz#8b29ecb6158e868959be4bea56b9f0322dbfbd82"
+  integrity sha512-3N86aBEtyZX+iIPX36Q0wnnwuBaQUzVfrtnE6ZhGRiZd4VAmgG4ucqv0dFa+Rn4hMgUfMZDqNenqUvMfI0YUSw==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.8.3":
   version "7.10.4"
