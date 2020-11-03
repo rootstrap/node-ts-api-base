@@ -85,6 +85,6 @@
     "swagger-ui-express": "^4.1.4",
     "ts-jest": "^26.4.3",
     "typedi": "^0.8.0",
-    "typeorm": "^0.2.28"
+    "typeorm": "^0.2.29"
   }
 }
