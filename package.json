@@ -43,7 +43,7 @@
     "@types/supertest": "^2.0.10",
     "@types/swagger-ui-express": "^4.1.2",
     "dotenv": "^8.2.0",
-    "eslint": "^7.12.1",
+    "eslint": "^7.13.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
