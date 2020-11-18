@@ -45,7 +45,7 @@ jobs:
       # Before running the scan, typescript must be installed from npm and
       # NODE_PATH env var must point to tsc bin folder, otherways typescript static analysis will fail
       - name: Setup sonar scanner
-        uses: warchant/setup-sonar-scanner@v1
+        uses: warchant/setup-sonar-scanner@v3
       - name: Run Sonarqube analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
