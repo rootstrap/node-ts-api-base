@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import 'reflect-metadata'; // this shim is required
 import express from 'express';
 import {
@@ -23,17 +24,30 @@ useContainer(Container);
 const app: express.Express = express();
 
 // Setup security headers
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+        fontSrc: ['https://fonts.gstatic.com']
+      }
+    }
+  })
+);
 
 // Setup express middlewares
-app.use(rateLimit({
-  windowMs: Number.parseInt(RATE_LIMIT_WINDOW || '900000'),
-  max: Number.parseInt(RATE_LIMIT_MAX_REQUESTS || '10'),
-  message: {
-    status: 429,
-    message: 'Too many requests, please try again later.'
-  }
-}));
+app.use(
+  rateLimit({
+    windowMs: Number.parseInt(RATE_LIMIT_WINDOW || '900000'),
+    max: Number.parseInt(RATE_LIMIT_MAX_REQUESTS || '10'),
+    message: {
+      status: 429,
+      message: 'Too many requests, please try again later.'
+    }
+  })
+);
 
 const routingControllersOptions: any = {
   routePrefix: '/api/v1',
@@ -49,11 +63,7 @@ useExpressServer(app, routingControllersOptions);
 
 // Setup Swagger
 if (ENVIRONMENT !== 'prod') {
-  swaggerSpec(
-    getMetadataArgsStorage,
-    routingControllersOptions,
-    app
-  );
+  swaggerSpec(getMetadataArgsStorage, routingControllersOptions, app);
 }
 
 export default app;
