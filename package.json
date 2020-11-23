@@ -19,7 +19,9 @@
     "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed",
     "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
     "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync",
-    "migration:generate": "yarn run typeorm migration:create -n"
+    "migration:generate": "yarn run typeorm migration:create -n",
+    "migration:revert": "yarn typeorm migration:revert",
+    "migration:show": "yarn typeorm migration:show"
   },
   "jestSonar": {
     "reportPath": "__tests__",
