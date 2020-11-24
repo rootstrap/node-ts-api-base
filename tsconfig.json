@@ -17,7 +17,8 @@
       "@entities/*": ["src/entities/*"],
       "@middlewares/*": ["src/middlewares/*"],
       "@services/*": ["src/services/*"],
-      "@app": ["src/app"]
+      "@app": ["src/app"],
+      "@ormconfig": ["ormconfig"]
     },
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

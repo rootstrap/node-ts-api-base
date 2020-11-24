@@ -7,13 +7,16 @@ This project includes the boilerplate for a basic rest-api made in Node.JS with 
 1. Install Node.js (lts-version v12.18.3)
 2. Install `yarn` if not present `curl -o- -L https://yarnpkg.com/install.sh | bash` (macOS and generic Unix environments)
 3. Install required dependencies by `yarn`
-4. `cp .example.env .env`
+4. `cp .example.env .env.dev`
 5. `cp .example.env.test .env.test`
 6. Create your DB (i.e. psql for Postgres: `psql -U <user> -h <host> -c "create database <db name>;"`) with same name as your .env file.
-7. Run `yarn db:setup`.
-8. Start your server with `yarn dev`.
+7. Run `ENVIRONMENT=[dev, test, prod] yarn migration:run`.
+8. Start your server with `ENVIRONMENT=[dev, prod] yarn dev`.
 
 ## Some scripts
+
+Add `ENVIRONMENT=[dev, prod]` before running scripts.
+Why?: [Configuration file used by Typeorm](https://typeorm.io/#/using-ormconfig/which-configuration-file-is-used-by-typeorm)
 
 Run `yarn build` to build js from typescript source.
 
@@ -30,6 +33,15 @@ Run `yarn schema:sync` to resync the schema of your DB.
 Run `yarn seed:run` to run seed files.
 
 Run `yarn db:reset` to drop schema and re run it, then seed the DB.
+
+Run `yarn migration:generate` to create a new migration.
+
+Run `yarn migration:run` to run pending migrations.
+
+Run `yarn migration:revert` to rollback migrations.
+
+Run `yarn migration:show` to see the list of all migrations (pending and also ran).
+
 
 ## App scaffolding
 
