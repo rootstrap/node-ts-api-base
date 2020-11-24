@@ -5,7 +5,9 @@
 package-lock.json
 
 ### dotenv ###
-.env
+.env.dev
+.env.test
+.env.prod
 
 ### macOS ###
 # General

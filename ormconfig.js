@@ -1,10 +1,6 @@
 const dotenv = require('dotenv');
 
-const envFile = process.env.ENVIRONMENT
-  ? `.env.${process.env.ENVIRONMENT}`
-  : '.env';
-dotenv.config({ path: envFile });
-
+dotenv.config({ path: `.env.${process.env.ENVIRONMENT}` });
 
 // If .env wasn't provided then exit
 if (!process.env.PORT) {
@@ -20,7 +16,7 @@ module.exports = {
   database: process.env.TYPEORM_DATABASE,
   port: Number.parseInt(process.env.TYPEORM_PORT || '3000'),
   synchronize: process.env.TYPEORM_SYNCHRONIZE === 'true',
-  logging: process.env.TYPEORM_LOGGING === 'true',
+  logging: process.env.TYPEORM_LOGGING,
   entities: ['src/entities/**/*.ts'],
   migrations: ['src/database/migrations/**/*.ts'],
   migrationsRun: process.env.TYPEORM_MIGRATIONS_RUN === 'true',
