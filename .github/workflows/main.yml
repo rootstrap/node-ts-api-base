@@ -40,9 +40,14 @@ jobs:
         run: yarn lint
       - name: Create env file
         run: cp example.env.yaml env.yaml
-      - name: Run tests
+      - name: Add TYPEORM_PASSWORD to env.yaml
         run: |
           echo "  TYPEORM_PASSWORD: ${{ secrets.TEST_POSTGRES_PASSWORD }}" >> env.yaml
+      - name: Check file
+        run: |
+          ./node_modules/.bin/yenv print env.yaml ci json -f -s -r
+      - name: Run tests
+        run: |
           yarn test:ci
       # Before running the scan, typescript must be installed from npm and
       # NODE_PATH env var must point to tsc bin folder, otherways typescript static analysis will fail

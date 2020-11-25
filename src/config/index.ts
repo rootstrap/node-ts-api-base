@@ -1,6 +1,6 @@
 import yenv from 'yenv';
 
-const env = yenv('env.yaml');
+const env = yenv();
 
 // If .env wasn't provided then exit
 if (!env.PORT) {
