@@ -48,7 +48,7 @@ jobs:
           ./node_modules/.bin/yenv print env.yaml ci json -f -s -r
       - name: Run tests
         run: |
-          yarn test:ci
+          yarn test:ci --detectOpenHandles
       # Before running the scan, typescript must be installed from npm and
       # NODE_PATH env var must point to tsc bin folder, otherways typescript static analysis will fail
       - name: Setup sonar scanner
