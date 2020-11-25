@@ -1,6 +1,6 @@
 import yenv from 'yenv';
 
-const env = yenv(process.env.ENVIRONMENT === 'ci' ? 'example.env.yaml' : 'env.yaml');
+const env = yenv('env.yaml');
 
 // If .env wasn't provided then exit
 if (!env.PORT) {

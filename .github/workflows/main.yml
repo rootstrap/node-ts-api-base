@@ -38,9 +38,12 @@ jobs:
         run: yarn --frozen-lockfile
       - name: Lint
         run: yarn lint
+      - name: Create env file
+        run: cp example.env.yaml env.yaml
       - name: Run tests
         run: |
-          TYPEORM_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} yarn test:ci
+          echo "  TYPEORM_PASSWORD: ${{ secrets.TEST_POSTGRES_PASSWORD }}" >> env.yaml
+          yarn test:ci
       # Before running the scan, typescript must be installed from npm and
       # NODE_PATH env var must point to tsc bin folder, otherways typescript static analysis will fail
       - name: Setup sonar scanner
