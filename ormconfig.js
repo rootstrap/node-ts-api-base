@@ -1,25 +1,27 @@
-const dotenv = require('dotenv');
+const yenv = require('yenv');
 
-dotenv.config({ path: `.env.${process.env.ENVIRONMENT}` });
+const env = yenv('env.yaml');
 
-// If .env wasn't provided then exit
-if (!process.env.PORT) {
-  console.error('==> Please check your .env');
+// If env wasn't provided then exit
+if (!env.PORT) {
+  console.error('==> Please check your env.yml');
   process.exit(1);
 }
 
 module.exports = {
   type: 'postgres',
-  host: process.env.TYPEORM_HOST,
-  username: process.env.TYPEORM_USERNAME,
-  password: process.env.TYPEORM_PASSWORD,
-  database: process.env.TYPEORM_DATABASE,
-  port: Number.parseInt(process.env.TYPEORM_PORT || '3000'),
-  synchronize: process.env.TYPEORM_SYNCHRONIZE === 'true',
-  logging: process.env.TYPEORM_LOGGING,
+  host: env.TYPEORM_HOST,
+  username: env.TYPEORM_USERNAME,
+  password: env.TYPEORM_PASSWORD,
+  database: env.TYPEORM_DATABASE,
+  port: env.TYPEORM_PORT,
+  synchronize: env.TYPEORM_SYNCHRONIZE,
+  logging: env.TYPEORM_LOGGING,
   entities: ['src/entities/**/*.ts'],
   migrations: ['src/database/migrations/**/*.ts'],
-  migrationsRun: process.env.TYPEORM_MIGRATIONS_RUN === 'true',
+  seeds: ['src/database/seeds/**/*.ts'],
+  factories: ['src/database/factories/**/*.ts'],
+  migrationsRun: env.TYPEORM_MIGRATIONS_RUN,
   cli: {
     migrationsDir: 'src/database/migrations',
     entitiesDir: 'src/entities'

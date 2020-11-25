@@ -30,6 +30,8 @@ jobs:
       - name: Read .nvmrc
         run: echo ::set-output name=NVMRC::$(cat .nvmrc)
         id: nvm
+      - name: Copy env file
+        run: cp ./example.env.yaml ./env.yaml
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
@@ -40,8 +42,7 @@ jobs:
         run: yarn lint
       - name: Run tests
         run: |
-          echo TYPEORM_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} >> .env.ci
-          yarn test:ci
+          TYPEORM_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} yarn test:ci
       # Before running the scan, typescript must be installed from npm and
       # NODE_PATH env var must point to tsc bin folder, otherways typescript static analysis will fail
       - name: Setup sonar scanner

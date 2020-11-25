@@ -5,9 +5,7 @@
 package-lock.json
 
 ### dotenv ###
-.env.dev
-.env.test
-.env.prod
+env.*
 
 ### macOS ###
 # General
@@ -108,11 +106,6 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env.dev
-.env.staging
-.env.prod
-.env.test
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache

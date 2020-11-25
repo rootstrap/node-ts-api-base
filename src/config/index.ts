@@ -1,9 +1,9 @@
-const dotenv = require('dotenv');
+import yenv from 'yenv';
 
-dotenv.config({ path: `.env.${process.env.ENVIRONMENT}` });
+const env = yenv('env.yaml');
 
 // If .env wasn't provided then exit
-if (!process.env.PORT) {
+if (!env.PORT) {
   console.error('==> Please check your .env');
   process.exit(1);
 }
@@ -18,4 +18,4 @@ export const {
   S3_ID,
   S3_SECRET,
   S3_BUCKETNAME
-} = process.env;
+} = env;
