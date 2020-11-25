@@ -31,7 +31,7 @@ jobs:
         run: echo ::set-output name=NVMRC::$(cat .nvmrc)
         id: nvm
       - name: Copy env file
-        run: cp ./example.env.yaml ./env.yaml
+        run: git mv example.env.yaml env.yaml
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:

@@ -7,7 +7,7 @@ export class LoggingMiddleware implements ExpressMiddlewareInterface {
   use(request: any, response: any, next: (err?: any) => any) {
     const logger = morgan('dev', {
       skip: () => {
-        return ENVIRONMENT === 'test';
+        return ENVIRONMENT === 'test' || ENVIRONMENT === 'ci';
       }
     });
     logger(request, response, next);
