@@ -1,6 +1,6 @@
 const yenv = require('yenv');
 
-const env = yenv('env.yaml');
+const env = yenv(process.env.ENVIRONMENT === 'ci' ? 'example.env.yaml' : 'env.yaml');
 
 // If env wasn't provided then exit
 if (!env.PORT) {
