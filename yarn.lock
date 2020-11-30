@@ -7200,10 +7200,10 @@ rollup@^2.32.1:
   optionalDependencies:
     fsevents "~2.1.2"
 
-routing-controllers-openapi@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/routing-controllers-openapi/-/routing-controllers-openapi-2.1.0.tgz#616c36ab170ce49f332999aeeb8687ddbb6699fb"
-  integrity sha512-849+wuf2FVlnIHCkmlxrUpCrvbsNdVWLU9z+P2dozRnb24Dw5I96uYAjV8wqhHDg1/ib/+m+bGMYO9f3wXL3mQ==
+routing-controllers-openapi@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/routing-controllers-openapi/-/routing-controllers-openapi-2.2.0.tgz#fecf17921ba541348081541093595e17d4c13564"
+  integrity sha512-eJpcyE9Xi93JmKwJnX2PLKlpawE5PBa0KGjLYu6WRWV0HrQ3+ZBRUjxF6ZTOM2J8KFf4c0UNPfcHNLI0y5aUdQ==
   dependencies:
     lodash "^4.17.15"
     openapi3-ts "^1.3.0"
