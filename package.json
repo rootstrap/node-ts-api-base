@@ -52,7 +52,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "jest-sonar-reporter": "^2.0.0",
     "nodemon": "^2.0.6",
-    "prettier": "^2.2.0",
+    "prettier": "^2.2.1",
     "ts-node": "^9.0.0",
     "tsconfig-paths": "^3.9.0",
     "typeorm-seeding": "^1.6.1",
