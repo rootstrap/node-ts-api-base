@@ -26,6 +26,13 @@ describe('creating an account', () => {
       .post(`${API}/auth/signup`)
       .send(userFields);
     expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        firstName: expect.any(String),
+        lastName: expect.any(String),
+        email: expect.any(String)
+      })
+    );
   });
 
   it('returns http code 400 whith invalid params', async () => {

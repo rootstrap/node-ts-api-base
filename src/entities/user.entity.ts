@@ -1,6 +1,7 @@
 import { Entity, Column, BeforeInsert } from 'typeorm';
 import { IsEmail, validateOrReject, IsNotEmpty } from 'class-validator';
 import { compareSync, hashSync, genSaltSync } from 'bcrypt';
+import _ from 'lodash';
 import { Base } from './base.entity';
 
 @Entity()
@@ -31,5 +32,9 @@ export class User extends Base {
 
   private hashPassword() {
     this.password = hashSync(this.password, genSaltSync());
+  }
+
+  public publicFields() {
+    return _.pick(this, ['firstName', 'lastName', 'email']);
   }
 }

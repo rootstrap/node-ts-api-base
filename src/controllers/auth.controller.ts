@@ -1,3 +1,4 @@
+import { Response } from 'express';
 import {
   JsonController,
   Body,
@@ -8,14 +9,13 @@ import {
   Res
 } from 'routing-controllers';
 import { getRepository } from 'typeorm';
-import * as _ from 'lodash';
 import { User } from '@entities/user.entity';
 import { createJWT } from '@services/jwt.service';
 
 @JsonController('/auth')
 export class AuthController {
   @Post('/signup')
-  async signUp(@Body({ validate: false }) user: User, @Res() response: any) {
+  async signUp(@Body({ validate: false }) user: User) {
     let newUser;
 
     try {
@@ -23,13 +23,14 @@ export class AuthController {
     } catch (error) {
       throw new BadRequestError('Missing params on body');
     }
-    return response.send(_.omit(newUser, ['password']));
+    return newUser.publicFields();
   }
 
   @Post('/signin')
   async signIn(
     @BodyParam('email') email: string,
-    @BodyParam('password') password: string
+    @BodyParam('password') password: string,
+    @Res() response: Response
   ) {
     if (!email || !password) {
       throw new BadRequestError('Missing params on body');
@@ -49,8 +50,8 @@ export class AuthController {
 
     // user matches email + password, create a token
     const token = await createJWT(user);
-    return {
-      token
-    };
+    response.set('access-token', token);
+
+    return user.publicFields();
   }
 }
