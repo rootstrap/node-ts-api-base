@@ -16,7 +16,7 @@ jobs:
         env:
           POSTGRES_PASSWORD: ${{ secrets.TEST_POSTGRES_PASSWORD }}
           POSTGRES_USER: postgres
-        ports: 
+        ports:
           - "5432:5432"
 
     steps:
