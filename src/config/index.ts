@@ -1,10 +1,10 @@
 import yenv from 'yenv';
 
-const env = yenv();
+const env = yenv('env.yaml', { env: process.env.ENVIRONMENT });
 
 // If .env wasn't provided then exit
 if (!env.PORT) {
-  console.error('==> Please check your .env');
+  console.error('==> Please check your env.yaml');
   process.exit(1);
 }
 
@@ -19,4 +19,4 @@ export const {
   S3_SECRET,
   S3_BUCKETNAME,
   DOCS_ENABLED
-} = process.env;
+} = env;

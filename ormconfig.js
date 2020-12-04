@@ -1,10 +1,10 @@
 const yenv = require('yenv');
 
-const env = yenv();
+const env = yenv('env.yaml', { env: process.env.ENVIRONMENT });
 
 // If env wasn't provided then exit
 if (!env.PORT) {
-  console.error('==> Please check your env.yml');
+  console.error('==> Please check your env.yaml');
   process.exit(1);
 }
 
@@ -17,8 +17,16 @@ module.exports = {
   port: env.TYPEORM_PORT,
   synchronize: env.TYPEORM_SYNCHRONIZE,
   logging: env.TYPEORM_LOGGING,
-  entities: ['src/entities/**/*.ts'],
-  migrations: ['src/database/migrations/**/*.ts'],
+  entities: [
+    process.env.ENVIRONMENT === 'prod'
+      ? 'dist/src/entities/**/*.js'
+      : 'src/entities/**/*.ts'
+  ],
+  migrations: [
+    process.env.ENVIRONMENT === 'prod'
+      ? 'dist/src/database/migrations/**/*.js'
+      : 'src/database/migrations/**/*.ts'
+  ],
   seeds: ['src/database/seeds/**/*.ts'],
   factories: ['src/database/factories/**/*.ts'],
   migrationsRun: env.TYPEORM_MIGRATIONS_RUN,
