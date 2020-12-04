@@ -1,4 +1,4 @@
-# express-api-base
+# Node-TS-Api-Base
 
 This project includes the boilerplate for a basic rest-api made in Node.JS with Express + Typescript.
 
@@ -42,6 +42,45 @@ Run `yarn migration:revert` to rollback migrations.
 Run `yarn migration:show` to see the list of all migrations (pending and also ran).
 
 
+## Running with Docker
+
+### Prerequisites
+In order to run the app with Docker, you should install or update to the latest version, we recommend to install [Docker-Desktop](https://docs.docker.com/get-docker/) due to composer and some cool CLI-UI tools are included.
+
+### Development with Docker
+
+The following commands will build and run all you need to start working on the base, without any other installation requirements. Important: if you already have postgres running locally, you'll need to kill the service before run `docker-compose up`.
+
+```
+docker-compose --env-file .env.dev build
+```
+
+```
+docker-compose --env-file .env.dev up
+```
+
+### Deployment with Docker (only for production)
+
+The following commands will `build and run` a Docker image ready for production and size-optimized.
+
+#### Build Docker image
+
+```
+docker build -f Dockerfile.prod -t node-ts-api-base .
+```
+
+#### Run docker image (you need to add .env file as param)
+
+```
+docker run --rm --env-file=.env.prod -p 3000:3000 --name node-api node-ts-api-base
+```
+
+
+## API Documentation
+
+After running the server you will find OpenAPI Specification here: `http://<host>:<port>/docs`
+
+
 ## App scaffolding
 
 This is the suggested scaffolding for this project. You can take a look at:
@@ -62,12 +101,14 @@ This is the suggested scaffolding for this project. You can take a look at:
 │   ├── services
 │   │   └── ...
 │   ├── app.ts            (App root and is where the application will be configured.)
+│   ├── server.ts         (HTTP server)
 ├── README.md
 ├── .nvmrc                (Locks down your Node version.)
 ├── jest.config.js        (Jest configuration file.)
 ├── yarn-lock.json
 ├── package.json          (Your application’s package manifest.)
 ├── tsconfig.json         (The TypeScript project configuration.)
+├── prod-path.js          (Tool used to run in production, translates ts-path and alias)
 ```
 
 ## Dependencies
@@ -83,13 +124,6 @@ This is the suggested scaffolding for this project. You can take a look at:
 - [express-rate-limit](https://github.com/nfriedly/express-rate-limit) - Basic rate-limiting middleware used to limit repeated requests to public APIs
 - [morgan](https://github.com/expressjs/morgan) - HTTP request logger middleware for node.js
 
-## API Documentation
-
-After running the server you will find OpenAPI Specification here: `http://<host>:<port>/docs`
-
-## Deployment with docker
-
-Work in progress ...
 
 ## Code Quality
 

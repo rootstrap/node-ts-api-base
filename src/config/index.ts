@@ -17,5 +17,6 @@ export const {
   RATE_LIMIT_MAX_REQUESTS,
   S3_ID,
   S3_SECRET,
-  S3_BUCKETNAME
-} = env;
+  S3_BUCKETNAME,
+  DOCS_ENABLED
+} = process.env;

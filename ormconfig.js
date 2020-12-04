@@ -23,7 +23,11 @@ module.exports = {
   factories: ['src/database/factories/**/*.ts'],
   migrationsRun: env.TYPEORM_MIGRATIONS_RUN,
   cli: {
-    migrationsDir: 'src/database/migrations',
-    entitiesDir: 'src/entities'
+    migrationsDir:
+      process.env.ENVIRONMENT === 'prod'
+        ? 'dist/src/database/migrations'
+        : 'src/database/migrations',
+    entitiesDir:
+      process.env.ENVIRONMENT === 'prod' ? 'dist/src/entities' : 'src/entities'
   }
 };
