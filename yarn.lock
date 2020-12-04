@@ -3407,7 +3407,7 @@ eslint-config-prettier@^6.15.0:
   dependencies:
     get-stdin "^6.0.0"
 
-eslint-plugin-prettier@^3.2.0:
+eslint-plugin-prettier@^3.1.4:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.2.0.tgz#af391b2226fa0e15c96f36c733f6e9035dbd952c"
   integrity sha512-kOUSJnFjAUFKwVxuzy6sA5yyMx6+o9ino4gCdShzBNx4eyFRudWRYKCFolKjoM40PEiuU6Cn7wBLfq3WsGg7qg==
@@ -7113,7 +7113,7 @@ rollup@^2.32.1:
   optionalDependencies:
     fsevents "~2.1.2"
 
-routing-controllers-openapi@^2.2.0:
+routing-controllers-openapi@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/routing-controllers-openapi/-/routing-controllers-openapi-2.2.0.tgz#fecf17921ba541348081541093595e17d4c13564"
   integrity sha512-eJpcyE9Xi93JmKwJnX2PLKlpawE5PBa0KGjLYu6WRWV0HrQ3+ZBRUjxF6ZTOM2J8KFf4c0UNPfcHNLI0y5aUdQ==
@@ -7976,7 +7976,7 @@ ts-jest@^26.4.4:
     semver "7.x"
     yargs-parser "20.x"
 
-ts-node@^9.1.0:
+ts-node@^9.0.0:
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-9.1.0.tgz#95eae4c6d0f94f2545884078e1eb1b14d2155639"
   integrity sha512-0yqcL4sgruCvM+w64LiAfNJo6+lHfCYc5Ajj4yiLNkJ9oZ2HWaa+Kso7htYOOxVQ7+csAjdUjffOe9PIqC4pMg==
