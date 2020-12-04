@@ -17,11 +17,23 @@ module.exports = {
   port: Number.parseInt(process.env.TYPEORM_PORT || '3000'),
   synchronize: process.env.TYPEORM_SYNCHRONIZE === 'true',
   logging: process.env.TYPEORM_LOGGING,
-  entities: ['src/entities/**/*.ts'],
-  migrations: ['src/database/migrations/**/*.ts'],
+  entities: [
+    process.env.ENVIRONMENT === 'prod'
+      ? 'dist/src/entities/**/*.js'
+      : 'src/entities/**/*.ts'
+  ],
+  migrations: [
+    process.env.ENVIRONMENT === 'prod'
+      ? 'dist/src/database/migrations/**/*.js'
+      : 'src/database/migrations/**/*.ts'
+  ],
   migrationsRun: process.env.TYPEORM_MIGRATIONS_RUN === 'true',
   cli: {
-    migrationsDir: 'src/database/migrations',
-    entitiesDir: 'src/entities'
+    migrationsDir:
+      process.env.ENVIRONMENT === 'prod'
+        ? 'dist/src/database/migrations'
+        : 'src/database/migrations',
+    entitiesDir:
+      process.env.ENVIRONMENT === 'prod' ? 'dist/src/entities' : 'src/entities'
   }
 };

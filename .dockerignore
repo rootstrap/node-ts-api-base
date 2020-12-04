@@ -1,0 +1,13 @@
+# Git and VSCode
+.git
+.gitignore
+/.vscode
+
+# Docker
+Dockerfile.*
+docker-compose.yml
+
+# NPM dependencies
+node_modules
+npm-debug.log
+package-lock.json
