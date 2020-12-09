@@ -4,6 +4,7 @@ import { compareSync, hashSync, genSaltSync } from 'bcrypt';
 import TokenGenerator from 'uuid-token-generator';
 import { Base } from './base.entity';
 import { Mailer } from '@services/mailer.service';
+import { CONFIRMATION_URL } from '@config';
 
 @Entity()
 export class User extends Base {
@@ -61,7 +62,7 @@ export class User extends Base {
     const mailer = new Mailer();
     const payload = {
       name: `${this.firstName} ${this.lastName}`,
-      link: `http://localhost:3000/api/v1/auth/confirm/${this.confirmationToken}`
+      link: `${CONFIRMATION_URL}/${this.confirmationToken}`
     };
     mailer.sendMail(this.email, 'Confirm your email', Mailer.WELCOME, payload);
     this.confirmationSentAt = new Date();

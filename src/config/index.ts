@@ -20,5 +20,6 @@ export const {
   S3_ID,
   S3_SECRET,
   S3_BUCKETNAME,
-  DOCS_ENABLED
+  DOCS_ENABLED,
+  CONFIRMATION_URL
 } = process.env;
