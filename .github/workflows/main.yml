@@ -27,10 +27,13 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Fetch unshallow
         run: git fetch --unshallow
-      - name: Use Node.js
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+      - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x' # TODO: match nvmrc version
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Lint
@@ -42,10 +45,10 @@ jobs:
       # Before running the scan, typescript must be installed from npm and
       # NODE_PATH env var must point to tsc bin folder, otherways typescript static analysis will fail
       - name: Setup sonar scanner
-        uses: warchant/setup-sonar-scanner@v1
+        uses: warchant/setup-sonar-scanner@v3
       - name: Run Sonarqube analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "::set-env name=NODE_PATH::$(which tsc)"
+          echo "NODE_PATH=$(which tsc)" >> $GITHUB_ENV
           sonar-scanner -Dsonar.verbose=false -Dsonar.qualitygate.wait=true -Dsonar.host.url=${{ secrets.SONAR_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.projectKey=${{secrets.SONAR_PROJECT_KEY }} -Dsonar.scm.provider=git -Dsonar.java.binaries=/tmp -Dsonar.nodejs.executable=$(which node) -Dsonar.projectVersion=$(echo $GITHUB_SHA | cut -c1-8) -Dsonar.sources=. -Dsonar.projectBaseDir=.

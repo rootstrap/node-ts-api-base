@@ -1,10 +1,10 @@
 import { createConnection, getConnection, Connection } from 'typeorm';
-import { databaseConfig } from '@config';
+import config from '@ormconfig';
 
 const connection = {
   async create(callback?: (c: Connection) => void): Promise<void> {
     try {
-      const connection = await createConnection(databaseConfig);
+      const connection = await createConnection(config);
       if (callback) {
         callback(connection);
       }

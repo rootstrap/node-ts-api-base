@@ -1,4 +1,4 @@
-# express-api-base
+# Node-TS-Api-Base
 
 This project includes the boilerplate for a basic rest-api made in Node.JS with Express + Typescript.
 
@@ -7,13 +7,16 @@ This project includes the boilerplate for a basic rest-api made in Node.JS with 
 1. Install Node.js (lts-version v12.18.3)
 2. Install `yarn` if not present `curl -o- -L https://yarnpkg.com/install.sh | bash` (macOS and generic Unix environments)
 3. Install required dependencies by `yarn`
-4. `cp .example.env .env`
+4. `cp .example.env .env.dev`
 5. `cp .example.env.test .env.test`
 6. Create your DB (i.e. psql for Postgres: `psql -U <user> -h <host> -c "create database <db name>;"`) with same name as your .env file.
-7. Run `yarn db:setup`.
-8. Start your server with `yarn dev`.
+7. Run `ENVIRONMENT=[dev, test, prod] yarn migration:run`.
+8. Start your server with `ENVIRONMENT=[dev, prod] yarn dev`.
 
 ## Some scripts
+
+Add `ENVIRONMENT=[dev, prod]` before running scripts.
+Why?: [Configuration file used by Typeorm](https://typeorm.io/#/using-ormconfig/which-configuration-file-is-used-by-typeorm)
 
 Run `yarn build` to build js from typescript source.
 
@@ -30,6 +33,54 @@ Run `yarn schema:sync` to resync the schema of your DB.
 Run `yarn seed:run` to run seed files.
 
 Run `yarn db:reset` to drop schema and re run it, then seed the DB.
+
+Run `yarn migration:generate` to create a new migration.
+
+Run `yarn migration:run` to run pending migrations.
+
+Run `yarn migration:revert` to rollback migrations.
+
+Run `yarn migration:show` to see the list of all migrations (pending and also ran).
+
+
+## Running with Docker
+
+### Prerequisites
+In order to run the app with Docker, you should install or update to the latest version, we recommend to install [Docker-Desktop](https://docs.docker.com/get-docker/) due to composer and some cool CLI-UI tools are included.
+
+### Development with Docker
+
+The following commands will build and run all you need to start working on the base, without any other installation requirements. Important: if you already have postgres running locally, you'll need to kill the service before run `docker-compose up`.
+
+```
+docker-compose --env-file .env.dev build
+```
+
+```
+docker-compose --env-file .env.dev up
+```
+
+### Deployment with Docker (only for production)
+
+The following commands will `build and run` a Docker image ready for production and size-optimized.
+
+#### Build Docker image
+
+```
+docker build -f Dockerfile.prod -t node-ts-api-base .
+```
+
+#### Run docker image (you need to add .env file as param)
+
+```
+docker run --rm --env-file=.env.prod -p 3000:3000 --name node-api node-ts-api-base
+```
+
+
+## API Documentation
+
+After running the server you will find OpenAPI Specification here: `http://<host>:<port>/docs`
+
 
 ## App scaffolding
 
@@ -58,19 +109,22 @@ This is the suggested scaffolding for this project. You can take a look at:
 │   │   └── emails
 │   │       └── ...       (Templates for emails.)
 │   ├── app.ts            (App root and is where the application will be configured.)
-│   ├── server.ts         (Start the server.)
+│   ├── server.ts         (HTTP server)
 ├── README.md
 ├── .nvmrc                (Locks down your Node version.)
 ├── jest.config.js        (Jest configuration file.)
 ├── yarn-lock.json
 ├── package.json          (Your application’s package manifest.)
 ├── tsconfig.json         (The TypeScript project configuration.)
+├── prod-path.js          (Tool used to run in production, translates ts-path and alias)
 ```
 
 ## Dependencies
 
 - [AdminBro](https://adminbro.com/) - Admin panel middleware.
 - [routing-controllers](https://github.com/typestack/routing-controllers) - Create structured class-based controllers with decorators usage in Express.
+- [routing-controllers-openapi](https://www.npmjs.com/package/routing-controllers-openapi) - Runtime OpenAPI v3 schema generation for routing-controllers.
+- [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express) - Serves auto-generated swagger-ui API docs from express.
 - [typeorm](https://typeorm.io/#/) - NodeJS ORM.
 - [nodemon](https://nodemon.io/) - Utility that will monitor for any changes in your source and automatically restart your server.
 - [multer](https://github.com/expressjs/multer) -  NodeJS middleware for handling multipart/form-data.
@@ -80,9 +134,6 @@ This is the suggested scaffolding for this project. You can take a look at:
 - [nodemailer](https://github.com/nodemailer/nodemailer) - Send e-mails from Node.js
 - [ejs](https://github.com/tj/ejs) - Embedded JavaScript templates.
 
-## Deployment with docker
-
-Work in progress ...
 
 ## Code Quality
 

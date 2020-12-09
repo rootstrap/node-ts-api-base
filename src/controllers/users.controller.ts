@@ -33,12 +33,12 @@ export class UserController {
   }
 
   @Post()
-  async post(@Body() user: any): Promise<InsertResult> {
+  async post(@Body() user: User): Promise<InsertResult> {
     return this.userRepository.insert(user);
   }
 
   @Put('/:id')
-  async put(@Param('id') id: number, @Body() user: any): Promise<UpdateResult> {
+  async put(@Param('id') id: number, @Body() user: User): Promise<UpdateResult> {
     return this.userRepository.update(id, user);
   }
 

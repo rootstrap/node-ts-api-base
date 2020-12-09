@@ -1,11 +1,22 @@
+/* eslint-disable quotes */
 import 'reflect-metadata'; // this shim is required
 import express from 'express';
+import {
+  useContainer,
+  useExpressServer,
+  getMetadataArgsStorage
+} from 'routing-controllers';
 import helmet from 'helmet';
-import { useContainer, useExpressServer } from 'routing-controllers';
 import { Container } from 'typedi';
-import Auth from '@middlewares/auth.middleware';
+import { AuthMiddleware, LoggingMiddleware } from '@middlewares';
+import { controllers } from '@controllers';
 import rateLimit from 'express-rate-limit';
-import { RATE_LIMIT_MAX_REQUESTS, RATE_LIMIT_WINDOW } from '@config';
+import { swaggerSpec } from './swagger';
+import {
+  RATE_LIMIT_MAX_REQUESTS,
+  RATE_LIMIT_WINDOW,
+  DOCS_ENABLED
+} from '@config';
 
 // required by routing-controllers
 useContainer(Container);
@@ -14,7 +25,18 @@ useContainer(Container);
 const app: express.Express = express();
 
 // Setup security headers
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+        fontSrc: ['https://fonts.gstatic.com']
+      }
+    }
+  })
+);
 
 // Setup express middlewares
 app.use(
@@ -28,14 +50,21 @@ app.use(
   })
 );
 
-// Wrap server with routing-controllers
-useExpressServer(app, {
+const routingControllersOptions: any = {
   routePrefix: '/api/v1',
   cors: true,
-  authorizationChecker: Auth.checker,
-  controllers: [`${__dirname}/controllers/*.ts`],
-  middlewares: [`${__dirname}/middlewares/*.ts`],
-  interceptors: [`${__dirname}/interceptors/*.ts`]
-});
+  authorizationChecker: AuthMiddleware.checker,
+  controllers,
+  middlewares: [AuthMiddleware, LoggingMiddleware],
+  interceptors: []
+};
+
+// Wrap server with routing-controllers
+useExpressServer(app, routingControllersOptions);
+
+// Setup Swagger
+if (DOCS_ENABLED === 'true') {
+  swaggerSpec(getMetadataArgsStorage, routingControllersOptions, app);
+}
 
 export default app;

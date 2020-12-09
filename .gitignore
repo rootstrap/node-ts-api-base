@@ -2,8 +2,12 @@
 # Created by https://www.toptal.com/developers/gitignore/api/yarn,visualstudiocode,node,macos,dotenv
 # Edit at https://www.toptal.com/developers/gitignore?templates=yarn,visualstudiocode,node,macos,dotenv
 
+package-lock.json
+
 ### dotenv ###
-.env
+.env.dev
+.env.test
+.env.prod
 
 ### macOS ###
 # General

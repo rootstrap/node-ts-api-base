@@ -8,15 +8,17 @@
     "strict": true,
     "noImplicitAny": false,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
       "@config": ["src/config/index"],
-      "@controllers/*": ["src/controllers/*"],
+      "@controllers": ["src/controllers"],
       "@database/*": ["src/database/*"],
       "@entities/*": ["src/entities/*"],
-      "@middlewares/*": ["src/middlewares/*"],
+      "@middlewares": ["src/middlewares"],
       "@services/*": ["src/services/*"],
-      "@app": ["src/app"]
+      "@app": ["src/app"],
+      "@ormconfig": ["ormconfig"]
     },
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -24,5 +26,6 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "exclude": ["node_modules", "dist", "__tests__"]
 }
