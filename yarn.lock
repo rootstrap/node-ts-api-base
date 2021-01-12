@@ -15,10 +15,10 @@
     react-datepicker "^3.1.3"
     styled-system "^5.1.5"
 
-"@admin-bro/express@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@admin-bro/express/-/express-3.0.1.tgz#21e6693cce257da6f25e75be28b4e2b7ef387531"
-  integrity sha512-CNGZxdMBFhhr9WGDKmdEpuxYumryO9VNZN+HK93o+Xjqx7lDfFk7smUDFRxmfoHsmaI4QRpErmvswNwpGGzevA==
+"@admin-bro/express@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@admin-bro/express/-/express-3.1.0.tgz#0b8eec245ffbe1111da50b11d8dc0585252244b0"
+  integrity sha512-tPEopzGkmdIJuhg/oTokZ5iB1mXCwq1uaieIFIX1cETwuw+HDY+DoH5iS7KtIdxQYdNgf0ppjX+6eSeSYAZc0w==
 
 "@admin-bro/typeorm@^1.4.0":
   version "1.4.0"
