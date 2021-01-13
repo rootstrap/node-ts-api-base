@@ -1,5 +1,5 @@
 import { Entity, Column, BeforeInsert } from 'typeorm';
-import { IsEmail, validateOrReject, IsNotEmpty } from 'class-validator';
+import { IsEmail, validateOrReject, IsNotEmpty, IsString } from 'class-validator';
 import { compareSync, hashSync, genSaltSync } from 'bcrypt';
 import { Base } from './base.entity';
 
@@ -12,10 +12,12 @@ export class User extends Base {
   }
 
   @Column({ nullable: true })
-  firstName!: string;
+  @IsString()
+  firstName?: string;
 
   @Column({ nullable: true })
-  lastName!: string;
+  @IsString()
+  lastName?: string;
 
   @Column()
   @IsEmail()

@@ -184,3 +184,7 @@ dist
 .scannerwork
 sonar-project.properties
 test-report.xml
+
+# IDE
+.idea
+
