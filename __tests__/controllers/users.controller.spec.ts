@@ -4,7 +4,8 @@ import { factory, useSeeding } from 'typeorm-seeding';
 import app from '@app';
 import connection from '@database/connection';
 import { User } from '@entities/user.entity';
-import { createJWT } from '@services/jwt.service';
+import { Container } from 'typedi';
+import { JWTService } from '@services/jwt.service';
 import { API } from '../utils';
 
 beforeAll(async () => {
@@ -23,10 +24,11 @@ beforeEach(async () => {
 describe('requesting all users', () => {
   let user;
   let token;
+  const jwtService = Container.get(JWTService);
 
   beforeEach(async () => {
     user = await factory(User)().create();
-    token = await createJWT(user);
+    token = await jwtService.createJWT(user);
   });
 
   it('returns http code 401 without authentication token', async () => {

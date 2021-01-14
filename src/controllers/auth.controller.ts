@@ -10,10 +10,12 @@ import {
 import { getRepository } from 'typeorm';
 import * as _ from 'lodash';
 import { User } from '@entities/user.entity';
-import { createJWT } from '@services/jwt.service';
+import { JWTService } from '@services/jwt.service';
 
 @JsonController('/auth')
 export class AuthController {
+  constructor(private jwtService: JWTService) {}
+
   @Post('/signup')
   async signUp(@Body({ validate: false }) user: User, @Res() response: any) {
     let newUser;
@@ -48,7 +50,7 @@ export class AuthController {
     }
 
     // user matches email + password, create a token
-    const token = await createJWT(user);
+    const token = await this.jwtService.createJWT(user);
     return {
       token
     };

@@ -1,6 +1,7 @@
 import * as aws from 'aws-sdk';
 import { ReadStream } from 'fs';
 import { S3_ID, S3_SECRET, S3_BUCKETNAME } from '../config';
+import { Service } from 'typedi';
 
 aws.config.update({
   accessKeyId: S3_ID,
@@ -15,7 +16,8 @@ const bucket = S3_BUCKETNAME || '';
 /**
  * Interacting with an S3 Bucket
  */
-export default class {
+@Service()
+export class S3Service {
   /**
    * @description uploads a file to S3
    * @param {ReadStream} file - file stream
