@@ -10,11 +10,11 @@ import {
 import { getRepository } from 'typeorm';
 import * as _ from 'lodash';
 import { User } from '@entities/user.entity';
-import { JWTService } from '@services/jwt.service';
+import { UsersService } from '@services/users.service';
 
 @JsonController('/auth')
 export class AuthController {
-  constructor(private jwtService: JWTService) {}
+  constructor(private readonly usersService: UsersService) {}
 
   @Post('/signup')
   async signUp(@Body({ validate: false }) user: User, @Res() response: any) {
@@ -33,7 +33,7 @@ export class AuthController {
     @BodyParam('email') email: string,
     @BodyParam('password') password: string
   ) {
-    if (!email || !password) {
+    if (!this.usersService.givenCrentials(email, password)) {
       throw new BadRequestError('Missing params on body');
     }
 
@@ -45,12 +45,14 @@ export class AuthController {
     }
 
     // Check if encrypted password match
-    if (!user.comparePassword(password)) {
+    if (!this.usersService.comparePassword(password, user.password)) {
       throw new UnauthorizedError('Invalid credentials');
     }
 
     // user matches email + password, create a token
-    const token = await this.jwtService.createJWT(user);
+    const token = this.usersService.generateToken(user);
+    user.password = this.usersService.hashPassword(user.password);
+
     return {
       token
     };
