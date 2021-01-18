@@ -17,6 +17,7 @@
       "@entities/*": ["src/entities/*"],
       "@middlewares": ["src/middlewares"],
       "@services/*": ["src/services/*"],
+      "@constants/*": ["src/constants/*"],
       "@app": ["src/app"],
       "@ormconfig": ["ormconfig"]
     },
