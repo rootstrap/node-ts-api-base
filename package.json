@@ -54,7 +54,7 @@
     "jest-sonar-reporter": "^2.0.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
-    "supertest": "^6.0.1",
+    "supertest": "^6.1.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
   },
