@@ -17,9 +17,11 @@ import {
   RATE_LIMIT_WINDOW,
   DOCS_ENABLED
 } from '@config';
+import * as typeorm from 'typeorm';
 
 // required by routing-controllers
 useContainer(Container);
+typeorm.useContainer(Container);
 
 // Create express server
 const app: express.Express = express();
