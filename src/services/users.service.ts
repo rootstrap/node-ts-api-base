@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 import { compareSync, genSaltSync, hashSync } from 'bcrypt';
-import { getRepository, getConnectionManager } from 'typeorm';
+import { getConnectionManager } from 'typeorm';
 import { User } from '@entities/user.entity';
 import { JWTService } from '@services/jwt.service';
 import config from '@ormconfig';
