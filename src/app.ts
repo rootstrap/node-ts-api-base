@@ -9,6 +9,7 @@ import {
 import helmet from 'helmet';
 import { Container } from 'typedi';
 import { AuthMiddleware, LoggingMiddleware } from '@middlewares';
+import { FilterParamInterceptor } from '@interceptors';
 import { controllers } from '@controllers';
 import rateLimit from 'express-rate-limit';
 import { swaggerSpec } from './swagger';
@@ -56,7 +57,7 @@ const routingControllersOptions: any = {
   authorizationChecker: AuthMiddleware.checker,
   controllers,
   middlewares: [AuthMiddleware, LoggingMiddleware],
-  interceptors: []
+  interceptors: [FilterParamInterceptor]
 };
 
 // Wrap server with routing-controllers

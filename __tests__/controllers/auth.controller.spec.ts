@@ -21,15 +21,23 @@ beforeEach(async () => {
 
 describe('creating an account', () => {
   it('returns http code 200 whith valid params', async () => {
-    const userFields = await factory(User)().make();
+    const userFields: User = await factory(User)().make();
     const response = await request(app)
       .post(`${API}/auth/signup`)
       .send(userFields);
     expect(response.status).toBe(200);
   });
 
+  it('returns new user without exposing the password', async () => {
+    const userFields: User = await factory(User)().make();
+    const response = await request(app)
+      .post(`${API}/auth/signup`)
+      .send(userFields);
+    expect(response.body.password).toBe('FILTERED');
+  });
+
   it('returns http code 400 whith invalid params', async () => {
-    const userFields = {};
+    const userFields: any = {};
     const response = await request(app)
       .post(`${API}/auth/signup`)
       .send(userFields);
@@ -42,7 +50,7 @@ describe('creating a session', () => {
   let password;
 
   beforeEach(async () => {
-    const user = await factory(User)().create({ password: 'password123' });
+    const user: User = await factory(User)().create({ password: 'password123' });
     email = user.email;
     password = 'password123';
   });

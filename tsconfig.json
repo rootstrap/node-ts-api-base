@@ -16,6 +16,7 @@
       "@database/*": ["src/database/*"],
       "@entities/*": ["src/entities/*"],
       "@middlewares": ["src/middlewares"],
+      "@interceptors": ["src/interceptors"],
       "@services/*": ["src/services/*"],
       "@app": ["src/app"],
       "@ormconfig": ["ormconfig"]
@@ -27,5 +28,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["node_modules", "dist", "__tests__"]
+  "exclude": ["node_modules", "dist"]
 }

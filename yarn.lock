@@ -25,6 +25,11 @@
   resolved "https://registry.yarnpkg.com/@admin-bro/typeorm/-/typeorm-1.4.0.tgz#8b29ecb6158e868959be4bea56b9f0322dbfbd82"
   integrity sha512-3N86aBEtyZX+iIPX36Q0wnnwuBaQUzVfrtnE6ZhGRiZd4VAmgG4ucqv0dFa+Rn4hMgUfMZDqNenqUvMfI0YUSw==
 
+"@amaabca/sensitive-param-filter@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@amaabca/sensitive-param-filter/-/sensitive-param-filter-1.0.7.tgz#4fbd46486124a10edc7cf1a999f2cec82e7b3112"
+  integrity sha512-lB5gPFGX7dsU1WWEskqr+RIYLg/9dSj6RumyoAPboOD/DVGUXpNePBvnSFksP73zmVOBgu2u/JyF4pKa6h1Sog==
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.8.3":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"

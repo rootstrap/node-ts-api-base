@@ -61,6 +61,7 @@
   "dependencies": {
     "@admin-bro/express": "^3.1.0",
     "@admin-bro/typeorm": "^1.4.0",
+    "@amaabca/sensitive-param-filter": "^1.0.7",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
     "admin-bro": "^3.3.1",
@@ -85,8 +86,8 @@
     "routing-controllers": "^0.9.0-alpha.6",
     "routing-controllers-openapi": "^2.1.0",
     "swagger-ui-express": "^4.1.6",
-    "tsconfig-paths": "^3.9.0",
     "ts-jest": "^26.4.4",
+    "tsconfig-paths": "^3.9.0",
     "typedi": "^0.8.0",
     "typeorm": "^0.2.30",
     "typeorm-seeding": "^1.6.1"

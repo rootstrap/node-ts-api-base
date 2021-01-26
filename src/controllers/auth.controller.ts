@@ -8,7 +8,6 @@ import {
   Res
 } from 'routing-controllers';
 import { getRepository } from 'typeorm';
-import * as _ from 'lodash';
 import { User } from '@entities/user.entity';
 import { JWTService } from '@services/jwt.service';
 
@@ -25,7 +24,7 @@ export class AuthController {
     } catch (error) {
       throw new BadRequestError('Missing params on body');
     }
-    return response.send(_.omit(newUser, ['password']));
+    return newUser;
   }
 
   @Post('/signin')
