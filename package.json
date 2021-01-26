@@ -62,7 +62,7 @@
     "@admin-bro/express": "^3.1.0",
     "@admin-bro/typeorm": "^1.4.0",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
-    "@typescript-eslint/parser": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.1",
     "admin-bro": "^3.3.1",
     "admin-bro-expressjs": "^2.1.1",
     "aws-sdk": "^2.831.0",
