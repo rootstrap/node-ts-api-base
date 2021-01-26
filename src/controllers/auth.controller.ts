@@ -16,7 +16,7 @@ export class AuthController {
   constructor(private jwtService: JWTService) {}
 
   @Post('/signup')
-  async signUp(@Body({ validate: false }) user: User, @Res() response: any) {
+  async signUp(@Body({ validate: false }) user: User, @Res() _response: any) {
     let newUser;
 
     try {
