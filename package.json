@@ -86,7 +86,7 @@
     "routing-controllers-openapi": "^2.1.0",
     "swagger-ui-express": "^4.1.6",
     "tsconfig-paths": "^3.9.0",
-    "ts-jest": "^26.4.4",
+    "ts-jest": "^26.5.0",
     "typedi": "^0.8.0",
     "typeorm": "^0.2.30",
     "typeorm-seeding": "^1.6.1"
