@@ -88,7 +88,7 @@
     "tsconfig-paths": "^3.9.0",
     "ts-jest": "^26.5.0",
     "typedi": "^0.8.0",
-    "typeorm": "^0.2.30",
+    "typeorm": "^0.2.31",
     "typeorm-seeding": "^1.6.1"
   }
 }
