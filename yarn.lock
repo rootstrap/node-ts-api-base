@@ -7116,10 +7116,10 @@ routing-controllers-openapi@^2.1.0:
     reflect-metadata "^0.1.13"
     tslib "^1.11.1"
 
-routing-controllers@^0.9.0-alpha.6:
-  version "0.9.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/routing-controllers/-/routing-controllers-0.9.0-alpha.6.tgz#4b6ef75eec9db83ef6a19f79ef322a1ec48bc229"
-  integrity sha512-KnZ7SB6S1q0eX2mVLSelSwB3Gf3cmC4Ul6krDZ9j7+tUa12BPzblmTkuiIDwmhNtbZLXJQCgTD7pj18iqW57Ww==
+routing-controllers@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/routing-controllers/-/routing-controllers-0.9.0.tgz#979016523db37832d4c9a23c33b2654a89a563de"
+  integrity sha512-OtARLKA6j8enNgGqi/hoRqBsTjVo2hbxc1+MeKi8mvelNn18+LXUdHpzY3z4GbCERBtaj8CwVjcsiQR+2w6ZFg==
   dependencies:
     cookie "^0.4.0"
     express-session "^1.17.1"
