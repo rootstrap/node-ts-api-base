@@ -43,7 +43,7 @@ describe('requesting all users', () => {
     expect(response.status).toBe(401);
   });
 
-  it.only('returns http code 200 with valid authentication token', async () => {
+  it('returns http code 200 with valid authentication token', async () => {
     const response = await request(app)
       .get(`${API}/users`)
       .set({ Authorization: token });
