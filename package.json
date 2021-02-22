@@ -65,7 +65,7 @@
     "@typescript-eslint/parser": "^4.15.1",
     "admin-bro": "^3.4.0",
     "admin-bro-expressjs": "^2.1.1",
-    "aws-sdk": "^2.847.0",
+    "aws-sdk": "^2.848.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "class-transformer": "^0.4.0",
