@@ -11,8 +11,10 @@ import { getRepository } from 'typeorm';
 import * as _ from 'lodash';
 import { User } from '@entities/user.entity';
 import { JWTService } from '@services/jwt.service';
+import { Service } from 'typedi';
 
 @JsonController('/auth')
+@Service()
 export class AuthController {
   constructor(private jwtService: JWTService) {}
 

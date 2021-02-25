@@ -16,8 +16,10 @@ import {
 } from 'typeorm';
 
 import { User } from '@entities/user.entity';
+import { Service } from 'typedi';
 
 @JsonController('/users')
+@Service()
 export class UserController {
   private readonly userRepository = getRepository<User>(User);
 
