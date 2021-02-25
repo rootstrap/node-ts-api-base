@@ -13,10 +13,12 @@ import {
   UpdateResult,
   DeleteResult
 } from 'typeorm';
+import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
 import { UsersService } from '@services/users.service';
 
 @JsonController('/users')
+@Service()
 export class UserController {
   constructor(private readonly usersService: UsersService) {}
 

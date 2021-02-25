@@ -8,11 +8,13 @@ import {
   Res
 } from 'routing-controllers';
 import * as _ from 'lodash';
+import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
 import { SessionService } from '@services/session.service';
 import { Errors } from '@constants/errorMessages';
 
 @JsonController('/auth')
+@Service()
 export class AuthController {
   constructor(private readonly sessionService: SessionService) {}
 
