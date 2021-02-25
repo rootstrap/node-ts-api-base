@@ -10,7 +10,6 @@ import {
 import * as _ from 'lodash';
 import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
-import { JWTService } from '@services/jwt.service';
 import { SessionService } from '@services/session.service';
 import { Errors } from '@constants/errorMessages';
 
