@@ -5,6 +5,7 @@ import { API } from '../utils';
 import { factory, useSeeding } from 'typeorm-seeding';
 import { User } from '@entities/user.entity';
 import { RATE_LIMIT_MAX_REQUESTS } from '@config';
+import { genSaltSync, hashSync } from 'bcrypt';
 
 beforeAll(async () => {
   await connection.create();
@@ -40,9 +41,11 @@ describe('creating an account', () => {
 describe('creating a session', () => {
   let email;
   let password;
+  let hashedPassword;
 
   beforeEach(async () => {
-    const user = await factory(User)().create({ password: 'password123' });
+    hashedPassword = hashSync('password123', genSaltSync());
+    const user = await factory(User)().create({ password: hashedPassword });
     email = user.email;
     password = 'password123';
   });
