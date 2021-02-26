@@ -43,6 +43,18 @@ Run `yarn migration:revert` to rollback migrations.
 Run `yarn migration:show` to see the list of all migrations (pending and also ran).
 
 
+## Github Actions
+Our CI workflow is based on [Github Actions](https://docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions), for this, we need to set several secret keys for integrated with some services like SonarQube or databases for example.
+To configure these keys in the GitHub repo, you can follow the next [guideline](https://docs.github.com/en/actions/learn-github-actions/security-hardening-for-github-actions#using-secrets).
+Also, for configuring the SonarQube keys you can follow the next [steps](https://github.com/rootstrap/node-ts-api-base/wiki/SonarQube-Setup).
+| Action                                                     | Secret Key             |
+|------------------------------------------------------------|------------------------|
+| Password for the database that is used in the testing step | TEST_POSTGRES_PASSWORD |
+| URL of SonarQube server                                    | SONAR_URL              |
+| Key of the project on the SonarQube server                 | SONAR_PROJECT_KEY      |
+| Token generated of the project in the SonarQube server     | SONAR_TOKEN            |
+
+
 ## Running with Docker
 
 ### Prerequisites
