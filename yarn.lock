@@ -2667,10 +2667,10 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-class-validator-jsonschema@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/class-validator-jsonschema/-/class-validator-jsonschema-2.1.1.tgz#2ab18c03d0af78f805e7c2e9771ab61c48f79c00"
-  integrity sha512-h9ZjaFgrtk7shrSbYGii08ow+mcrKVjzdBWZ/iHfrro6APOiTxYLTIASBneOfy+8uShocCsvBB2VtBFj8P/+Lg==
+class-validator-jsonschema@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/class-validator-jsonschema/-/class-validator-jsonschema-2.2.0.tgz#d33f8e6e579c627582729b10f387d870f5282bf7"
+  integrity sha512-tyyU5IjO7+rEwuXrXImsXz6DppYKDyT2+fG2Pz5oaHccz9Z5iMWPQFRuR9JykCX+Y9HgwC15U2h/v/2jYvCBkw==
   dependencies:
     lodash "^4.17.20"
     openapi3-ts "^2.0.0"
