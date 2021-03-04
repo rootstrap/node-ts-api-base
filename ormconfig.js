@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
 
-dotenv.config({ path: `.env.${process.env.ENVIRONMENT}` });
+dotenv.config({ path: `.env.${process.env.ENV || 'dev'}` });
 
 // If .env wasn't provided then exit
 if (!process.env.PORT) {
@@ -18,22 +18,22 @@ module.exports = {
   synchronize: process.env.TYPEORM_SYNCHRONIZE === 'true',
   logging: process.env.TYPEORM_LOGGING,
   entities: [
-    process.env.ENVIRONMENT === 'prod'
+    process.env.ENV === 'prod'
       ? 'dist/src/entities/**/*.js'
       : 'src/entities/**/*.ts'
   ],
   migrations: [
-    process.env.ENVIRONMENT === 'prod'
+    process.env.ENV === 'prod'
       ? 'dist/src/database/migrations/**/*.js'
       : 'src/database/migrations/**/*.ts'
   ],
   migrationsRun: process.env.TYPEORM_MIGRATIONS_RUN === 'true',
   cli: {
     migrationsDir:
-      process.env.ENVIRONMENT === 'prod'
+      process.env.ENV === 'prod'
         ? 'dist/src/database/migrations'
         : 'src/database/migrations',
     entitiesDir:
-      process.env.ENVIRONMENT === 'prod' ? 'dist/src/entities' : 'src/entities'
+      process.env.ENV === 'prod' ? 'dist/src/entities' : 'src/entities'
   }
 };

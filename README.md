@@ -10,12 +10,12 @@ This project includes the boilerplate for a basic rest-api made in Node.JS with 
 4. `cp .example.env .env.dev`
 5. `cp .example.env.test .env.test`
 6. Create your DB (i.e. psql for Postgres: `psql -U <user> -h <host> -c "create database <db name>;"`) with same name as your .env file.
-7. Run `ENVIRONMENT=[dev, test, prod] yarn migration:run`.
-8. Start your server with `ENVIRONMENT=[dev, prod] yarn dev`.
+7. Run `ENV=[dev, test, prod] yarn migration:run`.
+8. Start your server with `ENV=[dev, prod] yarn dev`.
 
 ## Some scripts
 
-Add `ENVIRONMENT=[dev, prod]` before running scripts.
+Add `ENV=[dev, prod]` before running scripts.
 Why?: [Configuration file used by Typeorm](https://typeorm.io/#/using-ormconfig/which-configuration-file-is-used-by-typeorm)
 
 Run `yarn build` to build js from typescript source.
