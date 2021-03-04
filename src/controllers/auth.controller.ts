@@ -7,23 +7,27 @@ import {
   BadRequestError,
   Res
 } from 'routing-controllers';
-import { getRepository } from 'typeorm';
 import * as _ from 'lodash';
+import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
-import { createJWT } from '@services/jwt.service';
+import { SessionService } from '@services/session.service';
+import { Errors } from '@constants/errorMessages';
 
 @JsonController('/auth')
+@Service()
 export class AuthController {
+  constructor(private readonly sessionService: SessionService) {}
+
   @Post('/signup')
   async signUp(@Body({ validate: false }) user: User, @Res() response: any) {
-    let newUser;
-
     try {
-      newUser = await getRepository(User).save(user);
+      const newUser = await this.sessionService.signUp(user);
+      return response.send(_.omit(newUser, ['password']));
     } catch (error) {
-      throw new BadRequestError('Missing params on body');
+      if (error?.message === Errors.MISSING_PARAMS) {
+        throw new BadRequestError(Errors.MISSING_PARAMS);
+      }
     }
-    return response.send(_.omit(newUser, ['password']));
   }
 
   @Post('/signin')
@@ -31,26 +35,16 @@ export class AuthController {
     @BodyParam('email') email: string,
     @BodyParam('password') password: string
   ) {
-    if (!email || !password) {
-      throw new BadRequestError('Missing params on body');
-    }
-
-    let user: User;
     try {
-      user = await User.findOneOrFail({ where: { email } });
+      const token = await this.sessionService.signIn(email, password);
+      return { token };
     } catch (error) {
-      throw new UnauthorizedError('Invalid credentials');
+      switch (error?.message) {
+      case Errors.MISSING_PARAMS:
+        throw new BadRequestError(Errors.MISSING_PARAMS);
+      default:
+        throw new UnauthorizedError(Errors.INVALID_CREDENTIALS);
+      }
     }
-
-    // Check if encrypted password match
-    if (!user.comparePassword(password)) {
-      throw new UnauthorizedError('Invalid credentials');
-    }
-
-    // user matches email + password, create a token
-    const token = await createJWT(user);
-    return {
-      token
-    };
   }
 }

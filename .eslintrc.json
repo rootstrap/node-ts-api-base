@@ -3,7 +3,7 @@
     "node": true,
     "es6": true
   },
-  "extends": ["prettier", "prettier/@typescript-eslint", "google", "plugin:@typescript-eslint/recommended"],
+  "extends": ["prettier", "google", "plugin:@typescript-eslint/recommended"],
   "plugins": ["prettier"],
   "globals": {
     "Atomics": "readonly",
