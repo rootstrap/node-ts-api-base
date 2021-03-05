@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
 
-dotenv.config({ path: `.env.${process.env.ENVIRONMENT}` });
+dotenv.config({ path: `.env.${process.env.ENV || 'dev'}` });
 
 // If .env wasn't provided then exit
 if (!process.env.PORT) {
@@ -9,7 +9,7 @@ if (!process.env.PORT) {
 }
 
 export const {
-  ENVIRONMENT,
+  ENV,
   PORT,
   JWT_SECRET,
   ACCESS_TOKEN_LIFE,
