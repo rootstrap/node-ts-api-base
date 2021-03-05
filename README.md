@@ -4,7 +4,7 @@ This project includes the boilerplate for a basic rest-api made in Node.JS with 
 
 ## Basic Requirements
 
-1. Install Node.js (lts-version v12.18.3)
+1. Install Node.js (lts-version v14.16.0)
 2. Install `yarn` if not present `curl -o- -L https://yarnpkg.com/install.sh | bash` (macOS and generic Unix environments)
 3. Install required dependencies by `yarn`
 4. `cp .example.env .env.dev`

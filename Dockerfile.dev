@@ -1,5 +1,5 @@
 # Check out https://hub.docker.com/_/node to select a new base image
-FROM node:12.19.0-alpine
+FROM node:14.16.0-alpine
 WORKDIR /app
 COPY ./package.json .
 COPY tsconfig* ./
