@@ -26,21 +26,21 @@ Run `yarn test` to run tests.
 
 Run `yarn dev` to start and automatically detect any source-code changes, restarting the server as well.
 
-Run `yarn schema:drop` to drop your schema of the DB.
+Run `yarn typeorm schema:drop` to drop your schema of the DB.
 
-Run `yarn schema:sync` to resync the schema of your DB.
+Run `yarn typeorm schema:sync` to resync the schema of your DB.
 
 Run `yarn seed:run` to run seed files.
 
 Run `yarn db:reset` to drop schema and re run it, then seed the DB.
 
-Run `yarn migration:generate` to create a new migration.
+Run `yarn typeorm migration:generate -n <migration's name>` to create a new migration.
 
-Run `yarn migration:run` to run pending migrations.
+Run `yarn typeorm migration:run` to run pending migrations.
 
-Run `yarn migration:revert` to rollback migrations.
+Run `yarn typeorm migration:revert` to rollback migrations.
 
-Run `yarn migration:show` to see the list of all migrations (pending and also ran).
+Run `yarn typeorm migration:show` to see the list of all migrations (pending and also ran).
 
 
 ## Github Actions
