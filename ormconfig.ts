@@ -8,11 +8,12 @@ import {
   TYPEORM_SYNCHRONIZE,
   TYPEORM_LOGGING,
   TYPEORM_MIGRATIONS_RUN,
-  PRODUCTION_ENV
+  PRODUCTION_ENV,
+  TYPEORM_TYPE
 } from './src/config';
 
 const config: ConnectionOptions = {
-  type: 'postgres',
+  type: TYPEORM_TYPE as 'mysql' | 'postgres' | 'mongodb',
   host: TYPEORM_HOST,
   username: TYPEORM_USERNAME,
   password: TYPEORM_PASSWORD,
