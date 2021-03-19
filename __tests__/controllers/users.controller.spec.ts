@@ -1,29 +1,16 @@
 import request from 'supertest';
 import { getRepository } from 'typeorm';
-import { factory, useSeeding } from 'typeorm-seeding';
-import app from '@app';
-import connection from '@database/connection';
-import { User } from '@entities/user.entity';
+import { factory } from 'typeorm-seeding';
 import { Container } from 'typedi';
+import app from '@app';
+import { User } from '@entities/user.entity';
 import { JWTService } from '@services/jwt.service';
 import { API } from '../utils';
-
-beforeAll(async () => {
-  await connection.create();
-  await useSeeding();
-});
-
-afterAll(async () => {
-  await connection.close();
-});
-
-beforeEach(async () => {
-  await connection.clear();
-});
+import '../utils/callbacks';
 
 describe('requesting all users', () => {
-  let user;
-  let token;
+  let user: User;
+  let token: string;
   const jwtService = Container.get(JWTService);
 
   beforeEach(async () => {
@@ -71,7 +58,7 @@ describe('requesting a user', () => {
   });
 
   it('returns http code 404 for non-existing user', async () => {
-    const randomId = Math.round(user.id + Math.random() * 10);
+    const randomId = Math.round(user.id + (1 + Math.random() * 10));
     const response = await request(app).get(`${API}/users/${randomId}`);
     expect(response.status).toBe(404);
   });

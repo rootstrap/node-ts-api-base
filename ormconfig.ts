@@ -10,7 +10,7 @@ import {
   TYPEORM_MIGRATIONS_RUN,
   PRODUCTION_ENV,
   TYPEORM_TYPE
-} from './src/config';
+} from '@config';
 
 const config: ConnectionOptions = {
   type: TYPEORM_TYPE as 'mysql' | 'postgres' | 'mongodb',

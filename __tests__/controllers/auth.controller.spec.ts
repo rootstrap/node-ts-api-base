@@ -1,24 +1,11 @@
 import request from 'supertest';
 import app from '@app';
-import connection from '@database/connection';
-import { API } from '../utils';
-import { factory, useSeeding } from 'typeorm-seeding';
+import { factory } from 'typeorm-seeding';
 import { User } from '@entities/user.entity';
 import { RATE_LIMIT_MAX_REQUESTS } from '@config';
 import { genSaltSync, hashSync } from 'bcrypt';
-
-beforeAll(async () => {
-  await connection.create();
-  await useSeeding();
-});
-
-afterAll(async () => {
-  await connection.close();
-});
-
-beforeEach(async () => {
-  await connection.clear();
-});
+import { API } from '../utils';
+import '../utils/callbacks';
 
 describe('creating an account', () => {
   it('returns http code 200 whith valid params', async () => {
