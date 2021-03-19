@@ -1,11 +1,11 @@
 # Check out https://hub.docker.com/_/node to select a new base image
-FROM node:12.19.0-alpine AS builder
+FROM node:14.16.0-alpine AS builder
 WORKDIR /app
 COPY . .
 RUN yarn
 RUN yarn build
 
-FROM node:12.19.0-alpine AS production
+FROM node:14.16.0-alpine AS production
 WORKDIR /app
 COPY --from=builder ./app/dist ./dist
 COPY package* ./
