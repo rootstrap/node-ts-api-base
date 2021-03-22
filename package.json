@@ -78,7 +78,7 @@
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.9.0",
-    "routing-controllers-openapi": "^2.1.0",
+    "routing-controllers-openapi": "^3.0.0",
     "swagger-ui-express": "^4.1.6",
     "tsconfig-paths": "^3.9.0",
     "ts-jest": "^26.5.4",
