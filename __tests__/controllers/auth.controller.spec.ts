@@ -5,7 +5,6 @@ import { User } from '@entities/user.entity';
 import { RATE_LIMIT_MAX_REQUESTS } from '@config';
 import { genSaltSync, hashSync } from 'bcrypt';
 import { API } from '../utils';
-import '../utils/callbacks';
 
 describe('creating an account', () => {
   it('returns http code 200 whith valid params', async () => {

@@ -1,7 +1,6 @@
 import { Container } from 'typedi';
 import { genSaltSync, hashSync } from 'bcrypt';
 import { UsersService } from '@services/users.service';
-import '../utils/callbacks';
 
 let usersService: UsersService;
 

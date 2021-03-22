@@ -6,7 +6,6 @@ import app from '@app';
 import { User } from '@entities/user.entity';
 import { JWTService } from '@services/jwt.service';
 import { API } from '../utils';
-import '../utils/callbacks';
 
 describe('requesting all users', () => {
   let user: User;
