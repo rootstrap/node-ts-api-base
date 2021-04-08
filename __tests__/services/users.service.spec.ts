@@ -1,26 +1,16 @@
-import connection from '@database/connection';
 import { Container } from 'typedi';
-import { UsersService } from '@services/users.service';
 import { genSaltSync, hashSync } from 'bcrypt';
+import { UsersService } from '@services/users.service';
 
-let usersService;
+let usersService: UsersService;
 
 beforeAll(async () => {
-  await connection.create();
   usersService = Container.get(UsersService);
 });
 
-afterAll(async () => {
-  await connection.close();
-});
-
-beforeEach(async () => {
-  await connection.clear();
-});
-
 describe('given credentials', () => {
-  let email;
-  let password;
+  let email: string;
+  let password: string;
 
   beforeEach(() => {
     email = 'email@email.com';
@@ -53,7 +43,7 @@ describe('given credentials', () => {
 });
 
 describe('compare password', () => {
-  let userPassword;
+  let userPassword: string;
 
   beforeEach(() => {
     userPassword = hashSync('password', genSaltSync());
