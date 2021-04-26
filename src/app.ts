@@ -8,7 +8,11 @@ import {
 } from 'routing-controllers';
 import helmet from 'helmet';
 import { Container } from 'typedi';
-import { AuthMiddleware, LoggingMiddleware, ErrorMiddleware } from '@middlewares';
+import {
+  AuthMiddleware,
+  LoggingMiddleware,
+  ErrorMiddleware
+} from '@middlewares';
 import { controllers } from '@controllers';
 import rateLimit from 'express-rate-limit';
 import { swaggerSpec } from './swagger';
