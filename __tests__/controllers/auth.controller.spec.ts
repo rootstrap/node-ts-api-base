@@ -21,6 +21,12 @@ describe('creating an account', () => {
       .post(`${API}/auth/signup`)
       .send(userFields);
     expect(response.status).toBe(400);
+    expect(response.body).toStrictEqual(
+      expect.objectContaining({
+        errMessage: expect.any(String),
+        errCode: expect.any(Number)
+      })
+    );
   });
 });
 
@@ -56,6 +62,12 @@ describe('creating a session', () => {
       .post(`${API}/auth/signin`)
       .send(authFields);
     expect(response.status).toBe(401);
+    expect(response.body).toStrictEqual(
+      expect.objectContaining({
+        errMessage: expect.any(String),
+        errCode: expect.any(Number)
+      })
+    );
   });
 });
 
@@ -70,5 +82,11 @@ describe('calling multiple times an endpoint', () => {
       response = await request(app).post(`${API}/auth/signin`);
     }
     expect(response.status).toBe(429);
+    expect(response.body).toStrictEqual(
+      expect.objectContaining({
+        message: expect.any(String),
+        status: expect.any(Number)
+      })
+    );
   });
 });

@@ -20,6 +20,12 @@ describe('requesting all users', () => {
   it('returns http code 401 without authentication token', async () => {
     const response = await request(app).get(`${API}/users`);
     expect(response.status).toBe(401);
+    expect(response.body).toStrictEqual(
+      expect.objectContaining({
+        errMessage: expect.any(String),
+        errCode: expect.any(Number)
+      })
+    );
   });
 
   it('returns http code 401 with an invalid authentication token', async () => {
@@ -27,6 +33,12 @@ describe('requesting all users', () => {
       .get(`${API}/users`)
       .set({ Authorization: 'Inv3nT3d-T0k3N' });
     expect(response.status).toBe(401);
+    expect(response.body).toStrictEqual(
+      expect.objectContaining({
+        errMessage: expect.any(String),
+        errCode: expect.any(Number)
+      })
+    );
   });
 
   it('returns http code 200 with valid authentication token', async () => {
@@ -60,6 +72,12 @@ describe('requesting a user', () => {
     const randomId = Math.round(user.id + (1 + Math.random() * 10));
     const response = await request(app).get(`${API}/users/${randomId}`);
     expect(response.status).toBe(404);
+    expect(response.body).toStrictEqual(
+      expect.objectContaining({
+        errMessage: expect.any(String),
+        errCode: expect.any(Number)
+      })
+    );
   });
 
   it('returns http code 200 for an existing user', async () => {
@@ -92,9 +110,7 @@ describe('updating a user', () => {
     const id = user.id;
     user.firstName = 'new firstname';
     user.lastName = 'new lastname';
-    const response = await request(app)
-      .put(`${API}/users/${id}`)
-      .send(user);
+    const response = await request(app).put(`${API}/users/${id}`).send(user);
     expect(response.status).toBe(200);
 
     const updatedUser = await getRepository(User).findOne(id);

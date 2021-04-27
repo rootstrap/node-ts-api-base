@@ -8,7 +8,11 @@ import {
 } from 'routing-controllers';
 import helmet from 'helmet';
 import { Container } from 'typedi';
-import { AuthMiddleware, LoggingMiddleware } from '@middlewares';
+import {
+  AuthMiddleware,
+  LoggingMiddleware,
+  ErrorMiddleware
+} from '@middlewares';
 import { controllers } from '@controllers';
 import rateLimit from 'express-rate-limit';
 import { swaggerSpec } from './swagger';
@@ -52,10 +56,11 @@ app.use(
 
 const routingControllersOptions: any = {
   routePrefix: '/api/v1',
+  defaultErrorHandler: false,
   cors: true,
   authorizationChecker: AuthMiddleware.checker,
   controllers,
-  middlewares: [AuthMiddleware, LoggingMiddleware],
+  middlewares: [AuthMiddleware, LoggingMiddleware, ErrorMiddleware],
   interceptors: []
 };
 
