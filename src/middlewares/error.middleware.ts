@@ -3,7 +3,7 @@ import {
   Middleware,
   ExpressErrorMiddlewareInterface
 } from 'routing-controllers';
-import { TESTING_ENV } from '@config';
+import { DEV_ENV } from '@config';
 import { Service } from 'typedi';
 
 interface ErrorInterface extends Error {
@@ -19,7 +19,7 @@ export class ErrorMiddleware implements ExpressErrorMiddlewareInterface {
     res: Response,
     _next: (err?: ErrorInterface) => ErrorInterface
   ) {
-    if (TESTING_ENV) {
+    if (DEV_ENV) {
       console.error(`Message: ${error.message}`);
       console.error(`Stack: ${error.stack}`);
     }

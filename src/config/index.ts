@@ -9,6 +9,7 @@ if (!process.env.PORT) {
 }
 
 export const PRODUCTION_ENV = process.env.ENV === 'prod';
+export const DEV_ENV = process.env.ENV === 'dev';
 export const TESTING_ENV = process.env.ENV === 'test';
 export const CI_ENV = process.env.ENV === 'ci';
 
