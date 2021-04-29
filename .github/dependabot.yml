@@ -1,0 +1,23 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "09:00"
+    timezone: America/Montevideo
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: aws-sdk
+    versions:
+    - 2.843.0
+    - 2.874.0
+    - 2.889.0
+    - 2.890.0
+    - 2.893.0
+  - dependency-name: "@types/node"
+    versions:
+    - 15.0.0
+  - dependency-name: eslint-config-prettier
+    versions:
+    - 8.0.0
