@@ -5,6 +5,7 @@ COPY ./package.json .
 COPY tsconfig* ./
 COPY ormconfig* ./
 COPY src ./src
+RUN apk --no-cache add --virtual builds-deps build-base python
 RUN yarn
 EXPOSE 3000
 CMD [ "yarn", "dev" ]
