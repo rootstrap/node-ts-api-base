@@ -88,6 +88,15 @@ docker build -f Dockerfile.prod -t node-ts-api-base .
 docker run --rm --env-file=.env.prod -p 3000:3000 --name node-api node-ts-api-base
 ```
 
+### Fix issue at build docker image (dependencies to install bcrypt are not providede in alpine version of node)
+ 
+Add the following line before the command ` RUN yarn ` in the Dockerfile.
+
+```
+RUN apk --no-cache add --virtual builds-deps build-base python
+```
+
+
 
 ## API Documentation
 
