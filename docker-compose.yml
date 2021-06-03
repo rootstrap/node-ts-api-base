@@ -6,7 +6,8 @@ services:
       - '${TYPEORM_PORT}:${TYPEORM_PORT}'
     environment:
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: "${TYPEORM_DATABASE}"
+    volumes:
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
   node-api-base:
     build:
       context: ./
