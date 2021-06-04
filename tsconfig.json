@@ -15,9 +15,11 @@
       "@controllers": ["src/controllers"],
       "@database/*": ["src/database/*"],
       "@entities/*": ["src/entities/*"],
+      "@interfaces/*": ["src/interfaces/*"],
       "@middlewares": ["src/middlewares"],
       "@services/*": ["src/services/*"],
       "@constants/*": ["src/constants/*"],
+      "@utils/*": ["src/utils/*"],
       "@app": ["src/app"],
       "@ormconfig": ["ormconfig"]
     },

@@ -16,6 +16,7 @@
   "rules": {
     "indent": ["error", 2],
     "comma-dangle": ["error", "never"],
+    "camelcase": ["warn", {"properties": "always"}],
     "object-curly-spacing": ["error", "always"],
     "curly": ["error", "all"],
     "require-jsdoc": 0,
