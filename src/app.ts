@@ -1,4 +1,3 @@
-import { AuthorizationService } from './services/auth.service';
 /* eslint-disable quotes */
 import 'reflect-metadata'; // this shim is required
 import express from 'express';
@@ -8,6 +7,7 @@ import {
   getMetadataArgsStorage
 } from 'routing-controllers';
 import { Container } from 'typedi';
+import { AuthorizationService } from '@services/auth.service';
 import { middlewares } from '@middlewares';
 import { controllers } from '@controllers';
 import { swaggerSpec } from './swagger';
