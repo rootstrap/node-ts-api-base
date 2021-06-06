@@ -3,15 +3,12 @@ import morgan from 'morgan';
 import { CI_ENV, TESTING_ENV } from '@config';
 import { Service } from 'typedi';
 
+const skip = () => TESTING_ENV || CI_ENV;
+
 @Middleware({ type: 'before' })
 @Service()
 export class LoggingMiddleware implements ExpressMiddlewareInterface {
   use(request: any, response: any, next: (err?: any) => any) {
-    const logger = morgan('dev', {
-      skip: () => {
-        return TESTING_ENV || CI_ENV;
-      }
-    });
-    logger(request, response, next);
+    morgan('dev', { skip })(request, response, next);
   }
 }
