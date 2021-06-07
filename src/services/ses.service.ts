@@ -9,7 +9,7 @@ aws.config.update({
 
 @Service()
 export class SESService {
-  createSES() {
+  static createSES() {
     return new aws.SES({
       apiVersion: process.env.SES_API_VERSION,
       region: process.env.AWS_REGION

@@ -1,8 +1,8 @@
 import * as sgTransport from 'nodemailer-sendgrid-transport';
-import nodemailer, { Transporter } from 'nodemailer';
+import nodemailer, { SentMessageInfo, Transporter } from 'nodemailer';
 import aws from 'aws-sdk';
 import { Service } from 'typedi';
-import { AuthSg, ISgOptions, IEmail } from '@interfaces/email.interface';
+import { EmailInterface } from '@interfaces';
 import { transpoterMapper } from '@utils/emailPlatformMap';
 import { SENDGRID_API_KEY, SENDGRID_API_USER } from '@config';
 import { SESService } from '@services/ses.service';
@@ -11,7 +11,9 @@ import SESTransport from 'nodemailer/lib/ses-transport';
 
 @Service()
 export class EmailService {
-  private static getSgOptions(sgCredentials: AuthSg): ISgOptions {
+  private static getSgOptions(
+    sgCredentials: EmailInterface.AuthSg
+  ): EmailInterface.ISgOptions {
     return {
       auth: sgCredentials
     };
@@ -27,15 +29,15 @@ export class EmailService {
   }
 
   static buildSesTransport(): Transporter<SESTransport.SentMessageInfo> {
-    const sesService = new SESService();
-    const ses = sesService.createSES();
+    const ses = SESService.createSES();
     return nodemailer.createTransport({
       SES: { ses, aws }
     });
   }
 
-  sendEmail(email: IEmail, emailPlatform: string) {
-    const transporter = transpoterMapper[emailPlatform];
+  static sendEmail(email: EmailInterface.IEmail, emailPlatform: string) {
+    const transporter: Transporter<SentMessageInfo> =
+      transpoterMapper[emailPlatform];
     return new Promise((resolve, reject) => {
       transporter.sendMail(email, (err, res) => {
         if (err) {
