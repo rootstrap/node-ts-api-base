@@ -42,10 +42,10 @@ export class AuthController {
       return { token };
     } catch (error) {
       switch (error?.message) {
-        case Errors.MISSING_PARAMS:
-          throw new BadRequestError(Errors.MISSING_PARAMS);
-        default:
-          throw new UnauthorizedError(Errors.INVALID_CREDENTIALS);
+      case Errors.MISSING_PARAMS:
+        throw new BadRequestError(Errors.MISSING_PARAMS);
+      default:
+        throw new UnauthorizedError(Errors.INVALID_CREDENTIALS);
       }
     }
   }
