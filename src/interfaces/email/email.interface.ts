@@ -1,16 +1,27 @@
-export interface ISgOptions {
-  auth: AuthSg;
+export interface ISendGridOptions {
+  auth: AuthSendGrid;
 }
-
-export interface AuthSg {
-  api_user?: string;
-  api_key: string;
-}
-
 export interface IEmail {
   from: string;
   to: string;
   subject: string;
-  text: string;
-  html?: string;
+  template?: string;
+  text?: string;
+  context?: any;
 }
+export interface AuthSendGrid {
+  api_user?: string;
+  api_key: string;
+}
+
+export interface IHandlebarsOptions {
+  viewEngine: HandlebarsViewEngine;
+  viewPath: string;
+}
+
+type HandlebarsViewEngine = {
+  extname: string;
+  layoutsDir: string;
+  partialsDir?: string;
+  defaultLayout: string;
+};

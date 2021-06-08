@@ -21,7 +21,8 @@
       "@constants/*": ["src/constants/*"],
       "@utils/*": ["src/utils/*"],
       "@app": ["src/app"],
-      "@ormconfig": ["ormconfig"]
+      "@ormconfig": ["ormconfig"],
+      "@views": ["src/views"]
     },
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
