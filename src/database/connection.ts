@@ -4,7 +4,6 @@ import config from '@ormconfig';
 const connection = {
   async create(callback?: (c: Connection) => void): Promise<void> {
     try {
-      console.log(config);
       const connection = await createConnection(config);
       if (callback) {
         callback(connection);

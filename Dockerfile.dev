@@ -5,6 +5,7 @@ COPY ./package.json .
 COPY tsconfig* ./
 COPY ormconfig* ./
 COPY src ./src
+COPY .env* ./
 RUN yarn
 EXPOSE 3000
 CMD [ "yarn", "dev" ]
