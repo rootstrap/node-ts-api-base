@@ -26,14 +26,18 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "yarn",
+      "name": "Run in Development",
       "runtimeExecutable": "yarn",
       "runtimeArgs": [
         "dev"
       ],
       "port": 3000,
       "cwd": "${workspaceRoot}",
-      "timeout": 10000
+      "timeout": 10000,
+      "skipFiles": [
+        "<node_internals>/**",
+        "${workspaceFolder}/node_modules/**"
+      ]
     },
     {
       "type": "node",
