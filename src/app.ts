@@ -25,7 +25,7 @@ const routingControllersOptions: any = {
   cors: true,
   authorizationChecker: AuthorizationService.getInstance().authorizationChecker,
   controllers,
-  middlewares: middlewares,
+  middlewares,
   interceptors: []
 };
 
