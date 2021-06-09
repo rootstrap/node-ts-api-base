@@ -6,16 +6,14 @@ import {
   Post,
   Put,
   Delete,
-  Authorized
+  Authorized,
+  BadRequestError
 } from 'routing-controllers';
-import {
-  InsertResult,
-  UpdateResult,
-  DeleteResult
-} from 'typeorm';
+import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
 import { UsersService } from '@services/users.service';
+import { Errors } from '../constants/errorMessages';
 
 @JsonController('/users')
 @Service()
@@ -35,11 +33,21 @@ export class UserController {
 
   @Post()
   async post(@Body() user: User): Promise<InsertResult> {
-    return this.usersService.createUser(user);
+    try {
+      const createdUser = await this.usersService.createUser(user);
+      return createdUser;
+    } catch (error) {
+      throw new BadRequestError(
+        error?.detail ?? error?.message ?? Errors.UNKNOWN
+      );
+    }
   }
 
   @Put('/:id')
-  async put(@Param('id') id: number, @Body() user: User): Promise<UpdateResult> {
+  async put(
+    @Param('id') id: number,
+    @Body() user: User
+  ): Promise<UpdateResult> {
     return this.usersService.editUser(id, user);
   }
 

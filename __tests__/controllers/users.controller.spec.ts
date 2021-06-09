@@ -6,6 +6,7 @@ import app from '@app';
 import { User } from '@entities/user.entity';
 import { JWTService } from '@services/jwt.service';
 import { API } from '../utils';
+import { REGEX } from '../../src/constants/regex';
 
 describe('requesting all users', () => {
   let user: User;
@@ -84,6 +85,7 @@ describe('requesting a user', () => {
     const id = user.id;
     const response = await request(app).get(`${API}/users/${id}`);
     expect(response.status).toBe(200);
+    expect(response.body).not.toHaveProperty('password');
   });
 });
 
@@ -91,11 +93,35 @@ describe('creating a user', () => {
   it('returns http code 200 and creates the user', async () => {
     const userFields = await factory(User)().create();
 
+    const userRepo = getRepository<User>(User);
+    userRepo.clear();
+
+    expect(await userRepo.count()).toBe(0);
+
     const response = await request(app).post(`${API}/users`).send(userFields);
     expect(response.status).toBe(200);
 
+    expect(await userRepo.count()).toBe(1);
+  });
+
+  it('returns http code 400 if user email already exists', async () => {
+    const userFields = await factory(User)().create();
+
     const userRepo = getRepository<User>(User);
-    expect(await userRepo.count()).toBeGreaterThan(0);
+    userRepo.clear();
+
+    const validResponse = await request(app)
+      .post(`${API}/users`)
+      .send(userFields);
+    expect(validResponse.status).toBe(200);
+
+    const failingResponse = await request(app)
+      .post(`${API}/users`)
+      .send(userFields);
+    expect(failingResponse.status).toBe(400);
+    expect(failingResponse.body?.errMessage).toMatch(REGEX.DB_INDEX_ERROR);
+
+    expect(await userRepo.count()).toBe(1);
   });
 });
 
