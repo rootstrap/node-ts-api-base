@@ -1,6 +1,7 @@
 export interface ISendGridOptions {
   auth: AuthSendGrid;
 }
+
 export interface IEmail {
   from: string;
   to: string;
@@ -9,6 +10,7 @@ export interface IEmail {
   text?: string;
   context?: any;
 }
+
 export interface AuthSendGrid {
   api_user?: string;
   api_key: string;

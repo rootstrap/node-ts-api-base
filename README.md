@@ -120,7 +120,13 @@ This is the suggested scaffolding for this project. You can take a look at:
 │   │   └── ...
 │   ├── entities
 │   │   └── ...
+│   ├── interfaces
+│   │   └── ...
 │   ├── services
+│   │   └── ...
+│   ├── utils
+│   │   └── ...
+│   ├── views
 │   │   └── ...
 │   ├── app.ts            (App root and is where the application will be configured.)
 │   ├── server.ts         (HTTP server)
@@ -145,7 +151,7 @@ This is the suggested scaffolding for this project. You can take a look at:
 - [tsconfig-paths](https://github.com/dividab/tsconfig-paths#readme) - Utility to register relative paths set at tsconfig file
 - [express-rate-limit](https://github.com/nfriedly/express-rate-limit) - Basic rate-limiting middleware used to limit repeated requests to public APIs
 - [morgan](https://github.com/expressjs/morgan) - HTTP request logger middleware for node.js
-
+- [nodemailer](github.com/nodemailer/nodemailer) - Module for Node.js to allow the easy email sending. 
 
 ## Code Quality
 
