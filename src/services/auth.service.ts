@@ -1,9 +1,19 @@
 import { Action } from 'routing-controllers';
-import { JWTService } from '@services/jwt.service';
-import { Container } from 'typedi';
+import Container from 'typedi';
+import { JWTService } from './jwt.service';
 
-export class AuthMiddleware {
-  static async checker(action: Action): Promise<boolean> {
+export class AuthorizationService {
+  private static instance: AuthorizationService;
+
+  public static getInstance(): AuthorizationService {
+    if (!this.instance) {
+      this.instance = new AuthorizationService();
+    }
+
+    return this.instance;
+  }
+
+  async authorizationChecker(action: Action, _roles: string[]): Promise<boolean> {
     const jwt = Container.get(JWTService);
     let token = action.request.headers['authorization'];
     if (!token) {
