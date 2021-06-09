@@ -4,7 +4,7 @@ import * as hbs from 'nodemailer-express-handlebars';
 import aws from 'aws-sdk';
 import { Service } from 'typedi';
 import { EmailInterface } from '@interfaces';
-import { transpoterMapper } from '@utils/email/emailPlatformMap';
+import { transporterMapper } from '@utils/email/emailPlatformMap';
 import { SENDGRID_API_KEY, SENDGRID_API_USER } from '@config';
 import { SESService } from '@services/ses.service';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
@@ -53,7 +53,7 @@ export class EmailService {
   static async sendEmail(email: EmailInterface.IEmail, emailPlatform: string) {
     try {
       const transporter: Transporter<SentMessageInfo> =
-        transpoterMapper[emailPlatform];
+        transporterMapper[emailPlatform];
       transporter.use('compile', hbs(this.getHbsOptions));
       const emailSent = await transporter.sendMail(email);
       return emailSent;

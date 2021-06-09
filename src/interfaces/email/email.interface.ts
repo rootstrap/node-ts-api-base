@@ -1,3 +1,6 @@
+import { EmailPlatformConstants } from '@constants/email';
+import { Transporter, SentMessageInfo } from 'nodemailer';
+
 export interface ISendGridOptions {
   auth: AuthSendGrid;
 }
@@ -26,4 +29,8 @@ type HandlebarsViewEngine = {
   layoutsDir: string;
   partialsDir?: string;
   defaultLayout: string;
+};
+
+export type TransporterMapper = {
+  [k in EmailPlatformConstants.EmailPlatforms]: () => Transporter<SentMessageInfo>;
 };

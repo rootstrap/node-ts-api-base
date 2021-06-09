@@ -1,10 +1,7 @@
-import { EmailPlatformConstants } from '@constants/email';
 import { EmailService } from '@services/email.service';
-import { Transporter, SentMessageInfo } from 'nodemailer';
+import { EmailInterface } from '@interfaces';
 
-export const transpoterMapper: {
-  [k in EmailPlatformConstants.EmailPlatforms]: () => Transporter<SentMessageInfo>;
-} = {
+export const transporterMapper: EmailInterface.TransporterMapper = {
   SENDGRID: EmailService.buildSendGridTransport,
   SES: EmailService.buildSesTransport
 };
