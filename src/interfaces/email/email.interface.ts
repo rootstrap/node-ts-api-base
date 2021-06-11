@@ -2,7 +2,7 @@ import { EmailPlatformConstants } from '@constants/email';
 import { Transporter, SentMessageInfo } from 'nodemailer';
 
 export interface ISendGridOptions {
-  auth: AuthSendGrid;
+  auth: IAuthSendGrid;
 }
 
 export interface IEmail {
@@ -14,7 +14,7 @@ export interface IEmail {
   context?: any;
 }
 
-export interface AuthSendGrid {
+export interface IAuthSendGrid {
   api_user?: string;
   api_key: string;
 }

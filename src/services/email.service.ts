@@ -15,7 +15,7 @@ import { Errors } from '@constants/errorMessages';
 @Service()
 export class EmailService {
   private static getSendGridOptions(
-    sgCredentials: EmailInterface.AuthSendGrid
+    sgCredentials: EmailInterface.IAuthSendGrid
   ): EmailInterface.ISendGridOptions {
     return {
       auth: sgCredentials
