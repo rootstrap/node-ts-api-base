@@ -1,6 +1,6 @@
 import Container from 'typedi';
 import { JWTService } from './jwt.service';
-import { AuthInterface } from '@interfaces';
+import { Action } from 'routing-controllers';
 
 export class AuthorizationService {
   private static instance: AuthorizationService;
@@ -14,9 +14,9 @@ export class AuthorizationService {
   }
 
   async authorizationChecker(
-    input: AuthInterface.IAuthorizationCheckerInput
+    action: Action,
+    _roles: string[]
   ): Promise<boolean> {
-    const { action } = input;
     const jwt = Container.get(JWTService);
     let token = action.request.headers['authorization'];
     if (!token) {
