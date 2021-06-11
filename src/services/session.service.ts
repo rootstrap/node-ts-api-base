@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 import { User } from '@entities/user.entity';
 import { UsersService } from '@services/users.service';
 import { Errors } from '@constants/errorMessages';
+import { AuthInterface } from '@interfaces';
 
 @Service()
 export class SessionService {
@@ -22,8 +23,9 @@ export class SessionService {
     return newUser;
   }
 
-  async signIn(email: string, password: string) {
-    if (!this.userService.givenCredentials(email, password)) {
+  async signIn(input: AuthInterface.ISignInInput) {
+    const { email, password } = input;
+    if (!this.userService.givenCredentials({ email, password })) {
       throw new Error(Errors.MISSING_PARAMS);
     }
 
@@ -34,7 +36,12 @@ export class SessionService {
       throw new Error(Errors.INVALID_CREDENTIALS);
     }
 
-    if (!this.userService.comparePassword(password, user.password)) {
+    if (
+      !this.userService.comparePassword({
+        password,
+        userPassword: user.password
+      })
+    ) {
       throw new Error(Errors.INVALID_CREDENTIALS);
     }
 
