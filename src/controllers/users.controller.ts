@@ -8,11 +8,7 @@ import {
   Delete,
   Authorized
 } from 'routing-controllers';
-import {
-  InsertResult,
-  UpdateResult,
-  DeleteResult
-} from 'typeorm';
+import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
 import { UsersService } from '@services/users.service';
@@ -39,8 +35,11 @@ export class UserController {
   }
 
   @Put('/:id')
-  async put(@Param('id') id: number, @Body() user: User): Promise<UpdateResult> {
-    return this.usersService.editUser(id, user);
+  async put(
+    @Param('id') id: number,
+    @Body() user: User
+  ): Promise<UpdateResult> {
+    return this.usersService.editUser({ id, user });
   }
 
   @Delete('/:id')

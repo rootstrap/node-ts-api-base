@@ -18,26 +18,35 @@ describe('given credentials', () => {
   });
 
   it('checks that email and password are correct', () => {
-    const result = usersService.givenCredentials(email, password);
+    const result = usersService.givenCredentials({ email, password });
     expect(result).toBeTruthy();
   });
 
   it('checks that password is empty', () => {
     const emptyPassword = '';
-    const result = usersService.givenCredentials(email, emptyPassword);
+    const result = usersService.givenCredentials({
+      email,
+      password: emptyPassword
+    });
     expect(result).toBeFalsy();
   });
 
   it('checks that email is empty', () => {
     const emptyEmail = '';
-    const result = usersService.givenCredentials(emptyEmail, password);
+    const result = usersService.givenCredentials({
+      email: emptyEmail,
+      password
+    });
     expect(result).toBeFalsy();
   });
 
   it('checks that email and password are empty', () => {
     const emptyEmail = '';
     const emptyPassword = '';
-    const result = usersService.givenCredentials(emptyEmail, emptyPassword);
+    const result = usersService.givenCredentials({
+      email: emptyEmail,
+      password: emptyPassword
+    });
     expect(result).toBeFalsy();
   });
 });
@@ -51,13 +60,16 @@ describe('compare password', () => {
 
   it('checks that the password matches', () => {
     const hashedPassword = 'password';
-    const result = usersService.comparePassword(hashedPassword, userPassword);
+    const result = usersService.comparePassword({
+      password: hashedPassword,
+      userPassword
+    });
     expect(result).toBeTruthy();
   });
 
   it('checks that the password don\'t match', () => {
     const password = 'anotherpassword';
-    const result = usersService.comparePassword(password, userPassword);
+    const result = usersService.comparePassword({ password, userPassword });
     expect(result).toBeFalsy();
   });
 });

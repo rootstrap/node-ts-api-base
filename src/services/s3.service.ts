@@ -4,8 +4,8 @@ import { AWS_ID, AWS_SECRET, S3_BUCKETNAME } from '../config';
 import { Service } from 'typedi';
 
 aws.config.update({
-  accessKeyId: AWS_ID,
-  secretAccessKey: AWS_SECRET
+  accessKeyId: AWS_ID as string,
+  secretAccessKey: AWS_SECRET as string
 });
 
 type SendData = aws.S3.ManagedUpload.SendData;
