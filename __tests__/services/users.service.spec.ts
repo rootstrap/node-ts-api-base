@@ -67,7 +67,7 @@ describe('compare password', () => {
     expect(result).toBeTruthy();
   });
 
-  it('checks that the password dont match', () => {
+  it('checks that the password don\'t match', () => {
     const password = 'anotherpassword';
     const result = usersService.comparePassword({ password, userPassword });
     expect(result).toBeFalsy();
