@@ -7,6 +7,25 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Debug Tests",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": [
+        "test",
+        "--runInBand",
+        "--detectOpenHandles",
+        "--verbose",
+      ],
+      "port": 3000,
+      "cwd": "${workspaceRoot}",
+      "timeout": 10000,
+      "skipFiles": [
+        "<node_internals>/**",
+        "${workspaceFolder}/node_modules/**"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Run in Development",
       "runtimeExecutable": "yarn",
       "runtimeArgs": [
@@ -16,7 +35,8 @@
       "cwd": "${workspaceRoot}",
       "timeout": 10000,
       "skipFiles": [
-        "<node_internals>/**"
+        "<node_internals>/**",
+        "${workspaceFolder}/node_modules/**"
       ]
     },
     {
@@ -24,13 +44,13 @@
       "request": "launch",
       "name": "Launch Program",
       "runtimeArgs": [
-          "-r",
-          "ts-node/register",
-          "-r",
-          "tsconfig-paths/register"
+        "-r",
+        "ts-node/register",
+        "-r",
+        "tsconfig-paths/register"
       ],
       "args": [
-          "${workspaceFolder}/src/server.ts"
+        "${workspaceFolder}/src/server.ts"
       ]
     }
   ]

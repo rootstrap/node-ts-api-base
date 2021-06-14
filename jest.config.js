@@ -11,5 +11,9 @@ module.exports = {
     prefix: '<rootDir>/'
   }),
   testRegex: '/__tests__/.*.spec.(js|ts|tsx)?$',
-  testResultsProcessor: 'jest-sonar-reporter'
+  testResultsProcessor: 'jest-sonar-reporter',
+  coveragePathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/src/database/migrations/'
+  ]
 };

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import nodemailer, { SentMessageInfo, Transporter } from 'nodemailer';
 import * as sgTransport from 'nodemailer-sendgrid-transport';
 import * as hbs from 'nodemailer-express-handlebars';

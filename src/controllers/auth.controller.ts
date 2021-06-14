@@ -7,7 +7,7 @@ import {
   BadRequestError,
   Res
 } from 'routing-controllers';
-import * as _ from 'lodash';
+import omit from 'lodash/omit';
 import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
 import { SessionService } from '@services/session.service';
@@ -22,10 +22,12 @@ export class AuthController {
   async signUp(@Body({ validate: false }) user: User, @Res() response: any) {
     try {
       const newUser = await this.sessionService.signUp(user);
-      return response.send(_.omit(newUser, ['password']));
+      return response.send(omit(newUser, ['password']));
     } catch (error) {
       if (error?.message === Errors.MISSING_PARAMS) {
         throw new BadRequestError(Errors.MISSING_PARAMS);
+      } else {
+        throw new BadRequestError(error?.message);
       }
     }
   }

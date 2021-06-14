@@ -13,6 +13,7 @@ describe('creating an account', () => {
       .post(`${API}/auth/signup`)
       .send(userFields);
     expect(response.status).toBe(200);
+    expect(response.body).not.toHaveProperty('password');
   });
 
   it('returns http code 400 whith invalid params', async () => {

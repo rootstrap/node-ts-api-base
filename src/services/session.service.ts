@@ -1,8 +1,8 @@
+import { Errors } from '@constants/errorMessages';
 import { Service } from 'typedi';
-import { getRepository } from 'typeorm';
 import { User } from '@entities/user.entity';
 import { UsersService } from '@services/users.service';
-import { Errors } from '@constants/errorMessages';
+import { getRepository } from 'typeorm';
 import { AuthInterface } from '@interfaces';
 
 @Service()
@@ -15,9 +15,10 @@ export class SessionService {
     let newUser: User;
 
     try {
+      this.userService.hashUserPassword(user);
       newUser = await this.userRepository.save(user);
     } catch (error) {
-      throw new Error(Errors.MISSING_PARAMS);
+      throw new Error(error.detail ?? Errors.MISSING_PARAMS);
     }
 
     return newUser;
@@ -31,7 +32,10 @@ export class SessionService {
 
     let user: User;
     try {
-      user = await User.findOneOrFail({ where: { email } });
+      user = await User.createQueryBuilder('user')
+        .addSelect('user.password')
+        .where({ email })
+        .getOneOrFail();
     } catch (error) {
       throw new Error(Errors.INVALID_CREDENTIALS);
     }
@@ -46,7 +50,7 @@ export class SessionService {
     }
 
     const token = this.userService.generateToken(user);
-    user.password = this.userService.hashPassword(user.password);
+    this.userService.hashUserPassword(user);
     return token;
   }
 }
