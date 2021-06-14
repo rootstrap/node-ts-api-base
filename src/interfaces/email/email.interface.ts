@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { EmailPlatformConstants } from '@constants/email';
 import { Transporter, SentMessageInfo } from 'nodemailer';
 
