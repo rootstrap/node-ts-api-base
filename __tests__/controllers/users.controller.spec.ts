@@ -96,8 +96,6 @@ describe('creating a user', () => {
     const userRepo = getRepository<User>(User);
     userRepo.clear();
 
-    expect(await userRepo.count()).toBe(0);
-
     const response = await request(app).post(`${API}/users`).send(userFields);
     expect(response.status).toBe(200);
 

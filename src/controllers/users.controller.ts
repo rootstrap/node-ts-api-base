@@ -34,8 +34,7 @@ export class UserController {
   @Post()
   async post(@Body() user: User): Promise<InsertResult> {
     try {
-      const createdUser = await this.usersService.createUser(user);
-      return createdUser;
+      return this.usersService.createUser(user);
     } catch (error) {
       throw new BadRequestError(
         error?.detail ?? error?.message ?? Errors.UNKNOWN
