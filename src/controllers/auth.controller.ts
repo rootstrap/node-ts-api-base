@@ -23,7 +23,7 @@ export class AuthController {
     try {
       const newUser = await this.sessionService.signUp(user);
       return response.send(_.omit(newUser, ['password']));
-    } catch (error) {
+    } catch (error: any) {
       if (error?.message === Errors.MISSING_PARAMS) {
         throw new BadRequestError(Errors.MISSING_PARAMS);
       }
@@ -38,12 +38,13 @@ export class AuthController {
     try {
       const token = await this.sessionService.signIn({ email, password });
       return { token };
-    } catch (error) {
-      switch (error?.message) {
+    } catch (error: any) {
+      const errorMessage = error?.message;
+      switch (errorMessage) {
         case Errors.MISSING_PARAMS:
-          throw new BadRequestError(Errors.MISSING_PARAMS);
+          throw new BadRequestError(errorMessage);
         default:
-          throw new UnauthorizedError(Errors.INVALID_CREDENTIALS);
+          throw new UnauthorizedError(errorMessage);
       }
     }
   }

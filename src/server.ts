@@ -4,7 +4,7 @@ import AdminBro from 'admin-bro';
 import AdminBroExpress from '@admin-bro/express';
 import { Database, Resource } from '@admin-bro/typeorm';
 import { User } from '@entities/user.entity';
-import { PORT } from '@config';
+import { PORT, TYPEORM_PORT, REDIS_PORT } from '@config';
 import connection from '@database/connection';
 import app from '@app';
 
@@ -35,7 +35,11 @@ const handleConnection = async (connection: Connection) => {
 
   // run express application on given port
   app.listen(PORT, () => {
-    return console.log(`Server is listening on ${PORT}`);
+    return console.log(
+      `Server is listening on ${PORT}
+Postgres database is listening on port ${TYPEORM_PORT}
+Redis database is listening on port ${REDIS_PORT}`
+    );
   });
 };
 
