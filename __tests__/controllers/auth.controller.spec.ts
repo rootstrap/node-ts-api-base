@@ -44,8 +44,8 @@ describe('creating a session', () => {
 
   it('returns http code 200 whith valid params', async () => {
     const authFields = {
-      email: email,
-      password: password
+      email,
+      password
     };
     const response = await request(app)
       .post(`${API}/auth/signin`)

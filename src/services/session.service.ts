@@ -2,12 +2,16 @@ import { Service } from 'typedi';
 import { getRepository } from 'typeorm';
 import { User } from '@entities/user.entity';
 import { UsersService } from '@services/users.service';
+import { RedisService } from '@services/redis.service';
 import { Errors } from '@constants/errorMessages';
 import { AuthInterface } from '@interfaces';
 
 @Service()
 export class SessionService {
-  constructor(private readonly userService: UsersService) {}
+  constructor(
+    private readonly userService: UsersService,
+    private readonly redisService: RedisService
+  ) {}
 
   private readonly userRepository = getRepository<User>(User);
 
@@ -36,6 +40,7 @@ export class SessionService {
       throw new Error(Errors.INVALID_CREDENTIALS);
     }
 
+    user.password = this.userService.hashPassword(user.password);
     if (
       !this.userService.comparePassword({
         password,
@@ -46,7 +51,19 @@ export class SessionService {
     }
 
     const token = this.userService.generateToken(user);
-    user.password = this.userService.hashPassword(user.password);
     return token;
+  }
+
+  logOut(input: AuthInterface.ITokenToBlacklistInput): Promise<number> {
+    try {
+      const tokenAddedToBlacklist =
+        this.redisService.addTokenToBlacklist(input);
+      if (!tokenAddedToBlacklist) {
+        throw new Error(Errors.REDIS_ERROR_SET_TOKEN);
+      }
+      return tokenAddedToBlacklist;
+    } catch (error) {
+      throw new Error(Errors.REDIS_ERROR);
+    }
   }
 }

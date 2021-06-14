@@ -1,20 +1,31 @@
-import { REDIS_PASSWORD } from '@config';
-import { createClient, RedisClient } from 'redis';
+import { redisClient } from '@server';
+import { AuthInterface } from '@interfaces';
 import { Service } from 'typedi';
 
 @Service()
 export class RedisService {
-  static createRedisClient(): RedisClient {
-    const redisClient = createClient({
-      password: REDIS_PASSWORD as string
+  addTokenToBlacklist(
+    input: AuthInterface.ITokenToBlacklistInput
+  ): Promise<number> {
+    return new Promise((res, rej) => {
+      const { email, token } = input;
+      return redisClient.sadd(email, token, (err, result) => {
+        if (err) {
+          rej(err);
+        }
+        res(result);
+      });
     });
-    redisClient.on('connect', connectObj => {
-      console.info(`Connected to redis server: ${connectObj}`);
-    });
-    redisClient.on('error', error => {
-      console.error(`Redis error: ${error}`);
-    });
+  }
 
-    return redisClient;
+  isMemberOfSet(email: string, token: string): Promise<number> {
+    return new Promise((res, rej) => {
+      redisClient.sismember(email, token, (err, result) => {
+        if (err) {
+          rej(err);
+        }
+        res(result);
+      });
+    });
   }
 }

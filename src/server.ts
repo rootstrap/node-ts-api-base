@@ -7,6 +7,7 @@ import { User } from '@entities/user.entity';
 import { PORT, TYPEORM_PORT, REDIS_PORT } from '@config';
 import connection from '@database/connection';
 import app from '@app';
+import { createRedisClient } from '@utils/redis/client';
 
 const handleConnection = async (connection: Connection) => {
   // creates admin panel, register all resources and their options
@@ -42,5 +43,8 @@ Redis database is listening on port ${REDIS_PORT}`
     );
   });
 };
+
+// Start redis server
+export const redisClient = createRedisClient();
 
 connection.create(handleConnection);

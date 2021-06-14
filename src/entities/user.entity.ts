@@ -1,5 +1,10 @@
 import { Entity, Column, BeforeInsert } from 'typeorm';
-import { IsEmail, validateOrReject, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsEmail,
+  validateOrReject,
+  IsNotEmpty,
+  IsString
+} from 'class-validator';
 import { Base } from './base.entity';
 
 @Entity()
@@ -17,7 +22,7 @@ export class User extends Base {
   @IsString()
   lastName?: string;
 
-  @Column()
+  @Column({ unique: true })
   @IsEmail()
   email!: string;
 
