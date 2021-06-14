@@ -1,11 +1,11 @@
 import * as aws from 'aws-sdk';
 import { ReadStream } from 'fs';
-import { S3_ID, S3_SECRET, S3_BUCKETNAME } from '../config';
+import { AWS_ID, AWS_SECRET, S3_BUCKETNAME } from '../config';
 import { Service } from 'typedi';
 
 aws.config.update({
-  accessKeyId: S3_ID,
-  secretAccessKey: S3_SECRET
+  accessKeyId: AWS_ID as string,
+  secretAccessKey: AWS_SECRET as string
 });
 
 type SendData = aws.S3.ManagedUpload.SendData;

@@ -38,7 +38,7 @@ export class AuthController {
     @BodyParam('password') password: string
   ) {
     try {
-      const token = await this.sessionService.signIn(email, password);
+      const token = await this.sessionService.signIn({ email, password });
       return { token };
     } catch (error) {
       switch (error?.message) {

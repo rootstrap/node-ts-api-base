@@ -47,7 +47,7 @@ export class UserController {
     @Param('id') id: number,
     @Body() user: User
   ): Promise<UpdateResult> {
-    return this.usersService.editUser(id, user);
+    return this.usersService.editUser({ id, user });
   }
 
   @Delete('/:id')

@@ -15,11 +15,14 @@
       "@controllers": ["src/controllers"],
       "@database/*": ["src/database/*"],
       "@entities/*": ["src/entities/*"],
+      "@interfaces": ["src/interfaces/index"],
       "@middlewares": ["src/middlewares"],
       "@services/*": ["src/services/*"],
       "@constants/*": ["src/constants/*"],
+      "@utils/*": ["src/utils/*"],
       "@app": ["src/app"],
-      "@ormconfig": ["ormconfig"]
+      "@ormconfig": ["ormconfig"],
+      "@views": ["src/views"]
     },
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
