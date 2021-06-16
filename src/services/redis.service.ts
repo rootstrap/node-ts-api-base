@@ -19,6 +19,7 @@ export class RedisService {
   }
 
   isMemberOfSet(email: string, token: string): Promise<number> {
+    console.log(redisClient);
     return new Promise((res, rej) => {
       redisClient.sismember(email, token, (err, result) => {
         if (err) {

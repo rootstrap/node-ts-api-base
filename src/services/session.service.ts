@@ -56,14 +56,17 @@ export class SessionService {
 
   logOut(input: AuthInterface.ITokenToBlacklistInput): Promise<number> {
     try {
+      if (!input.email) {
+        throw new Error(Errors.MISSING_PARAMS);
+      }
       const tokenAddedToBlacklist =
         this.redisService.addTokenToBlacklist(input);
       if (!tokenAddedToBlacklist) {
         throw new Error(Errors.REDIS_ERROR_SET_TOKEN);
       }
       return tokenAddedToBlacklist;
-    } catch (error) {
-      throw new Error(Errors.REDIS_ERROR);
+    } catch (error: any) {
+      throw new Error(error.message);
     }
   }
 }

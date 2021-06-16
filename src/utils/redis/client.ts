@@ -1,9 +1,9 @@
-import { REDIS_PASSWORD } from '@config';
+import { REDIS_PASSWORD, REDIS_HOST } from '@config';
 import { createClient, RedisClient } from 'redis';
 
 export const createRedisClient = (): RedisClient => {
   const redisClient = createClient({
-    host: 'redis',
+    host: REDIS_HOST as string,
     password: REDIS_PASSWORD as string
   });
   redisClient.on('connect', () => {
