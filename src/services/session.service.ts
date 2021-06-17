@@ -40,7 +40,6 @@ export class SessionService {
       throw new Error(Errors.INVALID_CREDENTIALS);
     }
 
-    user.password = this.userService.hashPassword(user.password);
     if (
       !this.userService.comparePassword({
         password,
@@ -51,6 +50,7 @@ export class SessionService {
     }
 
     const token = this.userService.generateToken(user);
+    user.password = this.userService.hashPassword(user.password);
     return token;
   }
 
