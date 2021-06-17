@@ -1,11 +1,10 @@
 import request from 'supertest';
-import { getRepository } from 'typeorm';
 import { factory } from 'typeorm-seeding';
 import { Container } from 'typedi';
 import app from '@app';
 import { User } from '@entities/user.entity';
 import { JWTService } from '@services/jwt.service';
-import { API } from '../utils';
+import { API } from '../../utils';
 
 describe('requesting all users', () => {
   let user: User;
@@ -59,14 +58,6 @@ describe('requesting all users', () => {
     expect(response.body).toBeInstanceOf(Array);
     expect(response.body).not.toEqual([]);
   });
-});
-
-describe('requesting a user', () => {
-  let user;
-
-  beforeEach(async () => {
-    user = await factory(User)().create();
-  });
 
   it('returns http code 404 for non-existing user', async () => {
     const randomId = Math.round(user.id + (1 + Math.random() * 10));
@@ -84,55 +75,5 @@ describe('requesting a user', () => {
     const id = user.id;
     const response = await request(app).get(`${API}/users/${id}`);
     expect(response.status).toBe(200);
-  });
-});
-
-describe('creating a user', () => {
-  it('returns http code 200 and creates the user', async () => {
-    const userFields = await factory(User)().make();
-
-    const response = await request(app).post(`${API}/users`).send(userFields);
-    expect(response.status).toBe(200);
-
-    const userRepo = getRepository<User>(User);
-    expect(await userRepo.count()).toBeGreaterThan(0);
-  });
-});
-
-describe('updating a user', () => {
-  let user;
-
-  beforeEach(async () => {
-    user = await factory(User)().create();
-  });
-
-  it('returns http code 200 and updates the user', async () => {
-    const id = user.id;
-    user.firstName = 'new firstname';
-    user.lastName = 'new lastname';
-    const response = await request(app).put(`${API}/users/${id}`).send(user);
-    expect(response.status).toBe(200);
-
-    const updatedUser = await getRepository(User).findOne(id);
-    expect(updatedUser?.firstName).toEqual(user.firstName);
-    expect(updatedUser?.lastName).toEqual(user.lastName);
-  });
-});
-
-describe('deleting a user', () => {
-  let user;
-
-  beforeEach(async () => {
-    user = await factory(User)().create({ password: 'password123' });
-  });
-
-  it('returns http code 200 and deletes the user', async () => {
-    const id = user.id;
-    const userRepo = getRepository<User>(User);
-    const beforeCount = await userRepo.count();
-    const response = await request(app).delete(`${API}/users/${id}`);
-
-    expect(response.status).toBe(200);
-    expect(await userRepo.count()).toBeLessThan(beforeCount);
   });
 });
