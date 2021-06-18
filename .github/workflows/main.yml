@@ -18,6 +18,10 @@ jobs:
           POSTGRES_USER: postgres
         ports: 
           - "5432:5432"
+      redis:
+        image: redis:latest
+        ports: "6379:6379"
+        command: redis-server --requirepass redis
 
     steps:
       - uses: actions/checkout@v2
