@@ -21,7 +21,7 @@ jobs:
       redis:
         image: redis:latest
         ports: "6379:6379"
-        options: redis-server --requirepass redis
+        command: redis-server --requirepass redis
 
     steps:
       - uses: actions/checkout@v2
