@@ -4,6 +4,7 @@ import { factory } from 'typeorm-seeding';
 import { User } from '@entities/user.entity';
 import { API } from '../../utils';
 import { genSaltSync, hashSync } from 'bcrypt';
+
 describe('creating a session', () => {
   let email;
   let password;

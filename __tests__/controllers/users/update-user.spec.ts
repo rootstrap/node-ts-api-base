@@ -4,6 +4,7 @@ import { factory } from 'typeorm-seeding';
 import app from '@app';
 import { User } from '@entities/user.entity';
 import { API } from '../../utils';
+
 describe('updating a user', () => {
   let user;
 

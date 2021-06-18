@@ -7,7 +7,7 @@ import { genSaltSync, hashSync } from 'bcrypt';
 import Container from 'typedi';
 import { JWTService } from '@services/jwt.service';
 
-describe('creating a session', () => {
+describe('deleting a session', () => {
   let email;
   let password;
   let hashedPassword;
