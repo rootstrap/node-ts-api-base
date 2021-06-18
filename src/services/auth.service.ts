@@ -29,10 +29,10 @@ export class AuthorizationService {
       const {
         data: { email }
       } = payload;
-      const tokenIsBlacklisted: number = await redis.isMemberOfSet(
+      const tokenIsBlacklisted: number = await redis.isMemberOfSet({
         email,
         token
-      );
+      });
       if (!!tokenIsBlacklisted) {
         return false;
       }

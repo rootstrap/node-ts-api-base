@@ -56,7 +56,8 @@ export class SessionService {
 
   logOut(input: AuthInterface.ITokenToBlacklistInput): Promise<number> {
     try {
-      if (!input.email) {
+      const { email } = input;
+      if (!email) {
         throw new Error(Errors.MISSING_PARAMS);
       }
       const tokenAddedToBlacklist =

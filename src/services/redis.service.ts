@@ -18,8 +18,9 @@ export class RedisService {
     });
   }
 
-  isMemberOfSet(email: string, token: string): Promise<number> {
+  isMemberOfSet(input: AuthInterface.ITokenToBlacklistInput): Promise<number> {
     return new Promise((res, rej) => {
+      const { email, token } = input;
       redisClient.sismember(email, token, (err, result) => {
         if (err) {
           rej(err);
