@@ -6,12 +6,14 @@ import {
   Post,
   Put,
   Delete,
-  Authorized
+  Authorized,
+  BadRequestError
 } from 'routing-controllers';
 import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
 import { UsersService } from '@services/users.service';
+import { Errors } from '../constants/errorMessages';
 
 @JsonController('/users')
 @Service()
@@ -31,7 +33,13 @@ export class UserController {
 
   @Post()
   async post(@Body() user: User): Promise<InsertResult> {
-    return this.usersService.createUser(user);
+    try {
+      return await this.usersService.createUser(user);
+    } catch (error) {
+      throw new BadRequestError(
+        error?.detail ?? error?.message ?? Errors.UNKNOWN
+      );
+    }
   }
 
   @Put('/:id')

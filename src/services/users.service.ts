@@ -29,6 +29,10 @@ export class UsersService {
     return hashSync(password, genSaltSync());
   }
 
+  hashUserPassword(user: User): void {
+    user.password = this.hashPassword(user.password);
+  }
+
   listUsers() {
     return this.userRepository.find();
   }
@@ -38,6 +42,7 @@ export class UsersService {
   }
 
   createUser(user: User) {
+    this.hashUserPassword(user);
     return this.userRepository.insert(user);
   }
 

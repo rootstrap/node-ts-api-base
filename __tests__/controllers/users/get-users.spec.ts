@@ -75,5 +75,6 @@ describe('requesting all users', () => {
     const id = user.id;
     const response = await request(app).get(`${API}/users/${id}`);
     expect(response.status).toBe(200);
+    expect(response.body).not.toHaveProperty('password');
   });
 });
