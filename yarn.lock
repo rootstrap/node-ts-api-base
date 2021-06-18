@@ -1700,10 +1700,10 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/jsonwebtoken@^8.5.1":
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.5.1.tgz#56958cb2d80f6d74352bd2e501a018e2506a8a84"
-  integrity sha512-rNAPdomlIUX0i0cg2+I+Q1wOUr531zHBQ+cV/28PJ39bSPKjahatZZ2LMuhiguETkCgLVzfruw/ZvNMNkKoSzw==
+"@types/jsonwebtoken@^8.5.2":
+  version "8.5.2"
+  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.5.2.tgz#eb71c717b3b8681bb85fbd2950c9c4c5d4506748"
+  integrity sha512-X8BOCkp+WJVNYCYIBugREtVZa4Y09Or9HDx6xqRZem5F8jJV8FuJgNessXyMuv9+U8pjnvdezASwU28uw+1scw==
   dependencies:
     "@types/node" "*"
 
@@ -1724,17 +1724,17 @@
   dependencies:
     "@types/node" "*"
 
-"@types/multer@^1.4.5":
-  version "1.4.5"
-  resolved "https://registry.yarnpkg.com/@types/multer/-/multer-1.4.5.tgz#db0557562307e9adb6661a9500c334cd7ddd0cd9"
-  integrity sha512-9b/0a8JyrR0r2nQhL73JR86obWL7cogfX12augvlrvcpciCo/hkvEsgu80Z4S2g2DHGVXHr8pUIi1VhqFJ8Ufw==
+"@types/multer@^1.4.6":
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/@types/multer/-/multer-1.4.6.tgz#411950b7a99ba0de6ee8f6e3713f4628980cdc73"
+  integrity sha512-F4EZ+KRrzdiSm3jSFj1GVUlw3zWXus5nXYBbrQW/0MGIUv9YHw1dM0cJOxq++v2+Gl4IBdSDvQ3YCORLdyCU+Q==
   dependencies:
     "@types/express" "*"
 
-"@types/node@*", "@types/node@^15.12.2":
-  version "15.12.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.2.tgz#1f2b42c4be7156ff4a6f914b2fb03d05fa84e38d"
-  integrity sha512-zjQ69G564OCIWIOHSXyQEEDpdpGl+G348RAKY0XXy9Z5kU9Vzv1GMNnkar/ZJ8dzXB3COzD9Mo9NtRZ4xfgUww==
+"@types/node@*", "@types/node@^15.12.3":
+  version "15.12.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.3.tgz#2817bf5f25bc82f56579018c53f7d41b1830b1af"
+  integrity sha512-SNt65CPCXvGNDZ3bvk1TQ0Qxoe3y1RKH88+wZ2Uf05dduBCqqFQ76ADP9pbT+Cpvj60SkRppMCh2Zo8tDixqjQ==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -2239,10 +2239,10 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-aws-sdk@^2.930.0:
-  version "2.930.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.930.0.tgz#f98871a790ffdbfae5439e50db99f6d4635afe19"
-  integrity sha512-g8fPOy7Skh2Pqpz2SaDI+M9re2rjTWBQUirAMgtUD/6I/Lf6CR1Q0amsjtQU8WqRQH06kNGwuLtc8Tt6wAux3Q==
+aws-sdk@^2.931.0:
+  version "2.931.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.931.0.tgz#7fdc886fa7697095203fe7de16bc948a8b1c8daa"
+  integrity sha512-Db97/aJq8zYl8mHzY6dNO6m9S89TqN4HEUUc2aCYQCTyMb/eNrjf+uZTnutnQbJkClqHzxFcWc3aqe5VlTac/A==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -6416,10 +6416,10 @@ nodemailer-sendgrid-transport@^0.2.0:
   dependencies:
     sendgrid "^1.8.0"
 
-nodemailer@^6.6.1:
-  version "6.6.1"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.6.1.tgz#2a05fbf205b897d71bf43884167b5d4d3bd01b99"
-  integrity sha512-1xzFN3gqv+/qJ6YRyxBxfTYstLNt0FCtZaFRvf4Sg9wxNGWbwFmGXVpfSi6ThGK6aRxAo+KjHtYSW8NvCsNSAg==
+nodemailer@^6.6.2:
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.6.2.tgz#e184c9ed5bee245a3e0bcabc7255866385757114"
+  integrity sha512-YSzu7TLbI+bsjCis/TZlAXBoM4y93HhlIgo0P5oiA2ua9Z4k+E2Fod//ybIzdJxOlXGRcHIh/WaeCBehvxZb/Q==
 
 nodemon@^2.0.7:
   version "2.0.7"
@@ -8750,10 +8750,10 @@ typeorm@^0.2.34:
     yargs "^16.2.0"
     zen-observable-ts "^1.0.0"
 
-typescript@^4.3.3:
-  version "4.3.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.3.tgz#5401db69bd3203daf1851a1a74d199cb3112c11a"
-  integrity sha512-rUvLW0WtF7PF2b9yenwWUi9Da9euvDRhmH7BLyBG4DCFfOJ850LGNknmRpp8Z8kXNUPObdZQEfKOiHtXuQHHKA==
+typescript@^4.3.4:
+  version "4.3.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.4.tgz#3f85b986945bcf31071decdd96cf8bfa65f9dcbc"
+  integrity sha512-uauPG7XZn9F/mo+7MrsRjyvbxFpzemRjKEZXS4AK83oP2KKOJPvb+9cO/gmnv8arWZvhnjVOXz7B49m1l0e9Ew==
 
 uglify-js@^3.1.4:
   version "3.13.9"
