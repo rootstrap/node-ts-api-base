@@ -20,10 +20,9 @@ jobs:
           - "5432:5432"
       redis:
         image: redis:latest
-        env:
-          REDIS_PASSWORD: redis
-        ports: 
-          - "6379:6379"
+        ports:
+        - 6379:6379
+        options: --entrypoint redis-server --requirepass redis
 
     steps:
       - uses: actions/checkout@v2
