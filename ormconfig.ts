@@ -22,9 +22,7 @@ const config: ConnectionOptions = {
   synchronize: TYPEORM_SYNCHRONIZE === 'true',
   logging: TYPEORM_LOGGING === 'true',
   entities: [
-    PRODUCTION_ENV
-      ? 'dist/src/entities/**/*.js'
-      : 'src/entities/**/*.ts'
+    PRODUCTION_ENV ? 'dist/src/entities/**/*.js' : 'src/entities/**/*.ts'
   ],
   migrations: [
     PRODUCTION_ENV
@@ -33,12 +31,10 @@ const config: ConnectionOptions = {
   ],
   migrationsRun: TYPEORM_MIGRATIONS_RUN === 'true',
   cli: {
-    migrationsDir:
-      PRODUCTION_ENV
-        ? 'dist/src/database/migrations'
-        : 'src/database/migrations',
-    entitiesDir:
-      PRODUCTION_ENV ? 'dist/src/entities' : 'src/entities'
+    migrationsDir: PRODUCTION_ENV
+      ? 'dist/src/database/migrations'
+      : 'src/database/migrations',
+    entitiesDir: PRODUCTION_ENV ? 'dist/src/entities' : 'src/entities'
   }
 };
 
