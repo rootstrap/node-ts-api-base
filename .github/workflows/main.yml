@@ -22,8 +22,6 @@ jobs:
         image: redis:latest
         ports: 
           - "6379:6379"
-        options: --entrypoint redis-server --requirepass redis
-
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
