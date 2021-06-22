@@ -13,7 +13,7 @@
     "posttypeorm": "prettier -w src/database/migrations",
     "test": "ENV=test jest --runInBand --useStderr",
     "test:cover": "yarn test --coverage",
-    "test:ci": "ENV=ci jest --coverage",
+    "test:ci": "ENV=ci jest --coverage --runInBand",
     "db:setup": "yarn typeorm schema:sync && yarn seed:run",
     "db:reset": "yarn typeorm schema:drop && yarn db:setup",
     "lint": "eslint \"src/**\" --color",

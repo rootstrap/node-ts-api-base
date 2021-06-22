@@ -1,18 +1,15 @@
 import connection from '@database/connection';
 import { useSeeding } from 'typeorm-seeding';
 
-beforeAll(async done => {
+beforeAll(async () => {
   await connection.create();
   await useSeeding();
-  done();
 });
 
-afterAll(async done => {
+afterAll(async () => {
   await connection.close();
-  done();
 });
 
-beforeEach(async done => {
+beforeEach(async () => {
   await connection.clear();
-  done();
 });
