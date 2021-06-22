@@ -6,7 +6,7 @@ import { User } from '@entities/user.entity';
 import { JWTService } from '@services/jwt.service';
 import { API } from '../../utils';
 
-describe('requesting all users', () => {
+describe.skip('requesting all users', () => {
   let user: User;
   let token: string;
   const jwtService = Container.get(JWTService);
