@@ -46,9 +46,7 @@ jobs:
       - name: Lint
         run: yarn lint
       - name: Run tests
-        run: |
-          echo TYPEORM_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} >> .env.ci
-          yarn test:ci
+        run: yarn test:ci
       # Before running the scan, typescript must be installed from npm and
       # NODE_PATH env var must point to tsc bin folder, otherways typescript static analysis will fail
       - name: Setup sonar scanner
