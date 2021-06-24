@@ -42,7 +42,7 @@ jobs:
       - name: Setup Databases
         run: |
           echo TYPEORM_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} >> .env.ci
-          ENV=ci yarn db:setup
+          yarn db:setup:ci
       - name: Lint
         run: yarn lint
       - name: Run tests
