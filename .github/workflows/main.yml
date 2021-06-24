@@ -39,6 +39,8 @@ jobs:
           node-version: '${{ steps.nvm.outputs.NVMRC }}'
       - name: Install dependencies
         run: yarn --frozen-lockfile
+      - name: Setup Databases
+        run: ENV=ci yarn db:setup
       - name: Lint
         run: yarn lint
       - name: Run tests
