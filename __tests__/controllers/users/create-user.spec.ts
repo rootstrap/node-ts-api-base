@@ -16,6 +16,7 @@ describe('creating a user', () => {
     const userRepo = getRepository<User>(User);
     expect(await userRepo.count()).toBeGreaterThan(0);
   });
+  
   it('returns http code 400 if user email already exists', async () => {
     const userFields = await factory(User)().create();
 

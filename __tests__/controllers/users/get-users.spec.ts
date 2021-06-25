@@ -47,7 +47,7 @@ describe('requesting all users', () => {
     expect(response.status).toBe(200);
   });
 
-  it('returns the user\'s list', async () => {
+  it("returns the user's list", async () => {
     const response = await request(app)
       .get(`${API}/users`)
       .set({ Authorization: token });

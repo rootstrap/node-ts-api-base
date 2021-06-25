@@ -27,7 +27,6 @@ describe('creating a session', () => {
       .send(authFields);
     expect(response.status).toBe(200);
   });
-
   it('returns http code 401 whith invalid params', async () => {
     const authFields = {
       email: 'r4nD0m@3M4Il.com',

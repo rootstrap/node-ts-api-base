@@ -27,5 +27,3 @@ describe('creating an account', () => {
     );
   });
 });
-
-
