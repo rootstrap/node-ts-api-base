@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { User } from '@entities/user.entity';
-import { JWT_SECRET, ACCESS_TOKEN_LIFE } from '@config';
+import { JWT_SECRET, ACCESS_TOKEN_LIFE, JWT_SECRET_DEFAULT } from '@config';
 import { Service } from 'typedi';
 import { AuthInterface } from '@interfaces';
 
@@ -11,7 +11,7 @@ export class JWTService {
       try {
         const token = jwt.sign(
           { data: { userId: user.id, email: user.email } },
-          JWT_SECRET || '',
+          JWT_SECRET || JWT_SECRET_DEFAULT,
           { expiresIn: ACCESS_TOKEN_LIFE || '6h' }
         );
         resolve(token);
@@ -39,7 +39,7 @@ export class JWTService {
       try {
         const decoded = jwt.verify(
           token,
-          JWT_SECRET || ''
+          JWT_SECRET || JWT_SECRET_DEFAULT
         ) as AuthInterface.ITokenPayload;
         resolve(decoded);
       } catch (error) {
