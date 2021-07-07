@@ -30,10 +30,10 @@ export class AuthController {
       const newUser = await this.sessionService.signUp(user);
       return response.send(omit(newUser, ['password']));
     } catch (error: any) {
-      if (error?.message === Errors.MISSING_PARAMS) {
+      if (error.message === Errors.MISSING_PARAMS) {
         throw new BadRequestError(Errors.MISSING_PARAMS);
       } else {
-        throw new BadRequestError(error?.message);
+        throw new BadRequestError(error.message);
       }
     }
   }
@@ -47,7 +47,7 @@ export class AuthController {
       const token = await this.sessionService.signIn({ email, password });
       return { token };
     } catch (error: any) {
-      const errorMessage = error?.message;
+      const errorMessage = error.message;
       switch (errorMessage) {
         case Errors.MISSING_PARAMS:
           throw new BadRequestError(errorMessage);
@@ -70,7 +70,7 @@ export class AuthController {
         logout: !!tokenAddToBlacklist
       };
     } catch (error: any) {
-      throw new BadRequestError(error?.message);
+      throw new BadRequestError(error.message);
     }
   }
 }
