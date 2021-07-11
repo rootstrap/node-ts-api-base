@@ -11,7 +11,7 @@ import { SESService } from '@services/ses.service';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 import SESTransport from 'nodemailer/lib/ses-transport';
 import { HandlebarsConstants } from '@constants/email';
-import { Errors } from '@constants/errorMessages';
+import { ErrorsMessages } from '@constants/errorMessages';
 
 @Service()
 export class EmailService {
@@ -59,7 +59,7 @@ export class EmailService {
       const emailSent = await transporter.sendMail(email);
       return emailSent;
     } catch (error) {
-      throw new Error(`${Errors.EMAIL_NOT_SENT}: ${error}`);
+      throw new Error(`${ErrorsMessages.EMAIL_NOT_SENT}: ${error}`);
     }
   }
 }

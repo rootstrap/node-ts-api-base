@@ -1,9 +1,9 @@
+import { ErrorsMessages } from '@constants/errorMessages';
 import { Service } from 'typedi';
 import { getRepository } from 'typeorm';
 import { User } from '@entities/user.entity';
 import { UsersService } from '@services/users.service';
 import { RedisService } from '@services/redis.service';
-import { Errors } from '@constants/errorMessages';
 import { AuthInterface } from '@interfaces';
 
 @Service()
@@ -21,8 +21,8 @@ export class SessionService {
     try {
       this.userService.hashUserPassword(user);
       newUser = await this.userRepository.save(user);
-    } catch (error: any) {
-      throw new Error(error.detail ?? Errors.MISSING_PARAMS);
+    } catch (error) {
+      throw new Error(error.detail ?? ErrorsMessages.MISSING_PARAMS);
     }
 
     return newUser;
@@ -31,7 +31,7 @@ export class SessionService {
   async signIn(input: AuthInterface.ISignInInput) {
     const { email, password } = input;
     if (!this.userService.givenCredentials({ email, password })) {
-      throw new Error(Errors.MISSING_PARAMS);
+      throw new Error(ErrorsMessages.MISSING_PARAMS);
     }
 
     let user: User;
@@ -41,7 +41,7 @@ export class SessionService {
         .where({ email })
         .getOneOrFail();
     } catch (error) {
-      throw new Error(Errors.INVALID_CREDENTIALS);
+      throw new Error(ErrorsMessages.INVALID_CREDENTIALS);
     }
 
     if (
@@ -50,7 +50,7 @@ export class SessionService {
         userPassword: user.password
       })
     ) {
-      throw new Error(Errors.INVALID_CREDENTIALS);
+      throw new Error(ErrorsMessages.INVALID_CREDENTIALS);
     }
 
     const token = this.userService.generateToken(user);
@@ -62,12 +62,12 @@ export class SessionService {
     try {
       const { email } = input;
       if (!email) {
-        throw new Error(Errors.MISSING_PARAMS);
+        throw new Error(ErrorsMessages.MISSING_PARAMS);
       }
       const tokenAddedToBlacklist =
         this.redisService.addTokenToBlacklist(input);
       if (!tokenAddedToBlacklist) {
-        throw new Error(Errors.REDIS_ERROR_SET_TOKEN);
+        throw new Error(ErrorsMessages.REDIS_ERROR_SET_TOKEN);
       }
       return tokenAddedToBlacklist;
     } catch (error: any) {
