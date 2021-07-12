@@ -96,6 +96,9 @@ Add the following line before the command ` RUN yarn ` in the Dockerfile.
 RUN apk --no-cache add --virtual builds-deps build-base python
 ```
 
+## Debugging
+
+If you're using VSCode, you can run the API in debug mode by clicking on `Debug > Start Debugging` or with the shortcut `F5`. This will start the app in DEV mode and then you can add as many breakpoints as you need.
 
 
 ## API Documentation
