@@ -5,44 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch API",
       "type": "node",
+      "sourceMaps": true,
       "request": "launch",
-      "name": "Debug Tests",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": [
-        "test",
-        "--runInBand",
-        "--detectOpenHandles",
-        "--verbose",
-      ],
-      "port": 3000,
-      "cwd": "${workspaceRoot}",
-      "timeout": 10000,
-      "skipFiles": [
-        "<node_internals>/**",
-        "${workspaceFolder}/node_modules/**"
-      ]
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Run in Development",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": [
-        "dev"
-      ],
-      "port": 3000,
-      "cwd": "${workspaceRoot}",
-      "timeout": 10000,
-      "skipFiles": [
-        "<node_internals>/**",
-        "${workspaceFolder}/node_modules/**"
-      ]
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Program",
       "runtimeArgs": [
         "-r",
         "ts-node/register",
@@ -51,7 +17,17 @@
       ],
       "args": [
         "${workspaceFolder}/src/server.ts"
-      ]
+      ],
+      "cwd": "${workspaceFolder}",
+      "internalConsoleOptions": "openOnSessionStart",
+      "skipFiles": [
+        "<node_internals>/**",
+        "node_modules/**"
+      ],
+      "env": {
+        "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig.json",
+        "ENVIRONMENT": "dev"
+      }
     }
   ]
 }
