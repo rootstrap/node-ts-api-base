@@ -21,6 +21,7 @@
       "@constants/*": ["src/constants/*"],
       "@utils/*": ["src/utils/*"],
       "@app": ["src/app"],
+      "@server": ["src/server"],
       "@ormconfig": ["ormconfig"],
       "@views": ["src/views"]
     },

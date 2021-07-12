@@ -18,7 +18,10 @@ jobs:
           POSTGRES_USER: postgres
         ports: 
           - "5432:5432"
-
+      redis:
+        image: redis:latest
+        ports: 
+          - "6379:6379"
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -36,12 +39,14 @@ jobs:
           node-version: '${{ steps.nvm.outputs.NVMRC }}'
       - name: Install dependencies
         run: yarn --frozen-lockfile
+      - name: Setup Databases
+        run: |
+          echo TYPEORM_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} >> .env.ci
+          yarn db:setup:ci
       - name: Lint
         run: yarn lint
       - name: Run tests
-        run: |
-          echo TYPEORM_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} >> .env.ci
-          yarn test:ci
+        run: yarn test:ci
       # Before running the scan, typescript must be installed from npm and
       # NODE_PATH env var must point to tsc bin folder, otherways typescript static analysis will fail
       - name: Setup sonar scanner

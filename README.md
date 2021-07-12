@@ -10,7 +10,7 @@ This project includes the boilerplate for a basic rest-api made in Node.JS with 
 4. `cp .example.env .env.dev`
 5. `cp .example.env.test .env.test`
 6. Create your DB (i.e. psql for Postgres: `psql -U <user> -h <host> -c "create database <db name>;"`) with same name as your .env file.
-7. Run `ENV=[dev, test, prod] yarn migration:run`.
+7. Run `ENV=[dev, test, prod] yarn db:setup`.
 8. Start your server with `ENV=[dev, prod] yarn dev`.
 
 ## Some scripts

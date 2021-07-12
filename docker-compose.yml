@@ -8,6 +8,11 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+  redis:
+    image: redis:latest
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    ports:
+        - '${REDIS_PORT}:${REDIS_PORT}'
   node-api-base:
     build:
       context: ./
@@ -33,11 +38,13 @@ services:
     ports:
       - '${PORT}:${PORT}'
     restart: on-failure
-    container_name: node-api-base
+    container_name: node-ts-api-base
     depends_on:
       - postgres
+      - redis
     links:
       - postgres
+      - redis
     volumes:
       - "./src:/app/src"
       - /src/node_modules

@@ -1,6 +1,8 @@
 export enum Errors {
   MISSING_PARAMS = 'Missing params on body',
   INVALID_CREDENTIALS = 'Invalid credentials',
-  UNKNOWN = 'Unknown error',
-  EMAIL_NOT_SENT = 'Error at sending email'
+  EMAIL_NOT_SENT = 'Error at sending email',
+  REDIS_ERROR = 'Error in redis database',
+  REDIS_ERROR_SET_TOKEN = 'Error at set user token in blacklist',
+  UNKNOWN = 'Unknown error'
 }

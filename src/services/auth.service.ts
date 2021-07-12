@@ -1,5 +1,6 @@
 import Container from 'typedi';
-import { JWTService } from './jwt.service';
+import { JWTService } from '@services/jwt.service';
+import { RedisService } from '@services/redis.service';
 import { Action } from 'routing-controllers';
 
 export class AuthorizationService {
@@ -18,19 +19,28 @@ export class AuthorizationService {
     _roles: string[]
   ): Promise<boolean> {
     const jwt = Container.get(JWTService);
-    let token = action.request.headers['authorization'];
-    if (!token) {
-      return false;
-    }
-
-    if (token.startsWith('Bearer ')) {
-      // Remove Bearer from authentication scheme header
-      token = token.replace('Bearer ', '');
-    }
-
+    const redis = Container.get(RedisService);
     try {
+      let token = action.request.headers['authorization'];
+      if (!token) {
+        return false;
+      }
       const payload = await jwt.verifyJWT(token);
-      return payload !== null;
+      const {
+        data: { email }
+      } = payload;
+      const tokenIsBlacklisted: number = await redis.isMemberOfSet({
+        email,
+        token
+      });
+      if (!!tokenIsBlacklisted) {
+        return false;
+      }
+      if (token.startsWith('Bearer ')) {
+        // Remove Bearer from authentication scheme header
+        token = token.replace('Bearer ', '');
+      }
+      return true;
     } catch (error) {
       return false;
     }

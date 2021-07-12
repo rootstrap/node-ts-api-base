@@ -1,13 +1,17 @@
-import { Errors } from '@constants/errorMessages';
 import { Service } from 'typedi';
+import { getRepository } from 'typeorm';
 import { User } from '@entities/user.entity';
 import { UsersService } from '@services/users.service';
-import { getRepository } from 'typeorm';
+import { RedisService } from '@services/redis.service';
+import { Errors } from '@constants/errorMessages';
 import { AuthInterface } from '@interfaces';
 
 @Service()
 export class SessionService {
-  constructor(private readonly userService: UsersService) {}
+  constructor(
+    private readonly userService: UsersService,
+    private readonly redisService: RedisService
+  ) {}
 
   private readonly userRepository = getRepository<User>(User);
 
@@ -17,7 +21,7 @@ export class SessionService {
     try {
       this.userService.hashUserPassword(user);
       newUser = await this.userRepository.save(user);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error.detail ?? Errors.MISSING_PARAMS);
     }
 
@@ -52,5 +56,22 @@ export class SessionService {
     const token = this.userService.generateToken(user);
     this.userService.hashUserPassword(user);
     return token;
+  }
+
+  logOut(input: AuthInterface.ITokenToBlacklistInput): Promise<number> {
+    try {
+      const { email } = input;
+      if (!email) {
+        throw new Error(Errors.MISSING_PARAMS);
+      }
+      const tokenAddedToBlacklist =
+        this.redisService.addTokenToBlacklist(input);
+      if (!tokenAddedToBlacklist) {
+        throw new Error(Errors.REDIS_ERROR_SET_TOKEN);
+      }
+      return tokenAddedToBlacklist;
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
   }
 }

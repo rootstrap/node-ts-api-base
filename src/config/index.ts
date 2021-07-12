@@ -12,6 +12,7 @@ export const PRODUCTION_ENV = process.env.ENV === 'prod';
 export const DEV_ENV = process.env.ENV === 'dev';
 export const TESTING_ENV = process.env.ENV === 'test';
 export const CI_ENV = process.env.ENV === 'ci';
+export const JWT_SECRET_DEFAULT = 'some-secret-string-default';
 
 export const {
   ENV,
@@ -25,6 +26,9 @@ export const {
   TYPEORM_SYNCHRONIZE,
   TYPEORM_LOGGING,
   TYPEORM_MIGRATIONS_RUN,
+  REDIS_HOST,
+  REDIS_PORT,
+  REDIS_PASSWORD,
   JWT_SECRET,
   ACCESS_TOKEN_LIFE,
   RATE_LIMIT_WINDOW,
