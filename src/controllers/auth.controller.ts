@@ -3,17 +3,16 @@ import {
   Body,
   Post,
   BodyParam,
-  UnauthorizedError,
   BadRequestError,
   Req,
-  Res,
-  Authorized
+  Authorized,
+  Res
 } from 'routing-controllers';
 import omit from 'lodash/omit';
 import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
 import { SessionService } from '@services/session.service';
-import { Errors } from '@constants/errorMessages';
+import { Errors, ErrorsMessages } from '@constants/errorMessages';
 import { Request, Response } from 'express';
 
 @JsonController('/auth')
@@ -29,12 +28,8 @@ export class AuthController {
     try {
       const newUser = await this.sessionService.signUp(user);
       return response.send(omit(newUser, ['password']));
-    } catch (error: any) {
-      if (error.message === Errors.MISSING_PARAMS) {
-        throw new BadRequestError(Errors.MISSING_PARAMS);
-      } else {
-        throw new BadRequestError(error.message);
-      }
+    } catch (error) {
+      throw Errors[error.message] || Errors[ErrorsMessages.DEFAULT];
     }
   }
 
@@ -46,14 +41,8 @@ export class AuthController {
     try {
       const token = await this.sessionService.signIn({ email, password });
       return { token };
-    } catch (error: any) {
-      const errorMessage = error.message;
-      switch (errorMessage) {
-        case Errors.MISSING_PARAMS:
-          throw new BadRequestError(errorMessage);
-        default:
-          throw new UnauthorizedError(errorMessage);
-      }
+    } catch (error) {
+      throw Errors[error.message] || Errors[ErrorsMessages.DEFAULT];
     }
   }
 

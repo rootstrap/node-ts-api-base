@@ -13,7 +13,7 @@ import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
 import { UsersService } from '@services/users.service';
-import { Errors } from '../constants/errorMessages';
+import { ErrorsMessages } from '../constants/errorMessages';
 
 @JsonController('/users')
 @Service()
@@ -37,7 +37,7 @@ export class UserController {
       return await this.usersService.createUser(user);
     } catch (error: any) {
       throw new BadRequestError(
-        error.detail ?? error.message ?? Errors.UNKNOWN
+        error.detail ?? error.message ?? ErrorsMessages.DEFAULT
       );
     }
   }
