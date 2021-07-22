@@ -144,7 +144,6 @@ This is the suggested scaffolding for this project. You can take a look at:
 
 ## Dependencies
 
-- [AdminBro](https://adminbro.com/) - Admin panel middleware.
 - [routing-controllers](https://github.com/typestack/routing-controllers) - Create structured class-based controllers with decorators usage in Express.
 - [routing-controllers-openapi](https://www.npmjs.com/package/routing-controllers-openapi) - Runtime OpenAPI v3 schema generation for routing-controllers.
 - [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express) - Serves auto-generated swagger-ui API docs from express.
