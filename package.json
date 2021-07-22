@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "yarn && nodemon --watch 'src/**/*.ts' --exec 'ENV=dev ts-node -r tsconfig-paths/register' src/server.ts",
     "prebuild": "rm -rf /dist",
-    "build": "tsc && cp -R src/admin dist/src",
+    "build": "tsc",
     "start": "ENV=dev node -r tsconfig-paths/register -r ts-node/register ./dist/src/server.js",
     "prod": "ENV=prod node -r ./prod-paths.js ./dist/src/server.js",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
