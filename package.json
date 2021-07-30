@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "yarn && nodemon --watch 'src/**/*.ts' --exec 'ENV=dev ts-node -r tsconfig-paths/register' src/server.ts",
     "prebuild": "rm -rf /dist",
-    "build": "tsc && cp -R src/admin dist/src",
+    "build": "tsc",
     "start": "ENV=dev node -r tsconfig-paths/register -r ts-node/register ./dist/src/server.js",
     "prod": "ENV=prod node -r ./prod-paths.js ./dist/src/server.js",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
@@ -60,12 +60,8 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "@admin-bro/express": "^3.1.0",
-    "@admin-bro/typeorm": "^1.4.0",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
-    "admin-bro": "^3.4.0",
-    "admin-bro-expressjs": "^2.1.1",
     "aws-sdk": "^2.955.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",

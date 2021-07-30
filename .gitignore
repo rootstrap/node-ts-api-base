@@ -177,9 +177,6 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/yarn,visualstudiocode,node,macos,dotenv
 
-# admin bro automatically generated file
-.adminbro
-
 #sonar local files
 .scannerwork
 sonar-project.properties
@@ -187,4 +184,3 @@ test-report.xml
 
 # IDE
 .idea
-
