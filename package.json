@@ -62,7 +62,7 @@
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
-    "aws-sdk": "^2.955.0",
+    "aws-sdk": "^2.959.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "class-transformer": "^0.4.0",
