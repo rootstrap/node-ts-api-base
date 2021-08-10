@@ -20,4 +20,6 @@ Redis database is listening on port ${REDIS_PORT}`
 // Start redis server
 export const redisClient = createRedisClient();
 
+export const emailClient = createEmailClient();
+
 connection.create(handleConnection);
