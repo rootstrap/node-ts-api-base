@@ -13,6 +13,8 @@ export const DEV_ENV = process.env.ENV === 'dev';
 export const TESTING_ENV = process.env.ENV === 'test';
 export const CI_ENV = process.env.ENV === 'ci';
 export const JWT_SECRET_DEFAULT = 'some-secret-string-default';
+export const AWS_USE_SES = process.env.AWS_USE_SES === 'true';
+export const SENDGRID_USE = process.env.SENDGRID_USE === 'true';
 
 export const {
   ENV,

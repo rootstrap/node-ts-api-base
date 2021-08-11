@@ -1,38 +1,16 @@
+/* eslint-disable camelcase */
 import { SESService } from '@services/ses.service';
 import nodemailer, { SentMessageInfo, Transporter } from 'nodemailer';
-import { SENDGRID_API_KEY, SENDGRID_API_USER } from '@config';
+import { AWS_USE_SES, SENDGRID_API_KEY, SENDGRID_API_USER, SENDGRID_USE } from '@config';
 import * as sgTransport from 'nodemailer-sendgrid-transport';
 import aws from 'aws-sdk';
 import SESTransport from 'nodemailer/lib/ses-transport';
 import { EmailInterface } from '@interfaces';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
-import Mail from 'nodemailer/lib/mailer';
 
 export class EmailClient {
-  private useSES = process.env.AWS_USE_SES;
-  private useSGRID = process.env.SENDGRID_USE_SENDGRID;
-
-  transporter?: Transporter<SentMessageInfo>;
+  transporter: Transporter<SentMessageInfo>;
   private static instance: EmailClient;
-
-  constructor() {
-    if (this.useSES && this.useSGRID) {
-      throw new Error('Could not have more than one Email Provider enabled');
-    }
-
-    if (this.useSES) {
-      this.transporter = this.buildSesTransport();
-    } else if (this.useSGRID) {
-      this.transporter = this.buildSendGridTransport();
-    }
-
-    throw new Error('Client Provider missing, check your config');
-  }
-
-  public static sendMail = async (params: Mail.Options) => {
-    const emailClient = await EmailClient.getInstance();
-    await emailClient.transporter?.sendMail(params);
-  }
 
   public static getInstance(): EmailClient {
     if (!this.instance) {
@@ -42,7 +20,23 @@ export class EmailClient {
     return this.instance;
   }
 
-  // Create Aws-SES Transporter
+  constructor() {
+    if (AWS_USE_SES && SENDGRID_USE) {
+      throw new Error('Could not have more than one Email Provider enabled');
+    }
+
+    if (AWS_USE_SES) {
+      this.transporter = this.buildSesTransport();
+      return;
+    } else if (SENDGRID_USE) {
+      this.transporter = this.buildSendGridTransport();
+      return;
+    }
+
+    throw new Error('ClientProvider missing, please check your .env config file');
+  }
+
+  // Create AWS-SES Transporter
   private buildSesTransport(): Transporter<SESTransport.SentMessageInfo> {
     const ses = SESService.createSES();
     return nodemailer.createTransport({
@@ -50,11 +44,10 @@ export class EmailClient {
     });
   }
 
+  // Create SendGrid Transporter
   private buildSendGridTransport(): Transporter<SMTPTransport.SentMessageInfo> {
     const credentials = {
-      // eslint-disable-next-line camelcase
       api_user: SENDGRID_API_USER as string,
-      // eslint-disable-next-line camelcase
       api_key: SENDGRID_API_KEY as string
     };
 
@@ -65,3 +58,13 @@ export class EmailClient {
     return nodemailer.createTransport(sgTransport(sendGrigOptions));
   }
 }
+
+export const createEmailClient = (): EmailClient => {
+  try {
+    return EmailClient.getInstance();
+  } catch (error) {
+    console.error(`EmailClient error: ${error}`);
+    console.error('Please check your Email configuration.');
+    process.exit(1);
+  }
+};

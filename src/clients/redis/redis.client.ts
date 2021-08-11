@@ -8,6 +8,8 @@ export const createRedisClient = (): RedisClient => {
   });
   redisClient.on('error', error => {
     console.error(`Redis error: ${error}`);
+    console.error('Please check your Redis instance.');
+    process.exit(1);
   });
 
   return redisClient;

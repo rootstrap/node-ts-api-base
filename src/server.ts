@@ -2,7 +2,8 @@ import 'reflect-metadata'; // this shim is required
 import { PORT, TYPEORM_PORT, REDIS_PORT, TESTING_ENV, CI_ENV } from '@config';
 import connection from '@database/connection';
 import app from '@app';
-import { createRedisClient } from '@utils/redis/client';
+import { createRedisClient } from '@clients/redis/redis.client';
+import { createEmailClient } from '@clients/email/email.client';
 
 const handleConnection = async () => {
   // run express application on given port

@@ -4,11 +4,22 @@ import { Service } from 'typedi';
 import { EmailInterface } from '@interfaces';
 import { HandlebarsConstants } from '@constants/email';
 import { ErrorsMessages } from '@constants/errorMessages';
-import { EmailClient } from 'src/bootstrap/email.client';
+import { emailClient } from '@server';
 
 @Service()
 export class EmailService {
-  private transporter: Transporter<SentMessageInfo> | undefined;
+  private static transporter: Transporter<SentMessageInfo>;
+  private static instance: EmailService;
+
+
+  public static getInstance(): EmailService {
+    if (!this.instance) {
+      this.instance = new EmailService();
+      this.transporter = emailClient.transporter;
+    }
+
+    return this.instance;
+  }
 
   private static getHbsOptions(): EmailInterface.IHandlebarsOptions {
     const { HandlebarsConfig } = HandlebarsConstants;
@@ -24,9 +35,8 @@ export class EmailService {
 
   static async sendEmail(email: EmailInterface.IEmail) {
     try {
-      const emailClient = EmailClient.getInstance();
-      emailClient.transporter?.use('compile', hbs(this.getHbsOptions));
-      const emailSent = await emailClient.transporter?.sendMail(email);
+      this.transporter.use('compile', hbs(this.getHbsOptions));
+      const emailSent = await this.transporter.sendMail(email);
       return emailSent;
     } catch (error) {
       throw new Error(`${ErrorsMessages.EMAIL_NOT_SENT}: ${error}`);
