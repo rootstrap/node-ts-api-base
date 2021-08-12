@@ -16,6 +16,7 @@ module.exports = {
   testResultsProcessor: 'jest-sonar-reporter',
   coveragePathIgnorePatterns: [
     '<rootDir>/node_modules/',
-    '<rootDir>/src/database/migrations/'
+    '<rootDir>/src/database/migrations/',
+    '<rootDir>/__tests__/'
   ]
 };
