@@ -55,7 +55,7 @@ export class EmailClient {
       auth: credentials
     };
     const sendGrigOptions = sgTransport(sendGripOptions);
-    return nodemailer.createTransport(sgTransport(sendGrigOptions));
+    return nodemailer.createTransport(sendGrigOptions);
   }
 }
 

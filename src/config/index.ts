@@ -15,7 +15,7 @@ export const CI_ENV = process.env.ENV === 'ci';
 export const JWT_SECRET_DEFAULT = 'some-secret-string-default';
 
 export const USE_AWS_SES = () => process.env.USE_AWS_SES === 'true';
-export const USE_SENDGRID = () =>process.env.USE_SENDGRID === 'true';
+export const USE_SENDGRID = () => process.env.USE_SENDGRID === 'true';
 
 export const {
   ENV,
