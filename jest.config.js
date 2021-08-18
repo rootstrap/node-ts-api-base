@@ -17,6 +17,7 @@ module.exports = {
   coveragePathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/src/database/migrations/',
+    '<rootDir>/src/swagger.ts',
     '<rootDir>/__tests__/'
   ]
 };
