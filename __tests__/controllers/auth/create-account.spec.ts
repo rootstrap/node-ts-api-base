@@ -3,7 +3,7 @@ import app from '@app';
 import { factory } from 'typeorm-seeding';
 import { User } from '@entities/user.entity';
 import { API } from '../../utils';
-import { Errors, ErrorsMessages } from '@constants/errorMessages';
+import { ErrorsMessages } from '@constants/errorMessages';
 import { HttpStatusCode } from '@constants/httpStatusCode';
 
 describe('creating an account', () => {
@@ -34,7 +34,7 @@ describe('creating an account', () => {
         'Property firstName must be a string',
         'Property lastName must be a string',
         'Property email must be an email',
-        'Property Password is too short, the minimum length is 6 characters.'
+        ErrorsMessages.PASSWORD_ERROR
       ],
       httpCode: HttpStatusCode.BAD_REQUEST,
       name: 'Bad request error'
