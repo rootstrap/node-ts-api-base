@@ -1,6 +1,6 @@
 import * as aws from 'aws-sdk';
 import { ReadStream } from 'fs';
-import { AWS_ID, AWS_SECRET, S3_BUCKETNAME } from '../config';
+import { AWS_ID, AWS_SECRET, AWS_S3_BUCKETNAME } from '../config';
 import { Service } from 'typedi';
 
 aws.config.update({
@@ -11,7 +11,7 @@ aws.config.update({
 type SendData = aws.S3.ManagedUpload.SendData;
 const ManagedUpload = aws.S3.ManagedUpload;
 
-const bucket = S3_BUCKETNAME || '';
+const bucket = AWS_S3_BUCKETNAME || '';
 
 /**
  * Interacting with an S3 Bucket
