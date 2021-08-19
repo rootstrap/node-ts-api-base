@@ -15,7 +15,7 @@ import { User } from '@entities/user.entity';
 import { UsersService } from '@services/users.service';
 import { ErrorsMessages } from '../constants/errorMessages';
 import { SignUpDTO } from '@dto/signUpDTO';
-import { EntityMapper } from '@utils/mapper/entityMapper.service';
+import { EntityMapper } from '@clients/mapper/entityMapper.service';
 
 @JsonController('/users')
 @Service()

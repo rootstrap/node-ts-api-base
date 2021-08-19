@@ -11,7 +11,7 @@ import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
 import { SessionService } from '@services/session.service';
 import { Request } from 'express';
-import { EntityMapper } from '@utils/mapper/entityMapper.service';
+import { EntityMapper } from '@clients/mapper/entityMapper.service';
 import { BaseUserDTO } from '@dto/baseUserDTO';
 import { SignUpDTO } from '@dto/signUpDTO';
 import { LogoutDTO } from '@dto/logoutDTO';
