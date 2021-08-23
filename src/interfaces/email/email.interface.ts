@@ -7,9 +7,7 @@ export interface IEmail {
   from: string;
   to: string;
   subject: string;
-  template?: string;
   text?: string;
-  context?: any;
 }
 
 export interface IAuthSendGrid {

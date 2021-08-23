@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { SESService } from '@services/ses.service';
 import nodemailer, { SentMessageInfo, Transporter } from 'nodemailer';
-import { USE_AWS_SES, SENDGRID_API_KEY, SENDGRID_API_USER, USE_SENDGRID } from '@config';
+import { SENDGRID_API_KEY, SENDGRID_API_USER } from '@config';
 import * as sgTransport from 'nodemailer-sendgrid-transport';
 import aws from 'aws-sdk';
 import SESTransport from 'nodemailer/lib/ses-transport';
@@ -21,19 +21,16 @@ export class EmailClient {
   }
 
   constructor() {
-    if (USE_AWS_SES() && USE_SENDGRID()) {
-      throw new Error('Could not have more than one Email Provider enabled');
+    switch (process.env.EMAIL_TRANSPORTER) {
+      case 'AWS':
+        this.transporter = this.buildSesTransport();
+        break;
+      case 'SENDGRID':
+        this.transporter = this.buildSendGridTransport();
+        break;
+      default:
+        throw new Error('ClientProvider missing, please check your .env config file');
     }
-
-    if (USE_AWS_SES()) {
-      this.transporter = this.buildSesTransport();
-      return;
-    } else if (USE_SENDGRID()) {
-      this.transporter = this.buildSendGridTransport();
-      return;
-    }
-
-    throw new Error('ClientProvider missing, please check your .env config file');
   }
 
   // Create AWS-SES Transporter
