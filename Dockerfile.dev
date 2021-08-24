@@ -6,6 +6,8 @@ COPY tsconfig* ./
 COPY ormconfig* ./
 COPY src ./src
 COPY .env* ./
+# Uncomment the next line if your laptop has an M1 processor
+# RUN apk --no-cache add --virtual builds-deps build-base python
 RUN yarn
 EXPOSE 3000
 CMD [ "yarn", "dev" ]

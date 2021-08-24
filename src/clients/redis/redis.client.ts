@@ -7,7 +7,9 @@ export const createRedisClient = (): RedisClient => {
     password: REDIS_PASSWORD as string
   });
   redisClient.on('error', error => {
-    console.error(`Redis error: ${error}`);
+    console.error(`Redis error: ${error} \n
+      Please check your Redis instance.`);
+    process.exit(1);
   });
 
   return redisClient;

@@ -1,5 +1,4 @@
 import { config } from 'dotenv';
-
 config({ path: `.env.${process.env.ENV || 'dev'}` });
 
 // If .env wasn't provided then exit
@@ -36,8 +35,8 @@ export const {
   AWS_ID,
   AWS_SECRET,
   AWS_REGION,
-  S3_BUCKETNAME,
-  SES_API_VERSION,
+  AWS_S3_BUCKETNAME,
+  AWS_SES_API_VERSION,
   DOCS_ENABLED,
   SENDGRID_API_USER,
   SENDGRID_API_KEY

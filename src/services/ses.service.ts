@@ -1,6 +1,6 @@
 import * as aws from 'aws-sdk';
 import { Service } from 'typedi';
-import { AWS_ID, AWS_SECRET, SES_API_VERSION, AWS_REGION } from '../config';
+import { AWS_ID, AWS_SECRET, AWS_SES_API_VERSION, AWS_REGION } from '../config';
 
 aws.config.update({
   accessKeyId: AWS_ID as string,
@@ -11,7 +11,7 @@ aws.config.update({
 export class SESService {
   static createSES() {
     return new aws.SES({
-      apiVersion: SES_API_VERSION as string,
+      apiVersion: AWS_SES_API_VERSION as string,
       region: AWS_REGION as string
     });
   }
