@@ -60,7 +60,7 @@
     "prettier": "^2.3.2",
     "supertest": "^6.1.6",
     "ts-node": "^10.2.1",
-    "typescript": "^4.3.5"
+    "typescript": "^4.4.2"
   },
   "dependencies": {
     "aws-sdk": "^2.978.0",
