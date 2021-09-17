@@ -32,9 +32,6 @@ services:
       ACCESS_TOKEN_LIFE: "${ACCESS_TOKEN_LIFE}"
       RATE_LIMIT_WINDOW: "${RATE_LIMIT_WINDOW}"
       RATE_LIMIT_MAX_REQUESTS: "${RATE_LIMIT_MAX_REQUESTS}"
-      S3_ID: "${S3_ID}"
-      S3_SECRET: "${S3_SECRET}"
-      S3_BUCKETNAME: "${S3_BUCKETNAME}"
     ports:
       - '${PORT}:${PORT}'
     restart: on-failure

@@ -23,7 +23,7 @@ export class SessionService {
     try {
       this.userService.hashUserPassword(user);
       return await this.userRepository.save(user);
-    } catch (error) {
+    } catch (error: any) {
       throw new DatabaseError(error.message + ' ' + error.detail);
     }
   }
