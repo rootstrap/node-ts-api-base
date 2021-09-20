@@ -17,7 +17,8 @@ export enum ErrorsMessages {
   PASSWORD_ERROR = 'Property password must be longer than or equal to 6 characters',
   // HTTP STANDARD MESSAGES
   INTERNAL_SERVER_ERROR = 'Internal Server Error',
-  BAD_REQUEST_ERROR = 'Bad request error'
+  BAD_REQUEST_ERROR = 'Bad request error',
+  USER_ALREADY_EXISTS = 'A user with this email is already registered'
 }
 
 export const Errors = {
