@@ -34,6 +34,21 @@ describe('deleting a session', () => {
     expect(response.status).toBe(200);
   });
 
+  it('returns http code 200 when the token starts with Bearer word', async () => {
+    const authFields = {
+      email,
+      password
+    };
+
+    const tokenWithBearer = 'Bearer ' + token;
+
+    const response = await request(app)
+      .post(`${API}/auth/logout`)
+      .set({ Authorization: tokenWithBearer })
+      .send(authFields);
+    expect(response.status).toBe(200);
+  });
+
   it('returns http code 401 because the token was invalidated', async () => {
     const authFields = {
       email,
