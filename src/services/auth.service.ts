@@ -25,6 +25,10 @@ export class AuthorizationService {
       if (!token) {
         return false;
       }
+      if (token.startsWith('Bearer ')) {
+        // Remove Bearer from authentication scheme header
+        token = token.replace('Bearer ', '');
+      }
       const payload = await jwt.verifyJWT(token);
       const {
         data: { email }
@@ -36,12 +40,9 @@ export class AuthorizationService {
       if (!!tokenIsBlacklisted) {
         return false;
       }
-      if (token.startsWith('Bearer ')) {
-        // Remove Bearer from authentication scheme header
-        token = token.replace('Bearer ', '');
-      }
       return true;
     } catch (error) {
+      // Here we should do something with the error like loggin
       return false;
     }
   }
