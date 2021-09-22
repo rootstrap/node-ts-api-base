@@ -7,15 +7,16 @@ import {
   Put,
   Delete,
   Authorized,
-  BadRequestError
+  Res
 } from 'routing-controllers';
-import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
+import { UpdateResult, DeleteResult } from 'typeorm';
 import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
 import { UsersService } from '@services/users.service';
-import { ErrorsMessages } from '../constants/errorMessages';
 import { SignUpDTO } from '@dto/signUpDTO';
 import { EntityMapper } from '@clients/mapper/entityMapper.service';
+import { omit } from 'lodash';
+import { Response } from 'express';
 
 @JsonController('/users')
 @Service()
@@ -34,16 +35,11 @@ export class UserController {
   }
 
   @Post()
-  async post(@Body() userDTO: SignUpDTO): Promise<InsertResult> {
-    try {
-      return await this.usersService.createUser(
-        EntityMapper.mapTo(User, userDTO)
-      );
-    } catch (error: any) {
-      throw new BadRequestError(
-        error.detail ?? error.message ?? ErrorsMessages.INTERNAL_SERVER_ERROR
-      );
-    }
+  async post(@Body() userDTO: SignUpDTO, @Res() response: Response<User>) {
+    const newUser = await this.usersService.createUser(
+      EntityMapper.mapTo(User, userDTO)
+    );
+    return response.send(<User>omit(newUser, ['password']));
   }
 
   @Put('/:id')

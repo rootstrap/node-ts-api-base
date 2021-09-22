@@ -10,7 +10,7 @@ import omit from 'lodash/omit';
 import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
 import { SessionService } from '@services/session.service';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { EntityMapper } from '@clients/mapper/entityMapper.service';
 import { BaseUserDTO } from '@dto/baseUserDTO';
 import { SignUpDTO } from '@dto/signUpDTO';
@@ -24,12 +24,12 @@ export class AuthController {
   @Post('/signup')
   async signUp(
     @Body({ validate: true }) user: SignUpDTO,
-    @Res() response: any
+    @Res() response: Response<User>
   ) {
     const newUser = await this.sessionService.signUp(
       EntityMapper.mapTo(User, user)
     );
-    return response.send(omit(newUser, ['password']));
+    return response.send(<User>omit(newUser, ['password']));
   }
 
   @Post('/signin')

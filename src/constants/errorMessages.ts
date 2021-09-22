@@ -18,7 +18,7 @@ export enum ErrorsMessages {
   // HTTP STANDARD MESSAGES
   INTERNAL_SERVER_ERROR = 'Internal Server Error',
   BAD_REQUEST_ERROR = 'Bad request error',
-  USER_ALREADY_EXISTS = 'A user with this email is already registered'
+  USER_ALREADY_EXIST = 'A user with this email is already registered'
 }
 
 export const Errors = {
