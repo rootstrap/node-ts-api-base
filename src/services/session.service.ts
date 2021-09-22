@@ -20,11 +20,11 @@ export class SessionService {
   private readonly userRepository = getRepository<User>(User);
 
   async signUp(user: User) {
+    this.userService.hashUserPassword(user);
     try {
-      this.userService.hashUserPassword(user);
       return await this.userRepository.save(user);
     } catch (error) {
-      throw new DatabaseError(error.message + ' ' + error.detail);
+      throw new DatabaseError(ErrorsMessages.USER_ALREADY_EXISTS);
     }
   }
 
