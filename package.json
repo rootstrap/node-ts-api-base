@@ -90,7 +90,7 @@
     "ts-jest": "^26.5.6",
     "tsconfig-paths": "^3.11.0",
     "typedi": "^0.10.0",
-    "typeorm": "^0.2.37",
+    "typeorm": "^0.2.38",
     "typeorm-seeding": "^1.6.1"
   }
 }
