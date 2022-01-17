@@ -74,7 +74,7 @@
     "express": "^4.17.2",
     "express-formidable": "^1.2.0",
     "express-rate-limit": "^6.0.4",
-    "helmet": "^5.0.0",
+    "helmet": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
