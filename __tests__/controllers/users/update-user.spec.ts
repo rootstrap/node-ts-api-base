@@ -6,7 +6,7 @@ import { User } from '@entities/user.entity';
 import { API } from '../../utils';
 
 describe('updating a user', () => {
-  let user;
+  let user: User;
 
   beforeEach(async () => {
     user = await factory(User)().create();
@@ -16,11 +16,14 @@ describe('updating a user', () => {
     const id = user.id;
     user.firstName = 'new firstname';
     user.lastName = 'new lastname';
+    user.gender = 'new_gender';
+
     const response = await request(app).put(`${API}/users/${id}`).send(user);
     expect(response.status).toBe(200);
 
     const updatedUser = await getRepository(User).findOne(id);
     expect(updatedUser?.firstName).toEqual(user.firstName);
     expect(updatedUser?.lastName).toEqual(user.lastName);
+    expect(updatedUser?.gender).toEqual(user.gender);
   });
 });

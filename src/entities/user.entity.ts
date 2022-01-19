@@ -2,11 +2,14 @@ import { Column, Entity, Index } from 'typeorm';
 import { Base } from './base.entity';
 @Entity()
 export class User extends Base {
-  @Column({ nullable: true })
-  firstName?: string;
+  @Column()
+  firstName!: string;
+
+  @Column()
+  lastName!: string;
 
   @Column({ nullable: true })
-  lastName?: string;
+  gender?: string;
 
   @Column()
   @Index({ unique: true })

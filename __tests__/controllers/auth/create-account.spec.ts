@@ -23,7 +23,7 @@ describe('creating an account', () => {
     expect(response.status).toBe(400);
   });
 
-  it('returns http code 400 with 4 errors on the errors field', async () => {
+  it('returns http code 400 with 5 errors on the errors field', async () => {
     const userFields = {};
     const response = await request(app)
       .post(`${API}/auth/signup`)
@@ -33,12 +33,13 @@ describe('creating an account', () => {
       errors: [
         'Property firstName must be a string',
         'Property lastName must be a string',
+        'Property gender must be a string',
         'Property email must be an email',
         ErrorsMessages.PASSWORD_ERROR
       ],
       httpCode: HttpStatusCode.BAD_REQUEST,
       name: 'Bad request error'
     });
-    expect(response.body.errors).toHaveLength(4);
+    expect(response.body.errors).toHaveLength(5);
   });
 });
