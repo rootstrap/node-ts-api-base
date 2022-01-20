@@ -28,7 +28,7 @@ describe('creating a user', () => {
     expect(response.body).toStrictEqual({
       description: ErrorsMessages.BODY_ERRORS,
       httpCode: HttpStatusCode.BAD_REQUEST,
-      errors: ['Property email must be an email'],
+      errors: [ErrorsMessages.EMAIL_NOT_EMAIL],
       name: ErrorsMessages.BAD_REQUEST_ERROR
     });
   });

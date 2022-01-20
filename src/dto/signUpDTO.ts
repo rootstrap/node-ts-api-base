@@ -1,13 +1,14 @@
-import { IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
 import { BaseUserDTO } from './baseUserDTO';
+import { Gender } from '@constants/users/attributes.constants';
 
 export class SignUpDTO extends BaseUserDTO {
-  @IsString()
+  @IsString() @IsNotEmpty()
   firstName!: string;
 
-  @IsString()
+  @IsString() @IsNotEmpty()
   lastName!: string;
 
-  @IsString()
-  gender!: string;
+  @IsNotEmpty() @IsEnum( Gender )
+  gender!: Gender;
 }

@@ -6,7 +6,7 @@ import { User } from '@entities/user.entity';
 import { API } from '../../utils';
 
 describe('deleting a user', () => {
-  let user;
+  let user: User;
 
   beforeEach(async () => {
     user = await factory(User)().create({ password: 'password123' });

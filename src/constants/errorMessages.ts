@@ -15,10 +15,18 @@ export enum ErrorsMessages {
   BODY_ERRORS = "You have errors in your request's body." +
     "Check 'errors' field for more details.",
   PASSWORD_ERROR = 'Property password must be longer than or equal to 6 characters',
+  EMAIL_NOT_EMAIL = 'Property email must be an email',
   // HTTP STANDARD MESSAGES
   INTERNAL_SERVER_ERROR = 'Internal Server Error',
   BAD_REQUEST_ERROR = 'Bad request error',
-  USER_ALREADY_EXISTS = 'A user with this email is already registered'
+  // USER ERRORS
+  USER_ALREADY_EXISTS = 'A user with this email is already registered',
+  USER_FIRST_NAME_NOT_EMPTY = 'Property firstName should not be empty',
+  USER_FIRST_NAME_STRING = 'Property firstName must be a string',
+  USER_LAST_NAME_NOT_EMPTY = 'Property lastName should not be empty',
+  USER_LAST_NAME_STRING = 'Property lastName must be a string',
+  USER_GENDER_ENUM = 'Property gender must be a valid enum value',
+  USER_GENDER_NOT_EMPTY = 'Property gender should not be empty'
 }
 
 export const Errors = {

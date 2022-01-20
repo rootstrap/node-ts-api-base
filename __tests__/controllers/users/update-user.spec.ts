@@ -7,16 +7,19 @@ import { API } from '../../utils';
 
 describe('updating a user', () => {
   let user: User;
+  let newUser: User;
 
   beforeEach(async () => {
     user = await factory(User)().create();
   });
 
   it('returns http code 200 and updates the user', async () => {
+    newUser = await factory(User)().create();
+
     const id = user.id;
-    user.firstName = 'new firstname';
-    user.lastName = 'new lastname';
-    user.gender = 'new_gender';
+    user.firstName = newUser.firstName;
+    user.lastName = newUser.lastName;
+    user.gender = newUser.gender;
 
     const response = await request(app).put(`${API}/users/${id}`).send(user);
     expect(response.status).toBe(200);
