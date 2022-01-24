@@ -6,6 +6,7 @@
     "outDir": "dist",
     "rootDir": ".",
     "strict": true,
+    "strictNullChecks": false,
     "noImplicitAny": false,
     "moduleResolution": "node",
     "resolveJsonModule": true,
