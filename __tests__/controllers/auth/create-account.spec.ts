@@ -1,14 +1,63 @@
 import request from 'supertest';
 import app from '@app';
-import { factory } from 'typeorm-seeding';
-import { User } from '@entities/user.entity';
 import { API } from '../../utils';
 import { ErrorsMessages } from '@constants/errorMessages';
 import { HttpStatusCode } from '@constants/httpStatusCode';
+import { AuthController } from '../../../src/controllers/auth.controller';
+import { Container } from 'typedi';
+import { SessionService } from '@services/session.service';
+import { User } from '@entities/user.entity';
+import { factory } from 'typeorm-seeding';
+import { SignUpDTO } from '@dto/signUpDTO';
+import { mockResponse, mockRequest } from '../../utils/mocks';
+import { Request, Response } from 'express';
+import { EmailService } from '@services/email.service';
+
+let authController: AuthController;
+let sessionService: SessionService;
+let userFields;
 
 describe('creating an account', () => {
+  beforeAll(async () => {
+    authController = Container.get(AuthController);
+    sessionService = Container.get(SessionService);
+    userFields = await factory(User)().make();
+  });
+
+  it('all dependencies should be defined', () => {
+    expect(authController).toBeDefined();
+    expect(sessionService).toBeDefined();
+  });
+
+  it('sends the verification email', async () => {
+    const signUPDTO = await factory(SignUpDTO)().make();
+
+    jest.spyOn(sessionService, 'signUp').mockResolvedValueOnce(userFields);
+    jest.spyOn(EmailService, 'sendEmail').mockResolvedValueOnce(true);
+
+    const response = await authController.signUp(
+      signUPDTO,
+      mockRequest as Request,
+      mockResponse as Response
+    );
+    expect(response).toHaveProperty('email');
+  });
+
+  it('does not send the verification email', async () => {
+    const signUPDTO = await factory(SignUpDTO)().make();
+
+    jest.spyOn(sessionService, 'signUp').mockResolvedValueOnce(userFields);
+    jest.spyOn(EmailService, 'sendEmail').mockRejectedValueOnce(new Error('Error'));
+
+    const responseObject = authController.signUp(
+      signUPDTO,
+      mockRequest as Request,
+      mockResponse as Response
+    );
+    await expect(responseObject).rejects.toThrowError(Error);
+  });
+
   it('returns http code 200 with valid params', async () => {
-    const userFields = await factory(User)().make();
     const response = await request(app)
       .post(`${API}/auth/signup`)
       .send(userFields);
@@ -16,7 +65,7 @@ describe('creating an account', () => {
   });
 
   it('returns http code 400 with invalid params', async () => {
-    const userFields = {};
+    userFields = {};
     const response = await request(app)
       .post(`${API}/auth/signup`)
       .send(userFields);
@@ -24,7 +73,7 @@ describe('creating an account', () => {
   });
 
   it('returns http code 400 with 8 errors on the errors field', async () => {
-    const userFields = {};
+    userFields = {};
     const response = await request(app)
       .post(`${API}/auth/signup`)
       .send(userFields);
