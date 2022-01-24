@@ -26,7 +26,10 @@ export enum ErrorsMessages {
   USER_LAST_NAME_NOT_EMPTY = 'Property lastName should not be empty',
   USER_LAST_NAME_STRING = 'Property lastName must be a string',
   USER_GENDER_ENUM = 'Property gender must be a valid enum value',
-  USER_GENDER_NOT_EMPTY = 'Property gender should not be empty'
+  USER_GENDER_NOT_EMPTY = 'Property gender should not be empty',
+  HASH_NOT_VALID = 'Please try again or request a new link',
+  HASH_EXPIRED = 'The link has expired, please request a new one'
+
 }
 
 export const Errors = {

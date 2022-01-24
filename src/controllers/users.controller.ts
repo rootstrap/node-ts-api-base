@@ -7,7 +7,8 @@ import {
   Put,
   Delete,
   Authorized,
-  BadRequestError
+  BadRequestError,
+  QueryParam
 } from 'routing-controllers';
 import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 import { Service } from 'typedi';
@@ -26,6 +27,13 @@ export class UserController {
   @Get()
   async index(): Promise<User[]> {
     return this.usersService.listUsers();
+  }
+
+  @Get('/verify')
+  async verify(
+    @QueryParam('key') key: string
+  ) {
+    return this.usersService.verifyUser(key);
   }
 
   @Get('/:id')

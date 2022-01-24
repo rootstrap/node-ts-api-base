@@ -10,25 +10,38 @@ import omit from 'lodash/omit';
 import { Service } from 'typedi';
 import { User } from '@entities/user.entity';
 import { SessionService } from '@services/session.service';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { EntityMapper } from '@clients/mapper/entityMapper.service';
 import { BaseUserDTO } from '@dto/baseUserDTO';
 import { SignUpDTO } from '@dto/signUpDTO';
 import { LogoutDTO } from '@dto/logoutDTO';
+import { IEmail } from 'src/interfaces/email/email.interface';
+import { EmailService } from '@services/email.service';
 
 @JsonController('/auth')
 @Service()
 export class AuthController {
-  constructor(private readonly sessionService: SessionService) {}
+  constructor(private readonly sessionService: SessionService) { }
 
   @Post('/signup')
   async signUp(
     @Body({ validate: true }) user: SignUpDTO,
-    @Res() response: any
+    @Req() request: Request,
+    @Res() response: Response
   ) {
     const newUser = await this.sessionService.signUp(
       EntityMapper.mapTo(User, user)
     );
+    const emailData: IEmail = {
+      from: process.env.EMAIL_SENDER,
+      to: newUser.email,
+      subject: 'Email Verification',
+      text: `Hello ${newUser.firstName} click on the link below to verify your email.
+      <a href="${request.hostname}/api/v1/users/verify?key=${newUser.verifyHash}">
+      Verify my email</a>
+      `
+    };
+    await EmailService.sendEmail( emailData );
     return response.send(omit(newUser, ['password']));
   }
 

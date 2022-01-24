@@ -4,10 +4,13 @@ import { getRepository } from 'typeorm';
 import { User } from '@entities/user.entity';
 import { JWTService } from '@services/jwt.service';
 import { AuthInterface, UserInterface } from '@interfaces';
+import { ErrorsMessages } from '@constants/errorMessages';
+import { BaseError } from '@exception/base.error';
+import { HttpStatusCode } from '@constants/httpStatusCode';
 
 @Service()
 export class UsersService {
-  constructor(private readonly jwtService: JWTService) {}
+  constructor(private readonly jwtService: JWTService) { }
 
   private readonly userRepository = getRepository<User>(User);
 
@@ -48,5 +51,26 @@ export class UsersService {
 
   deleteUser(id: number) {
     return this.userRepository.delete(id);
+  }
+
+  async verifyUser(verifyHash: string) {
+    const user = await this.userRepository.findOne({ verifyHash });
+    if (!user) {
+      throw new BaseError('Error',
+        HttpStatusCode.BAD_REQUEST,
+        ErrorsMessages.HASH_NOT_VALID
+      );
+    }
+    if (new Date(user.hashExpiresAt) < new Date()) {
+      throw new BaseError('Error',
+        HttpStatusCode.NOT_ACCEPTABLE,
+        ErrorsMessages.HASH_EXPIRED
+      );
+    }
+    user.verified = true;
+    user.verifyHash = null;
+    user.hashExpiresAt = null;
+    await this.userRepository.update(user.id, user);
+    return user;
   }
 }
