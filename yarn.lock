@@ -702,12 +702,12 @@
   dependencies:
     dotenv "*"
 
-"@types/express-rate-limit@^5.1.3":
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/@types/express-rate-limit/-/express-rate-limit-5.1.3.tgz#79f2ca40d90455a5798da6f8e06d8a3d35f4a1d6"
-  integrity sha512-H+TYy3K53uPU2TqPGFYaiWc2xJV6+bIFkDd/Ma2/h67Pa6ARk9kWE0p/K9OH1Okm0et9Sfm66fmXoAxsH2PHXg==
+"@types/express-rate-limit@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@types/express-rate-limit/-/express-rate-limit-6.0.0.tgz#11a314477895a8a888958f27650ed0d1ddad01b0"
+  integrity sha512-nZxo3nwU20EkTl/f2eGdndQkDIJYwkXIX4S3Vrp2jMdSdFJ6AWtIda8gOz0wiMuOFoeH/UUlCAiacz3x3eWNFA==
   dependencies:
-    "@types/express" "*"
+    express-rate-limit "*"
 
 "@types/express-serve-static-core@^4.17.18":
   version "4.17.18"
@@ -784,10 +784,10 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/jsonwebtoken@^8.5.6":
-  version "8.5.6"
-  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.5.6.tgz#1913e5a61e70a192c5a444623da4901a7b1a9d42"
-  integrity sha512-+P3O/xC7nzVizIi5VbF34YtqSonFsdnbXBnWUCYRiKOi1f9gA4sEFvXkrGr/QVV23IbMYvcoerI7nnhDUiWXRQ==
+"@types/jsonwebtoken@^8.5.8":
+  version "8.5.8"
+  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.5.8.tgz#01b39711eb844777b7af1d1f2b4cf22fda1c0c44"
+  integrity sha512-zm6xBQpFDIDM6o9r6HSgDeIcLy82TKWctCXEPbJJcXb5AKmi5BNNdLXneixK4lplX3PqIVcwLBCGE/kAGnlD4A==
   dependencies:
     "@types/node" "*"
 
@@ -815,10 +815,10 @@
   dependencies:
     "@types/express" "*"
 
-"@types/node@*", "@types/node@^17.0.7":
-  version "17.0.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.7.tgz#4a53d8332bb65a45470a2f9e2611f1ced637a5cb"
-  integrity sha512-1QUk+WAUD4t8iR+Oj+UgI8oJa6yyxaB8a8pHaC8uqM6RrS1qbL7bf3Pwl5rHv0psm2CuDErgho6v5N+G+5fwtQ==
+"@types/node@*", "@types/node@^17.0.11":
+  version "17.0.11"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.11.tgz#e0630988ea4c75efde22d5b099360ecfe494160f"
+  integrity sha512-TgLsFcuinMobmML3PsILoRJq/h11/qS7UDlak1LUsazJcvJeKejEBuI1m5X2pBnMBF5T5HRAvtcnr4cV5nvc8Q==
 
 "@types/nodemailer@^6.4.4":
   version "6.4.4"
@@ -1298,15 +1298,15 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-aws-sdk@^2.1048.0:
-  version "2.1048.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1048.0.tgz#02f2f35e0f51dd4510462e05c7a48fd4649d33f8"
-  integrity sha512-mVwWo+Udiuc/yEZ/DgJQGqOEtfiQjgUdtshx/t6ISe3+jW3TF9hUACwADwx2Sr/fuJyyJ3QD5JYLt5Cw35wQpA==
+aws-sdk@^2.1062.0:
+  version "2.1062.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1062.0.tgz#89b55c9dcfa15135910a217489eb8577b11d9899"
+  integrity sha512-QIU8jwi7Uqyvw2HjsXXXUZv3V/6TinUzLewrdl2EdvonqZCXhwMgnZx2F9I2x62IKH1RqnINwFWdoK+OTgcAjA==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
     ieee754 "1.1.13"
-    jmespath "0.15.0"
+    jmespath "0.16.0"
     querystring "0.2.0"
     sax "1.2.1"
     url "0.10.3"
@@ -2462,10 +2462,10 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
-dotenv@*, dotenv@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
-  integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
+dotenv@*, dotenv@^14.3.0:
+  version "14.3.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-14.3.0.tgz#40f537fe90e229d35361c66cf432903e0db49001"
+  integrity sha512-PCTcOQSXVo9FI1dB7AichJXMEvmiGCq0gnCpjfDUc8505uR+2MeLXWe+Ue4PN5UXa2isHSa78sr7L59fk+2mnQ==
 
 dotenv@^8.2.0:
   version "8.2.0"
@@ -2849,10 +2849,10 @@ express-handlebars@^4.0.0:
     graceful-fs "^4.2.4"
     handlebars "^4.7.6"
 
-express-rate-limit@^6.0.4:
-  version "6.0.4"
-  resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-6.0.4.tgz#1f3d663e8d640be1c8c5e1ad2fb55a7d7a7b118c"
-  integrity sha512-TratTfxxTAFb6ZUAxPIigqhcS0e7ql9XDTorjD+SihV5ua5h6agoKyr45iKM6m5OzTppesh9o/RCuvf5eTiwCw==
+express-rate-limit@*, express-rate-limit@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-6.2.0.tgz#be644be082d4d5da8c368aed07cef80152f6e218"
+  integrity sha512-q9xfttbPX79HiBsHA4LT3PZEeJR96CJ5/2jloAKSEECMx8XlOOOpjxx6iK/kBw3hFJ8uhx6Q9lCfSGp70yV0tQ==
 
 express-session@^1.17.1:
   version "1.17.1"
@@ -3419,10 +3419,10 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-helmet@*, helmet@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/helmet/-/helmet-5.0.0.tgz#3084c827f51b3c7680cfe99d5d8f29ec39a74fb9"
-  integrity sha512-wCuTCJZnEKXagvjcZiAnXkzS4lh8mTJ/JhhC5XjH5vPvSzzX/8Y88u6mfE3F66itB6UIA7uZEekXJsbdFTOiPw==
+helmet@*, helmet@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/helmet/-/helmet-5.0.2.tgz#3264ec6bab96c82deaf65e3403c369424cb2366c"
+  integrity sha512-QWlwUZZ8BtlvwYVTSDTBChGf8EOcQ2LkGMnQJxSzD1mUu8CCjXJZq/BXP8eWw4kikRnzlhtYo3lCk0ucmYA3Vg==
 
 hexoid@1.0.0:
   version "1.0.0"
@@ -4349,10 +4349,10 @@ jest@^26.6.3:
     import-local "^3.0.2"
     jest-cli "^26.6.3"
 
-jmespath@0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
-  integrity sha1-o/Iiqarp+Wb10nx5ZRDigJF2Qhc=
+jmespath@0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.16.0.tgz#b15b0a85dfd4d930d43e69ed605943c802785076"
+  integrity sha512-9FzQjJ7MATs1tSpnco1K6ayiYE3figslrXA72G2HQ/n76RzvYlofyi5QM+iX4YRs/pu3yzxlVQSST23+dMDknw==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -6642,10 +6642,10 @@ strip-json-comments@~2.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
 
-superagent@^7.0.2:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/superagent/-/superagent-7.0.2.tgz#8fa6d283c9e7cd52928b96cf422356019248e8c4"
-  integrity sha512-2Kx35bZxLLJMBKtuXezxvD0aZQ7l923VwoCn7EtUx+aFxdG7co7PeRIddfrNtvvMuGaLZXA0mKzX+yWRhjrJ7A==
+superagent@^7.1.0:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/superagent/-/superagent-7.1.1.tgz#2ab187d38c3078c31c3771c0b751f10163a27136"
+  integrity sha512-CQ2weSS6M+doIwwYFoMatklhRbx6sVNdB99OEJ5czcP3cng76Ljqus694knFWgOj3RkrtxZqIgpe6vhe0J7QWQ==
   dependencies:
     component-emitter "^1.3.0"
     cookiejar "^2.1.3"
@@ -6659,13 +6659,13 @@ superagent@^7.0.2:
     readable-stream "^3.6.0"
     semver "^7.3.5"
 
-supertest@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/supertest/-/supertest-6.2.1.tgz#add42f1afa661fa5b3083da05c6c964069768e0f"
-  integrity sha512-2kBKhfZgnPLmjpzB0n7A2ZnEAWTaLXq4bn3EEVY9w8rUpLyIlSusqKKvWA1Cav7hxXBnXGpxBsSeOHj5wQGe1Q==
+supertest@^6.2.2:
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/supertest/-/supertest-6.2.2.tgz#04a5998fd3efaff187cb69f07a169755d655b001"
+  integrity sha512-wCw9WhAtKJsBvh07RaS+/By91NNE0Wh0DN19/hWPlBOU8tAfOtbZoVSV4xXeoKoxgPx0rx2y+y+8660XtE7jzg==
   dependencies:
     methods "^1.1.2"
-    superagent "^7.0.2"
+    superagent "^7.1.0"
 
 supports-color@^2.0.0:
   version "2.0.0"
@@ -7070,10 +7070,10 @@ typeorm@^0.2.41:
     yargs "^17.0.1"
     zen-observable-ts "^1.0.0"
 
-typescript@^4.5.4:
-  version "4.5.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.5.4.tgz#a17d3a0263bf5c8723b9c52f43c5084edf13c2e8"
-  integrity sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==
+typescript@^4.5.5:
+  version "4.5.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.5.5.tgz#d8c953832d28924a9e3d37c73d729c846c5896f3"
+  integrity sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==
 
 uglify-js@^3.1.4:
   version "3.13.9"
