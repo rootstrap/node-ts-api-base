@@ -5,29 +5,29 @@ import { Gender } from '@constants/users/attributes.constants';
 @Entity()
 export class User extends Base {
   @Column()
-  firstName!: string;
+  firstName: string;
 
   @Column()
-  lastName!: string;
+  lastName: string;
 
   @Column({ type: 'enum', enum: Gender, default: 'other' })
-  gender!: Gender;
+  gender: Gender;
 
   @Column()
   @Index({ unique: true })
-  email!: string;
+  email: string;
 
   @Column({ select: false })
-  password!: string;
+  password: string;
 
   @Column({ default: false })
-  verified!: boolean;
+  verified: boolean;
 
   @Column({ nullable: true })
   @Generated('uuid')
-  verifyHash!: string | null;
+  verifyHash: string | null;
 
   // eslint-disable-next-line quotes
   @Column({ nullable: true, type: 'timestamp', default: () => `NOW() +INTERVAL '1 day'` })
-  hashExpiresAt!: Date | null;
+  hashExpiresAt: Date | null;
 }

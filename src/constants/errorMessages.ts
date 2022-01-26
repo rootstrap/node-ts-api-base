@@ -14,11 +14,14 @@ export enum ErrorsMessages {
   UNKNOWN = 'Unknown error',
   BODY_ERRORS = "You have errors in your request's body." +
     "Check 'errors' field for more details.",
+  TOO_MANY_REQUESTS_ERROR = 'Too many requests, please try again later.',
   PASSWORD_ERROR = 'Property password must be longer than or equal to 6 characters',
   EMAIL_NOT_EMAIL = 'Property email must be an email',
   // HTTP STANDARD MESSAGES
   INTERNAL_SERVER_ERROR = 'Internal Server Error',
   BAD_REQUEST_ERROR = 'Bad request error',
+  NOT_FOUND_ERROR = 'Not found error',
+  NOT_ACCEPTABLE_ERROR = 'Not acceptable error',
   // USER ERRORS
   USER_ALREADY_EXISTS = 'A user with this email is already registered',
   USER_FIRST_NAME_NOT_EMPTY = 'Property firstName should not be empty',
@@ -28,7 +31,8 @@ export enum ErrorsMessages {
   USER_GENDER_ENUM = 'Property gender must be a valid enum value',
   USER_GENDER_NOT_EMPTY = 'Property gender should not be empty',
   HASH_NOT_VALID = 'Please try again or request a new link',
-  HASH_EXPIRED = 'The link has expired, please request a new one'
+  HASH_EXPIRED = 'The link has expired, please request a new one',
+  USER_NOT_FOUND = 'The user cannot be found'
 
 }
 

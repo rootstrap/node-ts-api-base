@@ -1,12 +1,12 @@
 import { Service } from 'typedi';
 import { compareSync, genSaltSync, hashSync } from 'bcrypt';
-import { getRepository } from 'typeorm';
+import { DeleteResult, getRepository, InsertResult, UpdateResult } from 'typeorm';
 import { User } from '@entities/user.entity';
 import { JWTService } from '@services/jwt.service';
 import { AuthInterface, UserInterface } from '@interfaces';
-import { ErrorsMessages } from '@constants/errorMessages';
-import { BaseError } from '@exception/base.error';
-import { HttpStatusCode } from '@constants/httpStatusCode';
+import { UserNotFoundError } from '@exception/users/notfound.error';
+import { HashInvalidError } from '@exception/users/hashinvalid.error';
+import { HashExpiredError } from '@exception/users/hashexpired.error';
 
 @Service()
 export class UsersService {
@@ -31,41 +31,44 @@ export class UsersService {
     user.password = this.hashPassword(user.password);
   }
 
-  listUsers() {
+  listUsers(): Promise<User[]> {
     return this.userRepository.find();
   }
 
-  showUser(id: number) {
-    return this.userRepository.findOne(id);
+  async showUser(id: number): Promise<User> {
+    const user = await this.userRepository.findOne(id);
+    if (!user) {
+      throw new UserNotFoundError( );
+    }
+    return user;
   }
 
-  createUser(user: User) {
+  async showUserByHash(verifyHash: string): Promise<User> {
+    const user = await this.userRepository.findOne({ verifyHash });
+    if (!user) {
+      throw new HashInvalidError( );
+    }
+    return user;
+  }
+
+  createUser(user: User): Promise<InsertResult> {
     this.hashUserPassword(user);
     return this.userRepository.insert(user);
   }
 
-  editUser(input: UserInterface.IEditUserInput) {
+  editUser(input: UserInterface.IEditUserInput): Promise<UpdateResult> {
     const { id, user } = input;
     return this.userRepository.update(id, user);
   }
 
-  deleteUser(id: number) {
+  deleteUser(id: number): Promise<DeleteResult> {
     return this.userRepository.delete(id);
   }
 
-  async verifyUser(verifyHash: string) {
-    const user = await this.userRepository.findOne({ verifyHash });
-    if (!user) {
-      throw new BaseError('Error',
-        HttpStatusCode.BAD_REQUEST,
-        ErrorsMessages.HASH_NOT_VALID
-      );
-    }
+  async verifyUser(verifyHash: string): Promise<User> {
+    const user = await this.showUserByHash(verifyHash);
     if (new Date(user.hashExpiresAt) < new Date()) {
-      throw new BaseError('Error',
-        HttpStatusCode.NOT_ACCEPTABLE,
-        ErrorsMessages.HASH_EXPIRED
-      );
+      throw new HashExpiredError();
     }
     user.verified = true;
     user.verifyHash = null;
