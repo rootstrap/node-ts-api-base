@@ -11,16 +11,11 @@ import { HashExpiredError } from '@exception/users/hashexpired.error';
 import { HashInvalidError } from '@exception/users/hashinvalid.error';
 import { getRepository } from 'typeorm';
 import { ErrorsMessages } from '@constants/errorMessages';
+import { UnauthorizedError } from 'routing-controllers';
 
 let jwtService = Container.get(JWTService);
 let user: User;
 let token: string;
-const unAuthenticatedError = {
-  description: 'Authorization is required for request on GET /api/v1/users',
-  httpCode: HttpStatusCode.UNAUTHORIZED,
-  name: 'AuthorizationRequiredError'
-};
-
 
 describe('UsersController', () => {
   beforeAll(async () => {
@@ -39,9 +34,9 @@ describe('UsersController', () => {
 
     it('returns http code 401 without authentication token', async () => {
       const response = await request(app).get(`${API}/users`);
-      expect(response.status).toBe(401);
+      expect(response.status).toBe(HttpStatusCode.UNAUTHORIZED);
       expect(response.body).toStrictEqual(
-        expect.objectContaining(unAuthenticatedError)
+        expect.objectContaining(new UnauthorizedError('GET /api/v1/users'))
       );
     });
 
@@ -49,9 +44,9 @@ describe('UsersController', () => {
       const response = await request(app)
         .get(`${API}/users`)
         .set({ Authorization: 'Inv3nT3d-T0k3N' });
-      expect(response.status).toBe(401);
+      expect(response.status).toBe(HttpStatusCode.UNAUTHORIZED);
       expect(response.body).toStrictEqual(
-        expect.objectContaining(unAuthenticatedError)
+        expect.objectContaining(new UnauthorizedError('GET /api/v1/users'))
       );
     });
 

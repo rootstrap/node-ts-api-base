@@ -3,9 +3,10 @@ import { genSaltSync, hashSync } from 'bcrypt';
 import { UsersService } from '@services/users.service';
 import { factory } from 'typeorm-seeding';
 import { User } from '@entities/user.entity';
-import { ErrorsMessages } from '@constants/errorMessages';
 import { getRepository, Repository } from 'typeorm';
 import { mockUpdateResult } from '../utils/mocks';
+import { HashInvalidError } from '@exception/users/hashinvalid.error';
+import { HashExpiredError } from '@exception/users/hashexpired.error';
 
 let usersService: UsersService;
 let user: User;
@@ -46,32 +47,33 @@ describe('UsersService', () => {
       user = await factory(User)().create();
     });
 
-    beforeAll(async () => {
+    beforeAll( () => {
       usersService = Container.get(UsersService);
       userRepository = getRepository<User>(User);
     });
 
     it('should throw error if the hash is invalid', async () => {
-      const verifyHash = '11111111-2222-3333-4444-555555555555';
+      user.verifyHash = '11111111-2222-3333-4444-555555555555';
 
-      jest.spyOn(userRepository, 'findOne')
-        .mockRejectedValueOnce(new Error(ErrorsMessages.HASH_NOT_VALID));
+      jest.spyOn(usersService, 'showUserByHash')
+        .mockRejectedValueOnce(new HashInvalidError);
 
-      expect(usersService.verifyUser(verifyHash)).rejects.toThrowError(Error);
+      expect(usersService.verifyUser(user.verifyHash))
+        .rejects.toThrowError(HashInvalidError);
     });
 
     it('should throw error if the hash is expired', async () => {
-      const verifyHash = '11111111-2222-3333-4444-555555555555';
+      user.hashExpiresAt = new Date();
 
-      jest.spyOn(userRepository, 'findOne')
-        .mockRejectedValueOnce(new Error(ErrorsMessages.HASH_EXPIRED));
+      jest.spyOn(usersService, 'showUserByHash')
+        .mockResolvedValueOnce(user);
 
-      expect(usersService.verifyUser(verifyHash)).rejects.toThrowError(Error);
+      expect(usersService.verifyUser(user.verifyHash))
+        .rejects.toThrowError(HashExpiredError);
     });
 
     it('should verify the user email', async () => {
-      user = await factory(User)().make();
-      jest.spyOn(userRepository, 'findOne')
+      jest.spyOn(usersService, 'showUserByHash')
         .mockResolvedValueOnce(user);
       jest.spyOn(userRepository, 'update')
         .mockResolvedValueOnce(mockUpdateResult);

@@ -22,6 +22,7 @@ export enum ErrorsMessages {
   BAD_REQUEST_ERROR = 'Bad request error',
   NOT_FOUND_ERROR = 'Not found error',
   NOT_ACCEPTABLE_ERROR = 'Not acceptable error',
+  UNAUTHORIZED_ERROR = 'AuthorizationRequiredError',
   // USER ERRORS
   USER_ALREADY_EXISTS = 'A user with this email is already registered',
   USER_FIRST_NAME_NOT_EMPTY = 'Property firstName should not be empty',
