@@ -14,7 +14,7 @@ let user: User;
 let userRepository: Repository<User>;
 
 describe('UsersService', () => {
-  beforeAll(async () => {
+  beforeAll( () => {
     usersService = Container.get(UsersService);
     userRepository = getRepository<User>(User);
   });
