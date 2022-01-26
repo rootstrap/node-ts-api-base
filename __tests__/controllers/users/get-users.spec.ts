@@ -6,6 +6,7 @@ import { User } from '@entities/user.entity';
 import { JWTService } from '@services/jwt.service';
 import { API } from '../../utils';
 import { HttpStatusCode } from '@constants/httpStatusCode';
+import { UserNotFoundError } from '@exception/users/notfound.error';
 
 describe('requesting all users', () => {
   let user: User;
@@ -13,7 +14,7 @@ describe('requesting all users', () => {
   const jwtService = Container.get(JWTService);
   const unAuthenticatedError = {
     description: 'Authorization is required for request on GET /api/v1/users',
-    httpCode: 401,
+    httpCode: HttpStatusCode.UNAUTHORIZED,
     name: 'AuthorizationRequiredError'
   };
 
@@ -44,7 +45,7 @@ describe('requesting all users', () => {
     const response = await request(app)
       .get(`${API}/users`)
       .set({ Authorization: token });
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(HttpStatusCode.OK);
   });
 
   it("returns the user's list", async () => {
@@ -62,19 +63,14 @@ describe('requesting all users', () => {
   it('returns http code 404 for non-existing user', async () => {
     const randomId = Math.round(user.id + (1 + Math.random() * 10));
     const response = await request(app).get(`${API}/users/${randomId}`);
-    expect(response.status).toBe(404);
-    expect(response.body).toStrictEqual(
-      expect.objectContaining({
-        httpCode: HttpStatusCode.NOT_FOUND,
-        name: 'NotFoundError'
-      })
-    );
+    expect(response.status).toBe(HttpStatusCode.NOT_FOUND);
+    expect(response.body).toStrictEqual(expect.objectContaining(new UserNotFoundError()));
   });
 
   it('returns http code 200 for an existing user', async () => {
     const id = user.id;
     const response = await request(app).get(`${API}/users/${id}`);
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(HttpStatusCode.OK);
     expect(response.body).not.toHaveProperty('password');
   });
 });

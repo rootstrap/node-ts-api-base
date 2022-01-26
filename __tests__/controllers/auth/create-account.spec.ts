@@ -9,19 +9,25 @@ import { SessionService } from '@services/session.service';
 import { User } from '@entities/user.entity';
 import { factory } from 'typeorm-seeding';
 import { SignUpDTO } from '@dto/signUpDTO';
-import { mockResponse, mockRequest } from '../../utils/mocks';
-import { Request, Response } from 'express';
 import { EmailService } from '@services/email.service';
+import { getMockReq, getMockRes } from '@jest-mock/express';
 
 let authController: AuthController;
 let sessionService: SessionService;
-let userFields;
+let userFields: User;
+const req = getMockReq();
+const { res, mockClear } = getMockRes();
+
 
 describe('creating an account', () => {
   beforeAll(async () => {
     authController = Container.get(AuthController);
     sessionService = Container.get(SessionService);
     userFields = await factory(User)().make();
+  });
+
+  beforeEach( ( ) => {
+    mockClear();
   });
 
   it('all dependencies should be defined', () => {
@@ -35,15 +41,19 @@ describe('creating an account', () => {
     jest.spyOn(sessionService, 'signUp').mockResolvedValueOnce(userFields);
     jest.spyOn(EmailService, 'sendEmail').mockResolvedValueOnce(true);
 
-    const response = await authController.signUp(
+    await authController.signUp(
       signUPDTO,
-      mockRequest as Request,
-      mockResponse as Response
+      req,
+      res
     );
-    expect(response).toHaveProperty('email');
+    expect(res.send).toHaveBeenCalledWith(
+      expect.objectContaining({
+        email: userFields.email
+      })
+    );
   });
 
-  it('does not send the verification email', async () => {
+  it('throw error if fails sending the verification email', async () => {
     const signUPDTO = await factory(SignUpDTO)().make();
 
     jest.spyOn(sessionService, 'signUp').mockResolvedValueOnce(userFields);
@@ -51,13 +61,15 @@ describe('creating an account', () => {
 
     const responseObject = authController.signUp(
       signUPDTO,
-      mockRequest as Request,
-      mockResponse as Response
+      req,
+      res
     );
     await expect(responseObject).rejects.toThrowError(Error);
   });
 
   it('returns http code 200 with valid params', async () => {
+    jest.spyOn(EmailService, 'sendEmail').mockResolvedValueOnce(true);
+
     const response = await request(app)
       .post(`${API}/auth/signup`)
       .send(userFields);
@@ -65,18 +77,16 @@ describe('creating an account', () => {
   });
 
   it('returns http code 400 with invalid params', async () => {
-    userFields = {};
     const response = await request(app)
       .post(`${API}/auth/signup`)
-      .send(userFields);
+      .send({});
     expect(response.status).toBe(400);
   });
 
   it('returns http code 400 with 8 errors on the errors field', async () => {
-    userFields = {};
     const response = await request(app)
       .post(`${API}/auth/signup`)
-      .send(userFields);
+      .send({});
     expect(response.body).toStrictEqual({
       description: ErrorsMessages.BODY_ERRORS,
       errors: [

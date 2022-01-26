@@ -30,6 +30,7 @@
     "indent": 2
   },
   "devDependencies": {
+    "@jest-mock/express": "^1.4.5",
     "@types/bcrypt": "^5.0.0",
     "@types/body-parser": "^1.19.2",
     "@types/dotenv": "^8.2.0",
