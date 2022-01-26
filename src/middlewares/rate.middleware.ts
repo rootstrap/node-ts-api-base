@@ -5,6 +5,8 @@ import {
   RATE_LIMIT_WINDOW
 } from '@config';
 import { Service } from 'typedi';
+import { HttpStatusCode } from '@constants/httpStatusCode';
+import { ErrorsMessages } from '@constants/errorMessages';
 
 const limiter = rateLimit({
   // RATE_LIMIT_WINDOW minutes
@@ -12,8 +14,8 @@ const limiter = rateLimit({
   max: Number.parseInt(RATE_LIMIT_MAX_REQUESTS || '100'),
   headers: true,
   message: {
-    status: 429,
-    message: 'Too many requests, please try again later.'
+    status: HttpStatusCode.TOO_MANY_REQUESTS,
+    message: ErrorsMessages.TOO_MANY_REQUESTS_ERROR
   }
 });
 
