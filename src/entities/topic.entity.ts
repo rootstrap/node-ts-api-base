@@ -1,3 +1,4 @@
+import { IsUrl, MinLength } from 'class-validator';
 import { Column, Entity } from 'typeorm';
 import { Base } from './base.entity';
 
@@ -10,8 +11,10 @@ export class Topic extends Base {
   }
 
   @Column()
+  @MinLength(4)
   name: string;
 
   @Column()
+  @IsUrl()
   image: string;
 }
