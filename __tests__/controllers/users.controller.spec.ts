@@ -6,19 +6,19 @@ import { User } from '@entities/user.entity';
 import { JWTService } from '@services/jwt.service';
 import { API } from '../utils';
 import { HttpStatusCode } from '@constants/httpStatusCode';
-import { UserNotFoundError } from '@exception/users/notfound.error';
-import { HashExpiredError } from '@exception/users/hashexpired.error';
-import { HashInvalidError } from '@exception/users/hashinvalid.error';
+import { UserNotFoundError } from '@exception/users/user-not-found.error';
+import { HashExpiredError } from '@exception/users/hash-expired.error';
+import { HashInvalidError } from '@exception/users/hash-invalid.error';
 import { getRepository } from 'typeorm';
 import { ErrorsMessages } from '@constants/errorMessages';
-import { UnauthorizedError } from 'routing-controllers';
+import { UnauthorizedError } from '@exception/unauthorized.error';
 
 let jwtService = Container.get(JWTService);
 let user: User;
 let token: string;
 
 describe('UsersController', () => {
-  beforeAll(async () => {
+  beforeAll( () => {
     jwtService = Container.get(JWTService);
   });
 

@@ -4,9 +4,9 @@ import { DeleteResult, getRepository, InsertResult, UpdateResult } from 'typeorm
 import { User } from '@entities/user.entity';
 import { JWTService } from '@services/jwt.service';
 import { AuthInterface, UserInterface } from '@interfaces';
-import { UserNotFoundError } from '@exception/users/notfound.error';
-import { HashInvalidError } from '@exception/users/hashinvalid.error';
-import { HashExpiredError } from '@exception/users/hashexpired.error';
+import { UserNotFoundError } from '@exception/users/user-not-found.error';
+import { HashInvalidError } from '@exception/users/hash-invalid.error';
+import { HashExpiredError } from '@exception/users/hash-expired.error';
 
 @Service()
 export class UsersService {
