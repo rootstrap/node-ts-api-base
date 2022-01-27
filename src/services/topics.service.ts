@@ -6,7 +6,7 @@ import { Topic } from '@entities/topic.entity';
 export class TopicsService {
   private readonly topicRepository = getRepository<Topic>(Topic);
 
-  listTopics(): Promise<Topic[]> {
+  async listTopics(): Promise<Topic[]> {
     return this.topicRepository.find();
   }
 }

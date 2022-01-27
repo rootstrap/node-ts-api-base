@@ -26,10 +26,18 @@ describe('TopicsService', () => {
 
     it('returns the topics list', async () => {
       jest.spyOn(topicRepository, 'find')
-        .mockResolvedValue([topic]);
+        .mockResolvedValueOnce([topic]);
       const response = await topicsService.listTopics();
       expect(response).toBeInstanceOf(Array);
       expect(response).not.toEqual([]);
+    });
+
+    it('returns empty array if no topics found', async () => {
+      jest.spyOn(topicRepository, 'find')
+        .mockResolvedValueOnce([]);
+      const response = await topicsService.listTopics();
+      expect(response).toBeInstanceOf(Array);
+      expect(response).toEqual([]);
     });
   });
 });

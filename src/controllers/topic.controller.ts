@@ -15,7 +15,7 @@ export class TopicController {
 
   @Authorized()
   @Get()
-  async index(): Promise<Topic[]> {
+  async listTopics(): Promise<Topic[]> {
     return this.topicsService.listTopics();
   }
 }

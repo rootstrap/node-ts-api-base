@@ -12,7 +12,7 @@ import { TopicsService } from '@services/topics.service';
 import { TopicController } from '../../src/controllers/topic.controller';
 
 describe('TopicController', () => {
-  describe('index', () => {
+  describe('listTopics', () => {
     let user: User;
     let token: string;
     let topic: Topic;
@@ -40,10 +40,18 @@ describe('TopicController', () => {
 
     it('returns list of topics', async () => {
       jest.spyOn(topicsService, 'listTopics')
-        .mockResolvedValue([topic]);
-      const topics = await topicController.index();
+        .mockResolvedValueOnce([topic]);
+      const topics = await topicController.listTopics();
       expect(topics).toBeInstanceOf(Array);
       expect(topics).not.toEqual([]);
+    });
+
+    it('returns empty array if no topics found', async () => {
+      jest.spyOn(topicsService, 'listTopics')
+        .mockResolvedValueOnce([]);
+      const topics = await topicController.listTopics();
+      expect(topics).toBeInstanceOf(Array);
+      expect(topics).toEqual([]);
     });
 
     it('returns http code 401 without authentication token', async () => {
