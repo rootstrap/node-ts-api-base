@@ -1,6 +1,7 @@
-import { Column, Entity, Generated, Index } from 'typeorm';
+import { Column, Entity, Generated, Index, OneToMany } from 'typeorm';
 import { Base } from './base.entity';
 import { Gender } from '@constants/users/attributes.constants';
+import { Target } from './target.entity';
 
 @Entity()
 export class User extends Base {
@@ -30,4 +31,7 @@ export class User extends Base {
   // eslint-disable-next-line quotes
   @Column({ nullable: true, type: 'timestamp', default: () => `NOW() +INTERVAL '1 day'` })
   hashExpiresAt: Date | null;
+
+  @OneToMany(() => Target, target => target.user )
+    targets: Target[];
 }

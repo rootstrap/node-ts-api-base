@@ -1,5 +1,5 @@
 import { HttpStatusCode } from '@constants/httpStatusCode';
-import { ErrorsMessages } from '@constants/errorMessages';
+import { ErrorsMessages, UserErrorsMessages } from '@constants/errorMessages';
 import { BaseError } from '../base.error';
 
 export class HashInvalidError extends BaseError {
@@ -7,7 +7,7 @@ export class HashInvalidError extends BaseError {
     super(
       ErrorsMessages.BAD_REQUEST_ERROR,
       HttpStatusCode.BAD_REQUEST,
-      ErrorsMessages.HASH_NOT_VALID
+      UserErrorsMessages.HASH_NOT_VALID
     );
   }
 }

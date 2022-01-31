@@ -1,7 +1,7 @@
 import request from 'supertest';
 import app from '@app';
 import { API } from '../utils';
-import { ErrorsMessages } from '@constants/errorMessages';
+import { ErrorsMessages, UserErrorsMessages } from '@constants/errorMessages';
 import { HttpStatusCode } from '@constants/httpStatusCode';
 import { AuthController } from '../../src/controllers/auth.controller';
 import { Container } from 'typedi';
@@ -91,12 +91,12 @@ describe('AuthController', () => {
       expect(response.body).toStrictEqual({
         description: ErrorsMessages.BODY_ERRORS,
         errors: [
-          ErrorsMessages.USER_FIRST_NAME_NOT_EMPTY,
-          ErrorsMessages.USER_FIRST_NAME_STRING,
-          ErrorsMessages.USER_LAST_NAME_NOT_EMPTY,
-          ErrorsMessages.USER_LAST_NAME_STRING,
-          ErrorsMessages.USER_GENDER_ENUM,
-          ErrorsMessages.USER_GENDER_NOT_EMPTY,
+          UserErrorsMessages.USER_FIRST_NAME_NOT_EMPTY,
+          UserErrorsMessages.USER_FIRST_NAME_STRING,
+          UserErrorsMessages.USER_LAST_NAME_NOT_EMPTY,
+          UserErrorsMessages.USER_LAST_NAME_STRING,
+          UserErrorsMessages.USER_GENDER_ENUM,
+          UserErrorsMessages.USER_GENDER_NOT_EMPTY,
           ErrorsMessages.EMAIL_NOT_EMAIL,
           ErrorsMessages.PASSWORD_ERROR
         ],

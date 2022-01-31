@@ -172,7 +172,7 @@ describe('UsersController', () => {
       const userFields = await factory(User)().create();
 
       const userRepo = getRepository<User>(User);
-      userRepo.clear();
+      userRepo.delete({});
 
       const validResponse = await request(app)
         .post(`${API}/users`)

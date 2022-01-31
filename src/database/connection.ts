@@ -1,4 +1,4 @@
-import { createConnection, getConnection, Connection } from 'typeorm';
+import { createConnection, getConnection, Connection, DeleteResult } from 'typeorm';
 import config from '@ormconfig';
 
 const connection = {
@@ -21,11 +21,11 @@ const connection = {
     const connection = getConnection();
     const entities = connection.entityMetadatas;
 
-    const reposToClear: Promise<void>[] = [];
+    const reposToClear: Promise<DeleteResult>[] = [];
     entities.forEach(entity => {
       const repository = connection.getRepository(entity.name);
       try {
-        reposToClear.push(repository.clear());
+        reposToClear.push(repository.delete({}));
       } catch (error) {
         throw new Error(`ERROR: Cleaning test db: ${error}`);
       }

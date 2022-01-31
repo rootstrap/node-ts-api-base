@@ -1,4 +1,4 @@
-import { ErrorsMessages } from '@constants/errorMessages';
+import { ErrorsMessages, UserErrorsMessages } from '@constants/errorMessages';
 import { Service } from 'typedi';
 import { getRepository } from 'typeorm';
 import { User } from '@entities/user.entity';
@@ -24,7 +24,7 @@ export class SessionService {
     try {
       return await this.userRepository.save(user);
     } catch (error) {
-      throw new DatabaseError(ErrorsMessages.USER_ALREADY_EXISTS);
+      throw new DatabaseError(UserErrorsMessages.USER_ALREADY_EXISTS);
     }
   }
 

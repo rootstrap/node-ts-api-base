@@ -1,5 +1,5 @@
 import { HttpStatusCode } from '@constants/httpStatusCode';
-import { ErrorsMessages } from '@constants/errorMessages';
+import { ErrorsMessages, UserErrorsMessages } from '@constants/errorMessages';
 import { BaseError } from '../base.error';
 
 export class HashExpiredError extends BaseError {
@@ -7,7 +7,7 @@ export class HashExpiredError extends BaseError {
     super(
       ErrorsMessages.NOT_ACCEPTABLE_ERROR,
       HttpStatusCode.NOT_ACCEPTABLE,
-      ErrorsMessages.HASH_EXPIRED
+      UserErrorsMessages.HASH_EXPIRED
     );
   }
 }

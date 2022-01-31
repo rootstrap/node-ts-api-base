@@ -1,5 +1,5 @@
 import { HttpStatusCode } from '@constants/httpStatusCode';
-import { ErrorsMessages } from '@constants/errorMessages';
+import { ErrorsMessages, UserErrorsMessages } from '@constants/errorMessages';
 import { BaseError } from '../base.error';
 
 export class UserNotFoundError extends BaseError {
@@ -7,7 +7,7 @@ export class UserNotFoundError extends BaseError {
     super(
       ErrorsMessages.NOT_FOUND_ERROR,
       HttpStatusCode.NOT_FOUND,
-      ErrorsMessages.USER_NOT_FOUND
+      UserErrorsMessages.USER_NOT_FOUND
     );
   }
 }
