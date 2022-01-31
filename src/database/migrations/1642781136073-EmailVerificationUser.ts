@@ -8,7 +8,7 @@ export class EmailVerificationUser1642781136073 implements MigrationInterface {
       `  
         ALTER TABLE "user" ADD "verified" boolean NOT NULL DEFAULT false;
         ALTER TABLE "user" ADD "verifyHash" uuid DEFAULT uuid_generate_v4();
-        ALTER TABLE "user" ADD "hashExpiresAt" TIMESTAMP DEFAULT NOW() +INTERVAL '1 day;
+        ALTER TABLE "user" ADD "hashExpiresAt" TIMESTAMP DEFAULT NOW() +INTERVAL '1' day;
       `
     );
   }

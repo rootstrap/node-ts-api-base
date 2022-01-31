@@ -22,8 +22,10 @@ export enum ErrorsMessages {
   BAD_REQUEST_ERROR = 'Bad request error',
   NOT_FOUND_ERROR = 'Not found error',
   NOT_ACCEPTABLE_ERROR = 'Not acceptable error',
-  UNAUTHORIZED_ERROR = 'AuthorizationRequiredError',
-  // USER ERRORS
+  UNAUTHORIZED_ERROR = 'AuthorizationRequiredError'
+}
+
+export enum UserErrorsMessages {
   USER_ALREADY_EXISTS = 'A user with this email is already registered',
   USER_FIRST_NAME_NOT_EMPTY = 'Property firstName should not be empty',
   USER_FIRST_NAME_STRING = 'Property firstName must be a string',
@@ -34,8 +36,19 @@ export enum ErrorsMessages {
   HASH_NOT_VALID = 'Please try again or request a new link',
   HASH_EXPIRED = 'The link has expired, please request a new one',
   USER_NOT_FOUND = 'The user cannot be found'
-
 }
+
+export enum TargetErrorsMessages {
+  TARGET_TITLE_MIN_LENGTH = 'Property title should have a minimum length of 4',
+  TARGET_TITLE_NOT_EMPTY = 'Property title should not be empty',
+  TARGET_TITLE_STRING = 'Property title must be a string',
+  TARGET_RADIUS_GREATER_0 = 'Property radius must be greater than 0',
+  TARGET_RADIUS_NOT_EMPTY = 'Property radius should not be empty',
+  TARGET_RADIUS_NUMBER = 'Property radius must be a number',
+  TARGET_NOT_SAVED = 'The target could not be saved',
+  TARGET_USER_MORE_10 = 'Cannot create more than 10 targets'
+}
+
 
 export const Errors = {
   [ErrorsMessages.MISSING_PARAMS]: new BadRequestError(
