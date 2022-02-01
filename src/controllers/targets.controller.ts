@@ -26,10 +26,11 @@ export class TargetController {
     @CurrentUser() currentUser: ITokenPayload
   ): Promise<Target> {
     try {
-      return await this.targetsService.createTarget(
+      const target = await this.targetsService.createTarget(
         EntityMapper.mapTo(Target, targetDTO),
         currentUser.data.userId
       );
+      return target;
     } catch (error: any) {
       throw new BadRequestError(
         error.detail ?? error.message ?? ErrorsMessages.INTERNAL_SERVER_ERROR

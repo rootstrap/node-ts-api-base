@@ -23,6 +23,5 @@ export class Target extends Base {
   @ManyToOne(() => User, user => user.targets,
     { onDelete: 'CASCADE', onUpdate: 'CASCADE' }
   )
-
   user: User;
 }

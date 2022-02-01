@@ -66,12 +66,12 @@ describe('TargetController', () => {
         description: ErrorsMessages.BODY_ERRORS,
         httpCode: HttpStatusCode.BAD_REQUEST,
         errors: [
-          TargetErrorsMessages.TARGET_TITLE_MIN_LENGTH,
           TargetErrorsMessages.TARGET_TITLE_NOT_EMPTY,
           TargetErrorsMessages.TARGET_TITLE_STRING,
-          TargetErrorsMessages.TARGET_RADIUS_GREATER_0,
+          TargetErrorsMessages.TARGET_TITLE_MIN_LENGTH,
           TargetErrorsMessages.TARGET_RADIUS_NOT_EMPTY,
-          TargetErrorsMessages.TARGET_RADIUS_NUMBER
+          TargetErrorsMessages.TARGET_RADIUS_NUMBER,
+          TargetErrorsMessages.TARGET_RADIUS_GREATER_0
         ],
         name: ErrorsMessages.BAD_REQUEST_ERROR
       });

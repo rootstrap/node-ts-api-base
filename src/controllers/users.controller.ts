@@ -44,9 +44,10 @@ export class UserController {
   @Post()
   async post(@Body() userDTO: SignUpDTO): Promise<InsertResult> {
     try {
-      return await this.usersService.createUser(
+      const user = await this.usersService.createUser(
         EntityMapper.mapTo(User, userDTO)
       );
+      return user;
     } catch (error: any) {
       throw new BadRequestError(
         error.detail ?? error.message ?? ErrorsMessages.INTERNAL_SERVER_ERROR

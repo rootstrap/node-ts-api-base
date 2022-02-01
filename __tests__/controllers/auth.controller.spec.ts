@@ -95,8 +95,8 @@ describe('AuthController', () => {
           UserErrorsMessages.USER_FIRST_NAME_STRING,
           UserErrorsMessages.USER_LAST_NAME_NOT_EMPTY,
           UserErrorsMessages.USER_LAST_NAME_STRING,
-          UserErrorsMessages.USER_GENDER_ENUM,
           UserErrorsMessages.USER_GENDER_NOT_EMPTY,
+          UserErrorsMessages.USER_GENDER_ENUM,
           ErrorsMessages.EMAIL_NOT_EMAIL,
           ErrorsMessages.PASSWORD_ERROR
         ],

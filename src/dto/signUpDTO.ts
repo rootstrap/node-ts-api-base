@@ -3,12 +3,15 @@ import { BaseUserDTO } from './baseUserDTO';
 import { Gender } from '@constants/users/attributes.constants';
 
 export class SignUpDTO extends BaseUserDTO {
-  @IsString() @IsNotEmpty()
+  @IsString()
+  @IsNotEmpty()
   firstName!: string;
 
-  @IsString() @IsNotEmpty()
+  @IsString()
+  @IsNotEmpty()
   lastName!: string;
 
-  @IsNotEmpty() @IsEnum( Gender )
+  @IsEnum( Gender )
+  @IsNotEmpty()
   gender!: Gender;
 }
