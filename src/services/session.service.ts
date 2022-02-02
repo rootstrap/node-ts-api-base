@@ -62,6 +62,17 @@ export class SessionService {
     return token;
   }
 
+  async authenticateFacebook(userData: User) {
+    try {
+      const user = await this.userService.findOrCreateUserFacebook(userData);
+      const token = await this.userService.generateToken(user);
+      return token;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
+
   logOut(input: AuthInterface.ITokenToBlacklistInput): Promise<number> {
     const tokenAddedToBlacklist = this.redisService.addTokenToBlacklist(input);
     if (!tokenAddedToBlacklist) {

@@ -19,7 +19,7 @@ export class UsersService {
     return compareSync(password, userPassword);
   }
 
-  generateToken(user: User) {
+  async generateToken(user: User): Promise<string> {
     return this.jwtService.createJWT(user);
   }
 
@@ -47,6 +47,29 @@ export class UsersService {
     const user = await this.userRepository.findOne({ verifyHash });
     if (!user) {
       throw new HashInvalidError( );
+    }
+    return user;
+  }
+
+  async getUserByFBIDOrEmail(facebookID: string, email: string): Promise<User> {
+    const user = await this.userRepository.findOne(
+      { where:
+        [{ facebookID }, { email }]
+      });
+    return user;
+  }
+
+  async findOrCreateUserFacebook(userData: User): Promise<User> {
+    let user = await this.getUserByFBIDOrEmail( userData.facebookID, userData.email );
+
+    if (!user ) {
+      userData.verified = true;
+      userData.verifyHash = null;
+      userData.hashExpiresAt = null;
+      user = await this.userRepository.save(userData);
+    } else if (!user?.facebookID) {
+      user.facebookID = userData.facebookID;
+      user = await this.userRepository.save(user);
     }
     return user;
   }

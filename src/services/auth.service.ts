@@ -1,9 +1,10 @@
-import Container from 'typedi';
+import { Container, Service } from 'typedi';
 import { JWTService } from '@services/jwt.service';
 import { RedisService } from '@services/redis.service';
 import { Action } from 'routing-controllers';
 import { ITokenPayload } from 'src/interfaces/auth/auth.interface';
 
+@Service()
 export class AuthorizationService {
   private static instance: AuthorizationService;
   private static jwt = Container.get(JWTService);

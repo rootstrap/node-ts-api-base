@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Container } from 'typedi';
 import { genSaltSync, hashSync } from 'bcrypt';
 import { UsersService } from '@services/users.service';
@@ -82,6 +83,59 @@ describe('UsersService', () => {
       expect(userVerified.verified).toBeTruthy();
       expect(userVerified.verifyHash).toBeNull();
       expect(userVerified.hashExpiresAt).toBeNull();
+    });
+  });
+
+  describe('getUserByFBIDOrEmail', () => {
+    beforeAll(async () => {
+      user = await factory(User)().make();
+      user.facebookID = faker.datatype.uuid();
+    });
+
+    it('should return the user', async () => {
+      jest.spyOn(userRepository, 'findOne')
+        .mockResolvedValueOnce(user);
+
+      const userLogged = await usersService.getUserByFBIDOrEmail(
+        user.facebookID,
+        user.email
+      );
+      expect(userLogged.facebookID).toBe(user.facebookID);
+      expect(userLogged.email).toBe(user.email);
+    });
+
+    it('should not find the user returning undefined', async () => {
+      jest.spyOn(userRepository, 'findOne')
+        .mockResolvedValueOnce(undefined);
+
+      const userLogged = await usersService.getUserByFBIDOrEmail(
+        user.facebookID,
+        user.email);
+      expect(userLogged).toBeUndefined();
+    });
+  });
+
+  describe('findOrCreateUserFacebook', () => {
+    beforeEach( async () => {
+      user = await factory(User)().make();
+    });
+
+    it('should return the user if previously created', async () => {
+      jest.spyOn(usersService, 'getUserByFBIDOrEmail')
+        .mockResolvedValueOnce(user);
+
+      const userResponse = await usersService.findOrCreateUserFacebook(user);
+      expect(userResponse).toBe(user);
+    });
+
+    it('should return the user if it was not previously created', async () => {
+      jest.spyOn(usersService, 'getUserByFBIDOrEmail')
+        .mockResolvedValueOnce(undefined);
+      jest.spyOn(userRepository, 'save')
+        .mockResolvedValueOnce(user);
+
+      const userResponse = await usersService.findOrCreateUserFacebook(user);
+      expect(userResponse).toBe(user);
     });
   });
 });

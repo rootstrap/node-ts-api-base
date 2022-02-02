@@ -17,6 +17,7 @@ import { SignUpDTO } from '@dto/signUpDTO';
 import { LogoutDTO } from '@dto/logoutDTO';
 import { IEmail } from 'src/interfaces/email/email.interface';
 import { EmailService } from '@services/email.service';
+import { FacebookLoginDTO } from '@dto/facebookLoginDTO';
 
 @JsonController('/auth')
 @Service()
@@ -48,6 +49,15 @@ export class AuthController {
   @Post('/signin')
   async signIn(@Body({ validate: true }) signInDTO: BaseUserDTO) {
     const token = await this.sessionService.signIn(signInDTO);
+    return { token };
+  }
+
+  @Post('/facebook')
+  async authenticateFacebook(
+    @Body() facebookData: FacebookLoginDTO
+  ) {
+    const user = EntityMapper.mapTo(User, facebookData);
+    const token = await this.sessionService.authenticateFacebook(user);
     return { token };
   }
 

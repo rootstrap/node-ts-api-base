@@ -18,8 +18,8 @@ export class User extends Base {
   @Index({ unique: true })
   email: string;
 
-  @Column({ select: false })
-  password: string;
+  @Column({ select: false, nullable: true })
+  password: string | null;
 
   @Column({ default: false })
   verified: boolean;
@@ -31,6 +31,9 @@ export class User extends Base {
   // eslint-disable-next-line quotes
   @Column({ nullable: true, type: 'timestamp', default: () => `NOW() +INTERVAL '1 day'` })
   hashExpiresAt: Date | null;
+
+  @Column({ unique: true, nullable: true })
+  facebookID: string | null;
 
   @OneToMany(() => Target, target => target.user )
     targets: Target[];
