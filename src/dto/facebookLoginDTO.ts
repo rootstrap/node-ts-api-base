@@ -4,19 +4,19 @@ import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 export class FacebookLoginDTO {
   @IsEmail()
   @IsNotEmpty()
-  email!: string;
+  email: string;
 
   @IsString()
   @IsNotEmpty()
-  firstName!: string;
+  firstName: string;
 
   @IsString()
   @IsNotEmpty()
-  lastName!: string;
+  lastName: string;
 
   @IsString()
   @IsNotEmpty()
-  facebookID: string | null
+  facebookID: string
 
   @IsEnum( Gender )
   @IsNotEmpty()
