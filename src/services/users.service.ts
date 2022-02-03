@@ -56,22 +56,27 @@ export class UsersService {
       { where:
         [{ facebookID }, { email }]
       });
+    if ( !user ) {
+      throw new UserNotFoundError();
+    }
     return user;
   }
 
   async findOrCreateUserFacebook(userData: User): Promise<User> {
-    let user = await this.getUserByFBIDOrEmail( userData.facebookID, userData.email );
-
-    if (!user ) {
+    try {
+      let user = await this.getUserByFBIDOrEmail( userData.facebookID, userData.email );
+      if ( !user.facebookID ) {
+        user.facebookID = userData.facebookID;
+        user = await this.userRepository.save(user);
+      }
+      return user;
+    } catch ( error ) {
       userData.verified = true;
       userData.verifyHash = null;
       userData.hashExpiresAt = null;
-      user = await this.userRepository.save(userData);
-    } else if (!user?.facebookID) {
-      user.facebookID = userData.facebookID;
-      user = await this.userRepository.save(user);
+      const user = await this.userRepository.save(userData);
+      return user;
     }
-    return user;
   }
 
   createUser(user: User): Promise<InsertResult> {

@@ -9,6 +9,7 @@ import { mockUpdateResult } from '../utils/mocks';
 import { HashInvalidError } from '@exception/users/hash-invalid.error';
 import { HashExpiredError } from '@exception/users/hash-expired.error';
 import * as faker from 'faker';
+import { UserNotFoundError } from '@exception/users/user-not-found.error';
 
 let usersService: UsersService;
 let user: User;
@@ -104,23 +105,24 @@ describe('UsersService', () => {
       expect(userLogged.email).toBe(user.email);
     });
 
-    it('should not find the user returning undefined', async () => {
+    it('should not find the user returning UserNotFoundError', async () => {
       jest.spyOn(userRepository, 'findOne')
-        .mockResolvedValueOnce(undefined);
+        .mockResolvedValueOnce(null);
 
-      const userLogged = await usersService.getUserByFBIDOrEmail(
+      await expect(usersService.getUserByFBIDOrEmail(
         user.facebookID,
-        user.email);
-      expect(userLogged).toBeUndefined();
+        user.email
+      )).rejects.toThrowError(UserNotFoundError);
     });
   });
 
   describe('findOrCreateUserFacebook', () => {
     beforeEach( async () => {
       user = await factory(User)().make();
+      user.facebookID = faker.datatype.uuid();
     });
 
-    it('should return the user if previously created', async () => {
+    it('should return the user if previously authenticated with FB', async () => {
       jest.spyOn(usersService, 'getUserByFBIDOrEmail')
         .mockResolvedValueOnce(user);
 
@@ -128,9 +130,19 @@ describe('UsersService', () => {
       expect(userResponse).toBe(user);
     });
 
+    it('should return the user if previously authenticated with Email', async () => {
+      const facebookID = user.facebookID;
+      user.facebookID = null;
+      jest.spyOn(usersService, 'getUserByFBIDOrEmail')
+        .mockResolvedValueOnce(user);
+      const userResponse = await usersService.findOrCreateUserFacebook(user);
+      user.facebookID = facebookID;
+      expect(userResponse).toBe(user);
+    });
+
     it('should return the user if it was not previously created', async () => {
       jest.spyOn(usersService, 'getUserByFBIDOrEmail')
-        .mockResolvedValueOnce(undefined);
+        .mockRejectedValueOnce(new UserNotFoundError());
       jest.spyOn(userRepository, 'save')
         .mockResolvedValueOnce(user);
 
