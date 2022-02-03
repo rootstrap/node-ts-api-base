@@ -57,8 +57,7 @@ export class AuthController {
     @Body() facebookData: FacebookLoginDTO
   ) {
     const user = EntityMapper.mapTo(User, facebookData);
-    const token = await this.sessionService.authenticateFacebook(user);
-    return { token };
+    return this.sessionService.authenticateFacebook(user);
   }
 
   @Authorized()

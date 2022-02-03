@@ -10,6 +10,7 @@ import { HashInvalidError } from '@exception/users/hash-invalid.error';
 import { HashExpiredError } from '@exception/users/hash-expired.error';
 import * as faker from 'faker';
 import { UserNotFoundError } from '@exception/users/user-not-found.error';
+import { DatabaseError } from '@exception/database.error';
 
 let usersService: UsersService;
 let user: User;
@@ -150,6 +151,15 @@ describe('UsersService', () => {
 
       const userResponse = await usersService.findOrCreateUserFacebook(user);
       expect(userResponse).toBe(user);
+    });
+
+    it('should return error if cannot save the user', async () => {
+      jest.spyOn(usersService, 'getUserByFBIDOrEmail')
+        .mockRejectedValueOnce(new UserNotFoundError());
+      jest.spyOn(userRepository, 'save')
+        .mockRejectedValueOnce(new DatabaseError('Test error.'));
+
+      await expect(usersService.findOrCreateUserFacebook(user)).rejects.toThrowError(DatabaseError);
     });
   });
 });

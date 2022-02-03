@@ -35,7 +35,9 @@ export enum UserErrorsMessages {
   USER_GENDER_NOT_EMPTY = 'Property gender should not be empty',
   HASH_NOT_VALID = 'Please try again or request a new link',
   HASH_EXPIRED = 'The link has expired, please request a new one',
-  USER_NOT_FOUND = 'The user cannot be found'
+  USER_NOT_FOUND = 'The user cannot be found',
+  USER_NOT_SAVED = 'The user cannot be saved'
+
 }
 
 export enum TargetErrorsMessages {

@@ -63,13 +63,8 @@ export class SessionService {
   }
 
   async authenticateFacebook(userData: User) {
-    try {
-      const user = await this.userService.findOrCreateUserFacebook(userData);
-      const token = await this.userService.generateToken(user);
-      return token;
-    } catch (error) {
-      throw new Error(`${error}`);
-    }
+    const user = await this.userService.findOrCreateUserFacebook(userData);
+    return this.userService.generateToken(user);
   }
 
 

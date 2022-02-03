@@ -7,6 +7,8 @@ import { AuthInterface, UserInterface } from '@interfaces';
 import { UserNotFoundError } from '@exception/users/user-not-found.error';
 import { HashInvalidError } from '@exception/users/hash-invalid.error';
 import { HashExpiredError } from '@exception/users/hash-expired.error';
+import { DatabaseError } from '@exception/database.error';
+import { UserErrorsMessages } from '@constants/errorMessages';
 
 @Service()
 export class UsersService {
@@ -67,14 +69,14 @@ export class UsersService {
       let user = await this.getUserByFBIDOrEmail( userData.facebookID, userData.email );
       if ( !user.facebookID ) {
         user.facebookID = userData.facebookID;
-        user = await this.userRepository.save(user);
+        user = await this.save(user);
       }
       return user;
     } catch ( error ) {
       userData.verified = true;
       userData.verifyHash = null;
       userData.hashExpiresAt = null;
-      const user = await this.userRepository.save(userData);
+      const user = await this.save(userData);
       return user;
     }
   }
@@ -91,6 +93,15 @@ export class UsersService {
 
   deleteUser(id: number): Promise<DeleteResult> {
     return this.userRepository.delete(id);
+  }
+
+  private async save( _user: User ): Promise<User> {
+    try {
+      const user = await this.userRepository.save( _user );
+      return user;
+    } catch (error) {
+      throw new DatabaseError( `${UserErrorsMessages.USER_NOT_SAVED}: ${error}`);
+    }
   }
 
   async verifyUser(verifyHash: string): Promise<User> {
