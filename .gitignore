@@ -8,6 +8,7 @@ package-lock.json
 .env.dev
 .env.test
 .env.prod
+.env
 
 ### macOS ###
 # General
