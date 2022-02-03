@@ -131,13 +131,15 @@ describe('UsersService', () => {
     });
 
     it('should return the user if previously authenticated with Email', async () => {
-      const facebookID = user.facebookID;
+      const _user = await factory(User)().make( user );
       user.facebookID = null;
       jest.spyOn(usersService, 'getUserByFBIDOrEmail')
         .mockResolvedValueOnce(user);
-      const userResponse = await usersService.findOrCreateUserFacebook(user);
-      user.facebookID = facebookID;
-      expect(userResponse).toBe(user);
+      jest.spyOn(userRepository, 'save')
+        .mockResolvedValueOnce(_user);
+
+      const userResponse = await usersService.findOrCreateUserFacebook(_user);
+      expect(userResponse).toBe(_user);
     });
 
     it('should return the user if it was not previously created', async () => {
