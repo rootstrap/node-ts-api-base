@@ -81,7 +81,7 @@
     "nodemailer": "^6.7.2",
     "nodemailer-express-handlebars": "^4.0.0",
     "nodemailer-sendgrid-transport": "^0.2.0",
-    "pg": "^8.7.1",
+    "pg": "^8.7.3",
     "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.9.0",
