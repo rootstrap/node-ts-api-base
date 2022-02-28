@@ -63,7 +63,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "aws-sdk": "^2.1066.0",
+    "aws-sdk": "^2.1082.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "class-transformer": "^0.5.1",
