@@ -79,7 +79,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
     "nodemailer": "^6.7.2",
-    "nodemailer-express-handlebars": "^4.0.0",
+    "nodemailer-express-handlebars": "^5.0.0",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "pg": "^8.7.3",
     "redis": "^3.1.2",
