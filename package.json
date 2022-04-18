@@ -37,7 +37,7 @@
     "@types/express-rate-limit": "^6.0.0",
     "@types/faker": "5.5.9",
     "@types/helmet": "^4.0.0",
-    "@types/jest": "^27.4.0",
+    "@types/jest": "^27.4.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/lodash": "^4.14.181",
     "@types/morgan": "^1.9.3",
