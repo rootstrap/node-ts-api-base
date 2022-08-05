@@ -11,7 +11,8 @@ This project includes the boilerplate for a basic rest-api made in Node.JS with 
 5. `cp .example.env.test .env.test`
 6. Create your DB (i.e. psql for Postgres: `psql -U <user> -h <host> -c "create database <db name>;"`) with same name as your .env file.
 7. Run `ENV=[dev, test, prod] yarn db:setup`.
-8. Start your server with `ENV=[dev, prod] yarn dev`.
+8. Check Redis notes conf for running local.
+9. Start your server with `ENV=[dev, prod] yarn dev`.
 
 ## Some scripts
 
@@ -58,10 +59,10 @@ Also, for configuring the SonarQube keys you can follow the next [steps](https:/
 ## Running with Docker
 
 ### Prerequisites
-In order to run the app with Docker, you should install or update to the latest version, we recommend to install [Docker-Desktop](https://docs.docker.com/get-docker/) due to composer and some cool CLI-UI tools are included.
+* In order to run the app with Docker, you should install or update to the latest version, we recommend to install [Docker-Desktop](https://docs.docker.com/get-docker/) due to composer and some cool CLI-UI tools are included.
+* If you're running it local, don't forget to change REDIS_HOST to localhost into the .env.dev file.
 
 ### Development with Docker
-
 The following commands will build and run all you need to start working on the base, without any other installation requirements. Important: if you already have postgres running locally, you'll need to kill the service before run `docker-compose up`.
 
 ```
@@ -69,7 +70,12 @@ docker-compose --env-file .env.dev build
 ```
 
 ```
-docker-compose --env-file .env.dev up
+docker-compose --env-file .env.dev up -d --no-recreate
+```
+
+if you only want to run redis and postgres locally:
+```
+docker-compose --env-file .env.dev up -d --no-recreate postgres redis
 ```
 
 ### Deployment with Docker (only for production)
@@ -89,7 +95,7 @@ docker run --rm --env-file=.env.prod -p 3000:3000 --name node-api node-ts-api-ba
 ```
 
 ### Fix issue at build docker image (dependencies to install bcrypt are not providede in alpine version of node)
- 
+
 Add the following line before the command ` RUN yarn ` in the Dockerfile.
 
 ```
@@ -153,7 +159,7 @@ This is the suggested scaffolding for this project. You can take a look at:
 - [tsconfig-paths](https://github.com/dividab/tsconfig-paths#readme) - Utility to register relative paths set at tsconfig file
 - [express-rate-limit](https://github.com/nfriedly/express-rate-limit) - Basic rate-limiting middleware used to limit repeated requests to public APIs
 - [morgan](https://github.com/expressjs/morgan) - HTTP request logger middleware for node.js
-- [nodemailer](github.com/nodemailer/nodemailer) - Module for Node.js to allow the easy email sending. 
+- [nodemailer](github.com/nodemailer/nodemailer) - Module for Node.js to allow the easy email sending.
 
 ## Code Quality
 
