@@ -2849,10 +2849,10 @@ express-handlebars@^6.0.0:
     graceful-fs "^4.2.10"
     handlebars "^4.7.7"
 
-express-rate-limit@*, express-rate-limit@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-6.3.0.tgz#253387ce4d36c9c2cc77c7c676068deb36cc0821"
-  integrity sha512-932Io1VGKjM3ppi7xW9sb1J5nVkEJSUiOtHw2oE+JyHks1e+AXuOBSXbJKM0mcXwEnW1TibJibQ455Ow1YFjfg==
+express-rate-limit@*, express-rate-limit@^6.10.0:
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-6.10.0.tgz#e881fcfb1d2a5b364e4850bacb333d537b05e414"
+  integrity sha512-CtGn2IyklQnIWpA4pcRaovXkNR8psDQ9Fa0y5u7Yhz5TL74dNsm7oXpfm1HPKUYiNe5w0TPEyNbIrvNVU/xUIg==
 
 express-session@^1.17.1:
   version "1.17.1"
