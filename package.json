@@ -73,7 +73,7 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-formidable": "^1.2.0",
-    "express-rate-limit": "^6.3.0",
+    "express-rate-limit": "^7.0.2",
     "helmet": "^5.0.2",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
